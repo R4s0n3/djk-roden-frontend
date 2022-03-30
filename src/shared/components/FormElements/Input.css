@@ -1,0 +1,51 @@
+
+.form-control {
+  margin: 1rem 0;
+  width:100%;
+  
+}
+
+.form-control input,
+.form-control textarea {
+  display: block;
+  width:90%;
+  border-radius: 8px;
+  font: "Dosis", sans-serif;
+  border: 2px solid rgba(252, 250, 241, 0.15);
+  background: #f1f1f1;
+  padding: 0.5rem 1rem;
+
+}
+input[type=checkbox] { width: auto }
+.form-control label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.form-control input
+ {
+  height:2rem;
+}
+.form-control textarea{
+  height:6rem;
+
+}
+
+.form-control input:focus,
+.form-control textarea:focus {
+  outline: none;
+  background: #FFFFFF;
+  border-color: #111;
+}
+
+.form-control--invalid label,
+.form-control--invalid p {
+  color: red;
+}
+
+.form-control--invalid input,
+.form-control--invalid textarea {
+  border-color: red;
+  background: #ffd1d1;
+}

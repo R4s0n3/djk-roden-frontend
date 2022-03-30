@@ -1,0 +1,11 @@
+.top-slider{
+width: 100%;
+max-width:100vw;
+max-height: 60vh;
+flex:1
+
+}
+
+.slick-dots{
+    bottom:25px;
+}

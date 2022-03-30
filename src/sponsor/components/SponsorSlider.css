@@ -1,0 +1,22 @@
+.sponsor-slider-container{
+    width: 100%;
+    max-width:100vw;
+    max-height: 6rem;
+    padding:1rem 0;
+    display:flex;
+    background-color:#fff;
+}
+.sponsor-slider-container > div {
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+
+}
+.sponsor-slider-item{
+    display:flex;
+
+}
+.sponsor-slider-item > a img{
+    margin:0 auto;
+
+}

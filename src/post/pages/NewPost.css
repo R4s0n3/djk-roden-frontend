@@ -1,0 +1,40 @@
+.post-control{
+    display: flex;
+    flex-direction: column;
+    
+}
+.post-control > div{
+    padding:0.5rem;
+    flex:1;
+}
+.post-form{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+.post-form > div{
+    width: 100%;
+}
+
+    .halfwidth > div{
+     
+        
+        margin:0.5rem 0;
+    }
+
+@media (min-width: 768px) {
+   
+    .halfwidth{
+    display:flex;
+    margin:0.5rem 0;
+    }
+    .halfwidth > div{
+        padding:0.5rem;
+        flex:1;
+        display:flex;
+        flex-direction: column;
+       
+    }
+   
+}

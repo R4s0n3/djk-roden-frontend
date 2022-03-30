@@ -1,0 +1,11 @@
+.main-container{
+    margin:10rem auto 0;
+    width:100%;
+    max-width: 1200px;
+}
+
+.dash-container{
+    margin: 10rem auto 5rem;
+    width:100%;
+    max-width: 980px;
+}

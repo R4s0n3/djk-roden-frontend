@@ -1,0 +1,19 @@
+.main-header {
+  width: 100%;
+  max-width: 100vw;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  z-index: 9990;
+}
+
+
+@media (min-width: 768px) {
+  
+}

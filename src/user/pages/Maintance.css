@@ -1,0 +1,24 @@
+.maintance{
+    display: flex;
+    flex-direction: column;
+    width:90%;
+    max-width: 960px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin:auto;
+}
+
+.maintance > p{
+    width:95%;
+    max-width:480px;
+}
+.maintance > img{
+    width: 80%;
+    max-width:380px;
+    padding:2rem 1rem 3rem;
+}
+
+.maintance-social-links > a{
+    padding:1rem;
+}

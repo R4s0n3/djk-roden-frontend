@@ -1,0 +1,51 @@
+.post-grid{
+display:flex;
+height:100%;
+flex-direction: column;
+}
+
+
+.post-grid__col-long{
+    flex:3;
+    display:flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+
+}
+.post-grid__card{
+    flex:1;
+    margin:.5rem 0;
+    height:35vh;
+
+}
+
+.post-grid__col-short{
+    flex:1;
+    display:flex;
+    flex-direction: column;
+}
+.post-grid__col-short > div{
+    margin:0.5rem 0;
+}
+.post-grid__card-short{
+    height:33%;
+    
+}
+
+@media (min-width: 768px) {
+    .post-grid{
+       flex-direction: row;
+        }
+        .post-grid__col-long{
+            flex-direction: row;
+
+        }
+        .post-grid__col-short > div{
+            margin:.5rem
+
+        }
+        .post-grid__card{
+            margin:.5rem
+        }
+}

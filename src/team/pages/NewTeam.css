@@ -1,0 +1,13 @@
+.new-team__header-control{
+    display:flex;
+}
+.new-team__header-control > *{
+    flex:1;
+    height:6rem;
+}
+
+.table-control{
+   height:50%;
+   max-height: 420px;
+   overflow-y:scroll;
+}

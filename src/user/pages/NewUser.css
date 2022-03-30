@@ -1,0 +1,20 @@
+.users-control{
+    display: flex;
+    flex-direction: column;
+}
+.users-control > div{
+    flex: 1;
+    padding:0.5rem;
+}
+.user-form{
+    width:100%;
+}
+
+@media (min-width: 768px) {
+    .users-control{
+        flex-direction: row;
+    }
+    .user-form{
+        width:50%;
+    }
+}

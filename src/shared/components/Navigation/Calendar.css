@@ -1,0 +1,32 @@
+.calendar-widget{
+    position: fixed;
+    top: 4.5rem;
+    right:1rem;
+    height:250px;
+    width:80%;
+    max-width:350px;
+    padding:1rem;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+}
+
+.calendar-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+.calendar-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+.calendar-exit {
+    opacity: 1;
+  }
+.calendar-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+  }
+  
