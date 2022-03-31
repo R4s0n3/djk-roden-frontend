@@ -1,6 +1,5 @@
 import './Maintance.css';
 import illuMainT from '../../shared/assets/SVG/illu_wartung.png';
-import Button from '../../shared/components/FormElements/Button';
 import {Icon} from '@iconify/react';
 
 const Maintance = () => {

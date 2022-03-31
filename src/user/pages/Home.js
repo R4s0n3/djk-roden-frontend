@@ -1,5 +1,5 @@
 import './Home.css';
-import React,{useEffect, useState, useContext}from 'react';
+import React,{useEffect, useState}from 'react';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Button from '../../shared/components/FormElements/Button';
@@ -25,16 +25,7 @@ const Home = () => {
     // const [loadedLeads, setLoadedLeads] = useState();
     const [loadedData, setLoadedData] = useState(false);
 
-  const newsSliderSettings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 750,
-    autoplaySpeed:8000,
-    cssEase: "ease-in-out"
-  }
+  
     const sliderSettings = {
       dots: true,
       infinite: true,

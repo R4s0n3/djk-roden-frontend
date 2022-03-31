@@ -1,5 +1,4 @@
 import React,{useEffect, useState, useContext}from 'react';
-import {useNavigate} from "react-router-dom";
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import './Dashboard.css';

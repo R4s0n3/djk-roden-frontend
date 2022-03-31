@@ -16,7 +16,6 @@ import { useForm} from "../../shared/hooks/form-hook";
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { Icon } from '@iconify/react';
 
 const NewLead = props => {
     const {leadsform} = formstates

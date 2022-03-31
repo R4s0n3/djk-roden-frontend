@@ -1,5 +1,4 @@
 import React,{useEffect, useState, useContext}from 'react';
-import {useNavigate} from "react-router-dom";
 import SponsorsList from '../components/SponsorsList';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
@@ -12,13 +11,11 @@ import formstates from '../../shared/util/formstates';
 import {
     VALIDATOR_MINLENGTH,
     VALIDATOR_REQUIRE,
-    VALIDATOR_MAXLENGTH
   } from "../../shared/util/validators";
 import { useForm} from "../../shared/hooks/form-hook";
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { Icon } from '@iconify/react';
 
 const NewSponsor = props => {
     const {sponsorsform} = formstates

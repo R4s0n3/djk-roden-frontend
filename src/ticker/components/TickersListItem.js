@@ -1,4 +1,4 @@
-import React, {useState, useContext,useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import './TickersListItem.css';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
