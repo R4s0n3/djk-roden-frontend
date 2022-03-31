@@ -10,7 +10,7 @@ const Footer = () => {
         "textDecoration": "none"
     }
     return(<div>
-  <footer>
+  <footer className="main-footer">
   <div>
   <img src={logo} alt="logo" height="150px"/>
   <ul className="footer-ul">
