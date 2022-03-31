@@ -1,17 +1,9 @@
 import React,{useEffect, useState, useContext}from 'react';
-import {useNavigate} from "react-router-dom";
 import PlayersList from '../components/PlayersList';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Select from '../../shared/components/FormElements/Select';
 import formstates from '../../shared/util/formstates';
 
@@ -25,7 +17,6 @@ import { useForm} from "../../shared/hooks/form-hook";
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { Icon } from '@iconify/react';
 
 const NewPlayer = props => {
     const {playerform} = formstates

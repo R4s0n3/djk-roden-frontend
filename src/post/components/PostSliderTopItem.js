@@ -8,8 +8,9 @@ const PostSliderTopItem = (props) => {
   const navigate = useNavigate()
   const shortContent = props.content.slice(0, 85);
   const imgStyles={
-    backgroundImage: "linear-gradient(to bottom, rgba(40, 204, 100,0.3), rgba(40, 204, 100,0.75)),url(" + process.env.REACT_APP_AWS_URL +  `/${props.image})`,
+    backgroundImage: "linear-gradient(to bottom, rgba(40, 204, 100,0.3), rgba(40, 204, 100,0.5)),url(" + process.env.REACT_APP_AWS_URL +  `/${props.image})`,
     backgroundSize: "cover",
+    filter: "contrast(1.25)",
     backgroundPosition:"center center"
   }
   const itemClickHandler = () =>{

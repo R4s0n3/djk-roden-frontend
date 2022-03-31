@@ -33,8 +33,8 @@ const TeamsList = props => {
     }
     
     return(
-        <TableContainer component={Paper}>
-        <Table  aria-label="simple table">
+        <TableContainer sx={{maxHeight: 420}} component={Paper}>
+        <Table stickyHeader aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>

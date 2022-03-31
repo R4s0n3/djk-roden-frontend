@@ -31,8 +31,6 @@ import Footer from './shared/components/UIElements/Footer';
 
 function App() {
   const { token, login, logout, userId } = useAuth();
-  const maintance = true;
-
   let routes;
 
   if (token) {

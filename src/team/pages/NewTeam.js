@@ -17,7 +17,6 @@ import { useForm} from "../../shared/hooks/form-hook";
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { Icon } from '@iconify/react';
 import formstates from '../../shared/util/formstates';
 
 import './NewTeam.css';
@@ -75,8 +74,9 @@ const NewTeam = () => {
             formData.append('status', formState.inputs.status.value);
             formData.append('image', formState.inputs.image.value);
             formData.append('desc', formState.inputs.desc.value);
-            formData.append('league',formState.inputs.league.value);
             formData.append('insta', formState.inputs.insta.value);
+            formData.append('league',formState.inputs.league.value);
+            formData.append('link',formState.inputs.link.value);
             formData.append('fb', formState.inputs.fb.value);
             formData.append('gender',formState.inputs.gender.value);
             const createdTeam = await sendRequest(
@@ -168,8 +168,17 @@ const NewTeam = () => {
                     />
                     <Input 
                         element="input"
+                        id="link"
+                        type="url"
+                        label="Tabelle"
+                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
+                        errorText="Please enter a link"
+                        onInput={inputHandler}
+                    />
+                    <Input 
+                        element="input"
                         id="insta"
-                        type="text"
+                        type="url"
                         label="Instagram"
                         validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
                         errorText="Please enter an instagram link"
@@ -178,7 +187,7 @@ const NewTeam = () => {
                     <Input 
                         element="input"
                         id="fb"
-                        type="text"
+                        type="url"
                         label="Facebook"
                         validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
                         errorText="Please enter a facebook link."

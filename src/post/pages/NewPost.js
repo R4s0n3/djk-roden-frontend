@@ -23,11 +23,10 @@ const NewPost = () => {
   const auth = useContext(AuthContext);
     const [loadedPosts, setLoadedPosts] = useState(); 
     const [loadedCategories, setLoadedCategories] = useState(); 
+    const [loadedTeams, setLoadedTeams] = useState(); 
     const [createMode, setCreateMode] = useState(false);
     const [isReport, setIsReport] = useState(false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
-
-    const loadedTeams = [{title:'D1'}, {title:'Erste Damen'}, {title:'Erste Herren'}];
 
    
     let navigate = useNavigate();
@@ -82,8 +81,10 @@ const NewPost = () => {
         const fetchPosts = async () => {
             try{
                 const responseDataPosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
+                const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
                 const responseDataCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
                 setLoadedPosts(responseDataPosts.posts);
+                setLoadedTeams(responseTeams.teams);
                 setLoadedCategories(responseDataCategories.categories);
                 
             }catch(err){
@@ -144,7 +145,7 @@ const NewPost = () => {
       console.log(event.target.checked, event.target.value);
     
 
-      if(event.target.value === "6223c9515d09b510c093dec3" ){
+      if(event.target.id === 'category' && event.target.value === "6223c9515d09b510c093dec3" ){
         setFormData({
           ...formState.inputs,
           team: {
@@ -179,7 +180,11 @@ const NewPost = () => {
         false)
         setIsReport(true);
 
-       }
+       }else if(event.target.id === 'category' && event.target.value !== "6239156487b6da644f43d199"){
+        console.log("triggered2")
+        setFormData(defaultPostForm,false)
+        setIsReport(false);
+      }
     }
 
     const quitIsReportHandler = () =>{
@@ -187,9 +192,9 @@ const NewPost = () => {
       setIsReport(false);
 
     }
-    // const testData =()=>{
-    //   console.log(formState.inputs);
-    // }
+    const testData =()=>{
+      console.log(formState.inputs);
+    }
     return( <React.Fragment>
         <ErrorModal error={error} onClear={clearError} />
 
@@ -346,6 +351,7 @@ const NewPost = () => {
         <Button type="button" inverse onClick={cancelCreateMode}>
           Abbruch
         </Button>
+        <Button type="button" onClick={testData}>DATA</Button>
        
 
           </div>

@@ -62,17 +62,9 @@ const formstates = [
             value:"",
             isValid:false
         },
-        trainers:{
-            value:[],
-            isValid: true
-        },
-        players:{
-            value:[],
-            isValid:true
-        },
-        trainings:{
-            value:[],
-            isValid:true
+        link:{
+            value:"",
+            isValid:false
         }
     }},
     {trainerform:{

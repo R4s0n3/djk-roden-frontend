@@ -1,18 +1,9 @@
 import React,{useEffect, useState, useContext}from 'react';
-import {useNavigate} from "react-router-dom";
 import DatesList from '../components/DatesList';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import Checkbox from '../../shared/components/FormElements/Checkbox';
-import ImageUpload from '../../shared/components/FormElements/ImageUpload';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Select from '../../shared/components/FormElements/Select';
 import formstates from '../../shared/util/formstates';
 
@@ -20,13 +11,11 @@ import formstates from '../../shared/util/formstates';
 import {
     VALIDATOR_MINLENGTH,
     VALIDATOR_REQUIRE,
-    VALIDATOR_MAXLENGTH
   } from "../../shared/util/validators";
 import { useForm} from "../../shared/hooks/form-hook";
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { Icon } from '@iconify/react';
 
 const NewDate = props => {
     const {datesform} = formstates;
@@ -152,7 +141,9 @@ const NewDate = props => {
       setIsGame(false);
     }
     }
-
+const gimmeData = () => {
+  console.log(formState.inputs);
+}
     return(
         <React.Fragment>
          <ErrorModal error={error} onClear={clearError} />
@@ -235,6 +226,7 @@ const NewDate = props => {
 
             </div>}
             <Button type="submit">+</Button>
+            <Button type="button" onClick={gimmeData}>DATA</Button>
             <Button type="button" onClick={() => console.log(formState.inputs)}>State</Button>
             </form>
             </div>

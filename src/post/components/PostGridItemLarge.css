@@ -1,0 +1,40 @@
+h3.post-grid__card-title{
+    color:#28CC64;
+    font-size: 1.5rem;
+    margin:0.5rem 0;
+    width:90%;
+}
+
+.post-grid__card-info{
+    font-size: 0.75rem;
+    margin:0.5rem 0;
+    width:90%;
+}
+
+.post-grid__card-content{
+    font-size: 1rem;
+    margin:0.5rem 0;
+    width:90%;
+
+}
+
+.post-grid__card-footer{
+    width:90%;
+    flex:0.5;
+    margin-top:auto;
+
+}
+.post-grid__card-footer a{
+    color:#28CC64;
+    font-weight:bold;
+    text-decoration:none;
+    
+}
+.post-grid__card-footer a:hover{
+    text-decoration:underline;
+    transition:0.2s;
+
+}
+.post-grid__card-item{
+
+}

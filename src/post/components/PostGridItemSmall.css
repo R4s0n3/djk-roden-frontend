@@ -1,0 +1,33 @@
+.post-round-img{
+height:55px;
+width:55px;
+border-radius: 50px;
+position: absolute;
+top:1rem;
+right:1rem;
+
+}
+
+.post-grid__card-short{
+
+    position:relative;
+   flex:1;
+   
+    
+}
+.post-grid__card-short-container{
+    padding:0.5rem;
+}
+.post-grid__card-short h2{
+    margin:0.5rem 0 0;
+}
+
+.post-grid__card-short a{
+    text-decoration: none;
+    font-weight: bold;
+    color:#28CC64;
+}
+.post-grid__card-short a:hover{
+    text-decoration:underline;
+    transition: 0.2s;
+}
