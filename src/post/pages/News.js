@@ -26,7 +26,7 @@ const News = () => {
                 const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
                 const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
 
-                setLoadedPosts(responsePosts.posts);
+                setLoadedPosts(responsePosts.posts.filter(p => p.published === "true"));
                 setLoadedTickers(responseTickers.tickers)
                 setLoadedSponsors(responseSponsors.sponsors)
                 setIsData(true);

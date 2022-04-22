@@ -42,7 +42,7 @@ const Home = () => {
                     const responseTickers = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/tickers');             
                     const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
 
-                    setLoadedPosts(responsePosts.posts)
+                    setLoadedPosts(responsePosts.posts.filter(p => p.published === "true"))
                     setLoadedTickers(responseTickers.tickers)
                     setLoadedSponsors(responseSponsors.sponsors)
                     setLoadedData(true);

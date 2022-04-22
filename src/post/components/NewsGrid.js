@@ -7,24 +7,9 @@ import PostGridItemLarge from './PostGridItemLarge';
 import Button from '../../shared/components/FormElements/Button';
 const NewsGrid = () => {
     const initialCount = 4;
-    const [loadedPosts, setLoadedPosts] = useState();
-    const {isLoading, error, sendRequest,clearError} = useHttpClient();
     const [count, setCount] = useState(initialCount);
     const [filterState, setFilterState] = useState();
     const [outOfPosts,setOutOfPosts] = useState(false);
-
-    useEffect(()=>{
-        const fetchPosts = async()=>{
-            try{
-                const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
-                setLoadedPosts(responseData.posts.reverse());
-               
-            }catch(err){
-
-            }
-        }
-        fetchPosts();
-    },[sendRequest]);
 
     const createCardsLG =(data,index)=>{
         return(<PostGridItemLarge
@@ -95,20 +80,19 @@ const NewsGrid = () => {
        <Button inverse={filterState === "Spielbericht"} type="button" onClick={handleReports}>Spielbericht</Button>
      </div>
 
-     {!isLoading && loadedPosts && <div className="post-grid">
+      <div className="post-grid">
     
         <div className="post-grid__col-full">
           
-          {filterState && loadedPosts.filter(post => post.category.title === filterState).slice(0,count).map(createCardsLG)}
-          {!filterState && loadedPosts.slice(0,count).map(createCardsLG)}
+          {filterState && props.items.filter(post => post.category.title === filterState).slice(0,count).map(createCardsLG)}
+          {!filterState && props.items.slice(0,count).map(createCardsLG)}
         </div>
        
         </div>
        
 
-     }
      <div style={{margin:"0 0 1rem 0.5%"}}> 
-     <Button type="button" disabled={outOfPosts} onClick={increaseCount} >{outOfPosts ? "Das wars :(" : "Mehr Posts"}</Button>
+     <Button type="button" disabled={outOfPosts} onClick={increaseCount} >{outOfPosts ? "Das wars." : "Mehr Posts"}</Button>
      </div>
     </React.Fragment>)
 }

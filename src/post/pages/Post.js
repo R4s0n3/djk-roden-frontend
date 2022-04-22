@@ -88,7 +88,7 @@ const Post = () => {
 </div>
  {!isLoading && loadedData && <div className="featured-posts__container">
     <h2>Mehr Posts</h2>
-   <PostGrid items={ loadedPosts} />
+   <PostGrid items={loadedPosts.filter(p => p.published === "true")} />
 </div> }
         </div>
         </React.Fragment>  )

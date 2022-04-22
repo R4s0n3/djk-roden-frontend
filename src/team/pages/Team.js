@@ -58,7 +58,7 @@ const Team = () => {
         const filteredPosts = (posts) => {
             let thePosts = posts.filter(p => p.report.team === teamId)
             if(thePosts.length === 0){
-                thePosts = posts;
+                thePosts = posts.filter(p => p.published === "true");
                 return thePosts;
             }
             return thePosts;
