@@ -82,7 +82,7 @@ const Verein = () => {
             </div>
             <div className="verein-container__lead">
             <h2>Förderverein</h2>
-            <LeadSlider speed={9000}items={loadedLeads.filter(p => p.category.title === "Abteilungsvorstand")} />
+            <LeadSlider speed={9000}items={loadedLeads.filter(p => p.category.title === "Förderverein")} />
             </div>
             </React.Fragment>}
             </div>}
