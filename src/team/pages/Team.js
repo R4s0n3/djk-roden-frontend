@@ -6,7 +6,6 @@ import PostGrid from '../../post/components/PostGrid';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import './Team.css';
-import Button from '../../shared/components/FormElements/Button';
 
 
 
