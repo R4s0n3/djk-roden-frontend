@@ -2,9 +2,7 @@ import * as React from 'react';
 import './Verein.css';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import SponsorSlider from '../../sponsor/components/SponsorSlider';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import LiveTicker from '../../shared/components/UIElements/LiveTicker';
 import LeadSlider from '../../lead/components/LeadSlider';
 import historyImg from '../../shared/assets/PNG/placeholder.png';
 import {Link} from 'react-router-dom';
@@ -13,9 +11,7 @@ import Button from '../../shared/components/FormElements/Button';
 
 const Verein = () => {
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
-    const [loadedSponsors, setLoadedSponsors] = React.useState();
     const [loadedLeads, setLoadedLeads] = React.useState();
-    const [loadedTickers, setLoadedTickers] = React.useState();
     const [isData, setIsData] = React.useState(false);
 
     
@@ -24,13 +20,9 @@ const Verein = () => {
       
             try{
     
-                const responseTickers = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/tickers');             
-                const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
                 const responseLeads = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/leads');
 
                 setLoadedLeads(responseLeads.leads);
-                setLoadedTickers(responseTickers.tickers)
-                setLoadedSponsors(responseSponsors.sponsors)
                 setIsData(true);
                 
             }catch(err){

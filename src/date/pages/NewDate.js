@@ -5,7 +5,6 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import Checkbox from '../../shared/components/FormElements/Checkbox';
 import Select from '../../shared/components/FormElements/Select';
-import formstates from '../../shared/util/formstates';
 
 
 import {

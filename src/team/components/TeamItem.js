@@ -133,7 +133,7 @@ const TeamItem = props => {
       </TableContainer>
 
         </div>
-       {props.players.length ==! 0 &&  <div>
+       {props.players.length !== 0 &&  <div>
         <a className="tabellen-link" href={props.link}>Spiele und Tabelle</a>
         </div>}
         </div>

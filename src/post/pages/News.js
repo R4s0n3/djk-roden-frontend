@@ -3,7 +3,6 @@ import './News.css';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import PostSliderTop from '../../post/components/PostSliderTop';
-import PostGrid from '../../post/components/PostGrid';
 import SponsorSlider from '../../sponsor/components/SponsorSlider';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import NewsGrid from '../../post/components/NewsGrid';
