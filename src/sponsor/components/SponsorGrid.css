@@ -1,0 +1,23 @@
+.sponsor-grid__col-full{
+    display:flex;
+    flex-direction: column;
+}
+.sponsor-grid__col-full > div{
+    flex:1;
+
+}
+
+.sponsor-grid__col-full .sponsor-grid__card-item{
+    padding:0.5%;
+}
+@media (min-width: 768px) {
+    .sponsor-grid__col-full{
+        flex-direction: row;
+        flex-wrap:wrap;
+    
+    }
+    .sponsor-grid__col-full > div{
+        flex:0 0 24%;
+    }
+
+}

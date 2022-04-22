@@ -1,0 +1,33 @@
+.news-page{
+    width:100%;
+    max-width: 100vw;
+    margin-top:12rem;
+    display:flex;
+    flex-direction: column;
+    position:relative;
+
+}
+
+.news-page__container{
+    width:90%;
+    max-width: 1200px;
+    margin:4rem auto;
+    position:relative;
+}
+
+@media(min-width: 768px){
+  
+    .news-page__container i.bg{
+        display: none;
+        position:absolute;
+        width:25%;
+        height:150%;
+        top:-30%;
+        right:25%;
+        left:auto;
+        bottom:auto;
+        z-index: -3;
+   
+        background-color: #4BB05A;
+    }
+}

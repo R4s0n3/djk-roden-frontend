@@ -10,25 +10,59 @@ import Select from '../../shared/components/FormElements/Select';
 
 import {
     VALIDATOR_MINLENGTH,
-    VALIDATOR_REQUIRE,
-    VALIDATOR_MAXLENGTH
+    VALIDATOR_REQUIRE
   } from "../../shared/util/validators";
 import { useForm} from "../../shared/hooks/form-hook";
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import formstates from '../../shared/util/formstates';
 
 import './NewTeam.css';
 
 const NewTeam = () => {
-    const {teamform} = formstates;
     const auth = useContext(AuthContext);
     const [loadedTeams, setLoadedTeams] = useState();
     const [createMode, setCreateMode] = useState(false); 
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
 
-    const [formState, inputHandler] = useForm(teamform,false)
+    const [formState, inputHandler] = useForm({
+        name:{
+            value:"",
+            isValid:false
+        },
+        status:{
+            value:"",
+            isValid:false
+        },
+        image:{
+            value:null,
+            isValid:false
+        },
+        desc:{
+            value:"",
+            isValid:false
+        },
+        gender:{
+            value:"",
+            isValid:false
+        },
+        league:{
+            value:"",
+            isValid:false
+        },
+        insta:{
+            value:"",
+            isValid:true
+        },
+        fb:{
+            value:"",
+            isValid:true
+        },
+        link:{
+            value:"",
+            isValid:true
+        }
+    },false)
 
 
   const genderOptions = [{title:'Weiblich'},{title:'Männlich'},{title:'Gemischt'}];
@@ -153,7 +187,7 @@ const NewTeam = () => {
                         id="desc"
                         type="text"
                         label="Beschreibung"
-                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3),VALIDATOR_MAXLENGTH(250)]}
+                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
                         errorText="Please enter a description"
                         onInput={inputHandler}
                     />
@@ -171,7 +205,7 @@ const NewTeam = () => {
                         id="link"
                         type="url"
                         label="Tabelle"
-                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
+                        validators={[]}
                         errorText="Please enter a link"
                         onInput={inputHandler}
                     />
@@ -180,7 +214,7 @@ const NewTeam = () => {
                         id="insta"
                         type="url"
                         label="Instagram"
-                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
+                        validators={[]}
                         errorText="Please enter an instagram link"
                         onInput={inputHandler}
                     />
@@ -189,12 +223,12 @@ const NewTeam = () => {
                         id="fb"
                         type="url"
                         label="Facebook"
-                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
+                        validators={[]}
                         errorText="Please enter a facebook link."
                         onInput={inputHandler}
                     />
          <Button type="submit" disabled={!formState.isValid}>
-          CREATE TEAM
+          Team erstellen
         </Button>
         <Button inverse onClick={cancelCreateMode}>
           Abbruch

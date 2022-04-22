@@ -9,3 +9,7 @@
     width:100%;
     max-width: 980px;
 }
+
+.dash-container div.halfwidth div{
+    flex:1;
+}

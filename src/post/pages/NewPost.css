@@ -22,7 +22,10 @@
         
         margin:0.5rem 0;
     }
+.flex-checkers{
+    display:flex;
 
+}
 @media (min-width: 768px) {
    
     .halfwidth{

@@ -4,6 +4,7 @@ import {Icon} from '@iconify/react';
 import "./Footer.css";
 const Footer = () => {
 
+    const YEAR = new Date().getFullYear();
     const footerStyle= {
         "color": "#fff",
         "textDecoration": "none"
@@ -24,7 +25,7 @@ const Footer = () => {
             <a href="https://de-de.facebook.com/hgsthenextones/"><Icon className="djk-icon" icon="akar-icons:facebook-fill" height="40px" color="#fff" /></a>
             </div>
 
-  <p><a style={footerStyle} href="https://vcard.miomideal.com">© Mio Mideal</a></p>
+  <p><a style={footerStyle} href="https://vcard.miomideal.com">© {YEAR} Mio Mideal </a></p>
 
   </div>
         </footer>

@@ -4,7 +4,7 @@ import './Card.css';
 
 const Card = props => {
   return (
-    <div className={`card ${props.className}`} style={props.style}>
+    <div id={props.id} className={`card ${props.className}`} style={props.style}>
     {props.children}
 
     </div>
@@ -12,3 +12,4 @@ const Card = props => {
 };
 
 export default Card;
+

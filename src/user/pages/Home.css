@@ -9,6 +9,7 @@ position:relative;
 .home-page > div{
     flex:1;
 }
+
 .home-content{
     width:90%;
     max-width:1200px;
@@ -23,6 +24,7 @@ position:relative;
 
 .home-content__paragraph{
     width:100%;
+    margin:2rem 0;
 }
 .icon-buttons-container{
     display:flex;
@@ -38,16 +40,16 @@ position:relative;
         
     }
     .home-page i.bg{
-        display: block;
+        display: none;
         position:absolute;
         width:25%;
         height:100%;
-        right:0;
+        right:25%;
         left:auto;
         top:-8rem;
         bottom:auto;
         z-index: -3;
         padding:5rem 0 8rem;
-        background-color: #28CC64;
-    }
+  background-color: rgba(41, 204, 101, 0.15);
+}
 }

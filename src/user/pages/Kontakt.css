@@ -1,0 +1,14 @@
+.kontakt a{
+    color:#4BB05A;
+    text-decoration: none;
+}
+
+.kontakt a:hover{
+    text-decoration:underline;
+}
+
+.kontakt{
+    width: 90%;
+    max-width: 1200px;
+    margin:10rem auto;
+}

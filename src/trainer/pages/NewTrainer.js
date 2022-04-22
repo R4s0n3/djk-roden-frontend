@@ -144,7 +144,7 @@ const NewTrainer = props => {
                 errorText="Please enter a valid E-Mail."
                 onInput={inputHandler}
             />
-            <Button type="submit">+</Button>
+            <Button type="submit">Trainer erstellen</Button>
             </form>
             </div>
             </div>

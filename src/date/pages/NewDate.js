@@ -18,10 +18,22 @@ import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const NewDate = props => {
-    const {datesform} = formstates;
     const auth = useContext(AuthContext);
     const [createMode, setCreateMode] = useState(false);
-    const [formState, inputHandler, setFormData] = useForm(datesform, false);
+    const [formState, inputHandler, setFormData] = useForm({
+      title:{
+          value:"",
+          isValid:false
+      }, 
+      date:{
+          value:"",
+          isValid:false
+      },
+      category:{
+          value:"",
+          isValid:false
+      }
+}, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [isGame, setIsGame] = useState(false)
     const [loadedDates, setLoadedDates] = useState();
@@ -126,16 +138,18 @@ const NewDate = props => {
       console.log("triggered2")
       setFormData({
         title:{
-            value:"",
-            isValid:false
+            value:formState.inputs.title.value,
+            isValid:formState.inputs.title.isValid
         }, 
         date:{
-            value:"",
-            isValid:false
+            value:formState.inputs.date.value,
+            isValid:formState.inputs.date.isValid
+
         },
         category:{
-            value:"",
-            isValid:false
+          value:formState.inputs.category.value,
+          isValid:formState.inputs.category.isValid
+
         }
 },false)
       setIsGame(false);

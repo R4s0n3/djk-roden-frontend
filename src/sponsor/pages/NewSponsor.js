@@ -126,7 +126,7 @@ const NewSponsor = props => {
                 onInput={inputHandler}
             />
            
-            <Button type="submit">+</Button>
+            <Button type="submit">Sponsor erstellen</Button>
             </form>
             </div>
             </div>

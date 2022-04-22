@@ -1,0 +1,23 @@
+.team-grid__col-full{
+    display:flex;
+    flex-direction: column;
+}
+.team-grid__col-full > div{
+    flex:1;
+
+}
+
+.team-grid__col-full .team-grid__card-item{
+    padding:0.5%;
+}
+@media (min-width: 768px) {
+    .team-grid__col-full{
+        flex-direction: row;
+        flex-wrap:wrap;
+    
+    }
+    .team-grid__col-full > div{
+        flex:0 0 24%;
+    }
+
+}

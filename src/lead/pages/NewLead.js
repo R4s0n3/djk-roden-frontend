@@ -156,7 +156,7 @@ const NewLead = props => {
                 onInput={inputHandler}
             />
            
-            <Button type="submit">+</Button>
+            <Button type="submit">Vorstand erstellen</Button>
             </form>
             </div>
             </div>

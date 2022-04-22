@@ -58,6 +58,7 @@ const Input = props => {
         placeholder={props.placeholder}
         onChange={changeHandler}
         onBlur={touchHandler}
+        list={props.datalist}
         value={inputState.value}
       />
     ) : (
@@ -78,6 +79,7 @@ const Input = props => {
       <label htmlFor={props.id}>{props.label}</label>
       {element}
       {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
+      
     </div>
   );
 };

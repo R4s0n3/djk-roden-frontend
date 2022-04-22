@@ -1,0 +1,30 @@
+#Mannschaften a{
+    margin:auto;
+    text-decoration: none;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+#Mannschaften div.halfwidth div{
+    background-color: #4BB05A;
+    height:200px;    
+    display:flex;
+    border-radius: 8px;
+    margin:0.5rem;
+
+}
+
+#Mannschaften div.halfwidth div:last-child{
+    background-color: #4BB05A80;
+}
+
+#Mannschaften{
+    width:90%;
+    margin:10rem auto;
+    max-width: 1200px;
+}
+
+#Mannschaften div.halfwidth{
+    
+}

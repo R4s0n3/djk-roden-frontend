@@ -152,7 +152,7 @@ const NewTraining = props => {
                 errorText="Please enter a team."
                 onInput={inputHandler}
             />
-            <Button type="submit">+</Button>
+            <Button type="submit">Training erstellen</Button>
             </form>
             </div>
             </div>

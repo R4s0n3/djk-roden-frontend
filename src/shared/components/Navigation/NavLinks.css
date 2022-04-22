@@ -19,7 +19,7 @@
   border: 1px solid transparent;
   display:flex;
   align-items: center;
-  color:  #28CC64;
+  color:  #4BB05A;
   text-decoration: none;
   padding: 0.5rem;
 }
@@ -52,7 +52,7 @@
   }
 
   .nav-links a {
-    color:  #28CC64;
+    color:  #4BB05A;
     text-decoration: none;
   }
   

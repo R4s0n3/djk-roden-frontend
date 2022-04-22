@@ -1,0 +1,36 @@
+.history-item{
+    display:flex;
+    flex-direction: column;
+    margin:2rem 0;
+}
+
+.ht-end{
+    align-items: end;
+    text-align: right;
+}
+
+.ht-center{
+    align-items: center;
+    text-align: left;
+}
+
+.history-item h2{
+    font-size: 3rem;
+    line-height: 1.35;
+    margin:0;
+
+}
+.history-item p{
+    width:100%;
+    max-width: 800px;
+}
+
+.history-container h1{
+    line-height: 1.35;
+    font-size: 2.5rem;
+}
+.history-container{
+    width:90%;
+    max-width: 1200px;
+    margin:10rem auto;
+}

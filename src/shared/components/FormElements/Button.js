@@ -19,6 +19,7 @@ const Button = props => {
   if (props.to) {
     return (
       <Link
+      reloadDocument
         id={props.id}
         to={props.to}
         exact={props.exact}

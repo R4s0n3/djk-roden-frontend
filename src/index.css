@@ -1,13 +1,15 @@
 html{
-  background-image: url('../public/static/img/fresh-snow.png');
-  background-color:rgba(254, 255, 225, 0.5);
-  scroll-behavior: smooth;
+ 
 }
 body {
   margin: 0;
   margin: 0 auto;
   line-height: 150%;
 
+  background-color:  #fff;
+  background-image: linear-gradient(to bottom,rgba(194, 223, 194, 0.3), rgba(255, 244, 191,0.15)), url("https://www.transparenttextures.com/patterns/natural-paper.png");
+
+  scroll-behavior: smooth;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -16,7 +18,23 @@ body {
 }
 
 h2{
-  color:#28CC64;
+  color:#4BB05A;
   line-height: 150%;
-
 }
+
+h1{
+  color:#4BB05A;
+  font-size: 3rem;
+}
+
+hr{
+  height:2px;
+  color:#FFF4BF;
+  width:150px;
+  background-color: #FFD501;
+  border:0;
+  border-radius: 8px;
+ margin-left: 0;
+}
+
+b{}

@@ -1,0 +1,20 @@
+.team div.featured-posts__container{
+    margin:1rem 0 4rem;
+    padding:0 1rem;
+}
+
+.team{
+    margin-top: 3rem;
+    width:100%;
+    max-width: 1200px;
+}
+
+
+@media (min-width: 768px) {
+    .team{
+    margin:10rem auto 0;
+    }
+    .team div.featured-posts__container{
+        padding:0;
+    }
+}

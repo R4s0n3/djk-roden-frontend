@@ -7,8 +7,10 @@ const SponsorSlider = (props) => {
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
-        speed: 6000,
+        speed: 10000,
         autoplaySpeed:0,
+        prevArrow: false,
+    nextArrow: false,
         cssEase: "linear",
         responsive: [
             {

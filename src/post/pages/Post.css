@@ -1,0 +1,18 @@
+.single-post__container{
+    margin-bottom: 2rem;
+}
+
+.post{
+    margin-top: 3rem;
+    margin-bottom:8rem;
+    
+}
+.featured-posts__container{
+    padding:0 1rem;
+}
+
+@media (min-width: 768px) {
+    .post{
+        margin-top:10rem;
+    }
+}

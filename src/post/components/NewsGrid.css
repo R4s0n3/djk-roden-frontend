@@ -1,0 +1,23 @@
+.post-grid__col-full{
+    display:flex;
+    flex-direction: column;
+}
+.post-grid__col-full > div{
+    flex:1;
+
+}
+
+.post-grid__col-full .post-grid__card-item{
+    padding:0.5%;
+}
+@media (min-width: 768px) {
+    .post-grid__col-full{
+        flex-direction: row;
+        flex-wrap:wrap;
+    
+    }
+    .post-grid__col-full > div{
+        flex:0 0 24%;
+    }
+
+}

@@ -32,25 +32,25 @@ const IconNavLinks = () => {
     </li>
     <li>
     <button onClick={handleCal}>
-          <Icon className="djk-icon" icon="akar-icons:calendar" height="20px" color="#28cc64" />
+          <Icon className="djk-icon" icon="akar-icons:calendar" height="20px" color="#4BB05A" />
           </button>
 
     </li>
 
       {!auth.isLoggedIn && (
         <li>
-          <NavLink to="/auth"><Icon className="djk-icon" icon="bxs:user" height="20px" color="#28cc64" /></NavLink>
+          <NavLink to="/auth"><Icon className="djk-icon" icon="bxs:user" height="20px" color="#4BB05A" /></NavLink>
         </li>
       )}
 
       {auth.isLoggedIn && (
       <li>
-        <button onClick={handleAdminNav}><Icon className="djk-icon" icon="eos-icons:content-new" height="20px" color="#28cc64" /></button>
+        <button onClick={handleAdminNav}><Icon className="djk-icon" icon="eos-icons:content-new" height="20px" color="#4BB05A" /></button>
       </li>
     )}
       {auth.isLoggedIn && (
       <li>
-        <button onClick={auth.logout}><Icon className="djk-icon" icon="ic:round-logout" height="20px" color="#28cc64" /></button>
+        <button onClick={auth.logout}><Icon className="djk-icon" icon="ic:round-logout" height="20px" color="#4BB05A" /></button>
       </li>
     )}
     <Calendar show={isCal} onClick={handleCal}/>

@@ -1,0 +1,38 @@
+.verein{
+    width:90%;
+    max-width:1200px;
+    margin:8rem auto;
+    height:100%;
+    padding:0 1rem;
+    position:relative;
+}
+.verein > h1{
+    line-height: 1.25;
+}
+.history-img__container{
+    width:100%;
+    height:300px;
+    max-width: 1200px;
+}
+.history-img__container img{
+    width:100%;
+    height:100%;
+    border-radius:8px;
+    object-fit: cover;
+}
+.verein-container__header{
+    margin-bottom: 4rem;
+}
+.verein-container__history a{
+    color:#4BB05A;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.verein-container__history{
+    margin:8rem 0;
+}
+
+.verein-container__history h1{
+    font-size:2.5rem;
+}

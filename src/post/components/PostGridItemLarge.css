@@ -1,31 +1,51 @@
-h3.post-grid__card-title{
-    color:#28CC64;
-    font-size: 1.5rem;
-    margin:0.5rem 0;
-    width:90%;
+.post-grid__card-item{
+    padding:0.25rem;
+    margin:0.5% 0;
+    flex:1;
 }
 
+h3.post-grid__card-title{
+    color:#4BB05A;
+    font-size: 1.5rem;
+    width:90%;
+    margin:0;
+}
+.post-grid__card{
+    height: 375px;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
 .post-grid__card-info{
     font-size: 0.75rem;
-    margin:0.5rem 0;
     width:90%;
+    margin:0;
 }
 
 .post-grid__card-content{
     font-size: 1rem;
-    margin:0.5rem 0;
     width:90%;
-
+    display:flex;
+    margin:0;
 }
 
+.post-grid__card-content-container{
+    padding:0 1rem;
+    flex:4;
+    margin-top:0.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 .post-grid__card-footer{
     width:90%;
-    flex:0.5;
-    margin-top:auto;
-
+    padding:0 1rem;
+    flex:1;
+    align-items:center;
+    display:flex;
 }
 .post-grid__card-footer a{
-    color:#28CC64;
+    color:#4BB05A;
     font-weight:bold;
     text-decoration:none;
     
@@ -38,3 +58,5 @@ h3.post-grid__card-title{
 .post-grid__card-item{
 
 }
+
+

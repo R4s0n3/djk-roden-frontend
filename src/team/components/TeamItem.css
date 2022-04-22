@@ -1,0 +1,75 @@
+.team-item__stats-container{
+    display:flex;
+    flex-direction:column;
+}
+.team-item__header{
+    display:flex;
+    flex-direction: column;
+}
+
+.team-item__header-content-container{
+    padding:0 1rem;
+    flex:1;
+}
+.stats-container__long{
+    flex:2;
+    padding:0 1rem
+}
+.stats-container__short{
+    flex:1;
+    padding:0 1rem
+}
+
+.tabellen-link{
+    margin:2rem 0;
+    color:#4BB05A;
+    font-size: 2rem;
+    font-weight: bold;
+    display:block;
+}
+.no-players{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+.no-players img{
+    margin:1rem 0;
+}
+.tabellen-link::before{
+    content:"→"
+}
+.social-icons-container a{
+    margin-right: 1rem;
+}
+
+.team-item__header-img-container{
+    flex:1;
+}
+.team-item__header-img-container img{
+    border-radius:8px;
+    display:block;
+    width:100%;
+    max-width: 600px;
+
+}
+.team-item__header-img-container{
+   
+   
+}
+
+@media (min-width: 768px) {
+    .stats-container__short{
+    
+        padding:0;
+    }
+    .team-item__header-img-container img{
+     
+    }
+    .team-item__stats-container{
+        flex-direction:row;
+    }
+    .team-item__header{
+        flex-direction: row;
+    }
+}

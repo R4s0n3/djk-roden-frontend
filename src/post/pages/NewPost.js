@@ -10,7 +10,9 @@ import Select from '../../shared/components/FormElements/Select';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import {
     VALIDATOR_MINLENGTH,
+    VALIDATOR_MAXLENGTH,
     VALIDATOR_REQUIRE,
+    VALIDATOR_MIN
   } from "../../shared/util/validators";
 
 import { useForm } from "../../shared/hooks/form-hook";
@@ -21,6 +23,37 @@ import './NewPost.css';
 
 const NewPost = () => {
   const auth = useContext(AuthContext);
+  const [formState, inputHandler, setFormData ] = useForm({
+    title: {
+      value: "",
+      isValid: false,
+    },
+    content: {
+      value: "",
+      isValid: false,
+    },
+    category: { 
+      value: "",
+      isValid: false,
+    },
+    date: { 
+      value: "",
+      isValid: false,
+    },
+    published: { 
+      value: false,
+      isValid: true,
+    },
+    highlighted: { 
+      value: false,
+      isValid: true,
+    },
+    image: { 
+      value: null,
+      isValid: false,
+    }
+  }, false);
+
     const [loadedPosts, setLoadedPosts] = useState(); 
     const [loadedCategories, setLoadedCategories] = useState(); 
     const [loadedTeams, setLoadedTeams] = useState(); 
@@ -42,40 +75,6 @@ const NewPost = () => {
         navigate('/dashboard/posts')
 
       };
-    const defaultPostForm =  {
-        title: {
-          value: "",
-          isValid: false,
-        },
-        content: {
-          value: "",
-          isValid: false,
-        },
-        category: { 
-          value: "",
-          isValid: false,
-        },
-        date: { 
-          value: "",
-          isValid: false,
-        },
-        published: { 
-          value: false,
-          isValid: true,
-        },
-        highlighted: { 
-          value: false,
-          isValid: true,
-        },
-        image: { 
-          value: null,
-          isValid: true,
-        }
-      }
-
-    const [formState, inputHandler, setFormData ] = useForm(defaultPostForm, false);
-
- 
 
     useEffect(()=>{
         const fetchPosts = async () => {
@@ -141,11 +140,9 @@ const NewPost = () => {
       
 
     }
-    const formChangeChecker = event =>{
-      console.log(event.target.checked, event.target.value);
-    
-
+    const formChangeChecker = event =>{    
       if(event.target.id === 'category' && event.target.value === "6223c9515d09b510c093dec3" ){
+        setIsReport(true);
         setFormData({
           ...formState.inputs,
           team: {
@@ -177,29 +174,46 @@ const NewPost = () => {
             isValid: false,
           },
         },
-        false)
-        setIsReport(true);
+        false);
 
        }else if(event.target.id === 'category' && event.target.value !== "6239156487b6da644f43d199"){
-        console.log("triggered2")
-        setFormData(defaultPostForm,false)
         setIsReport(false);
+        setFormData({
+          title:{
+            value:formState.inputs.title.value,
+            isValid: formState.inputs.title.isValid
+          },
+          content:{
+            value:formState.inputs.content.value,
+            isValid: formState.inputs.content.isValid
+          },
+          date:{
+            value:formState.inputs.date.value,
+            isValid: formState.inputs.date.isValid
+          },
+          category:{
+            value:formState.inputs.category.value,
+            isValid: formState.inputs.category.isValid
+          },
+          highlighted:{
+            value:formState.inputs.highlighted.value,
+            isValid: formState.inputs.highlighted.isValid
+          },
+          published:{
+            value:formState.inputs.published.value,
+            isValid: formState.inputs.published.isValid
+          },
+          image:{
+            value:formState.inputs.image.value,
+            isValid: formState.inputs.image.isValid
+          },
+        },false);
       }
-    }
-
-    const quitIsReportHandler = () =>{
-      setFormData(defaultPostForm,false);
-      setIsReport(false);
 
     }
-    const testData =()=>{
-      console.log(formState.inputs);
-    }
+
     return( <React.Fragment>
         <ErrorModal error={error} onClear={clearError} />
-
-      
-     
   
         {isLoading && (
           <div className="center">
@@ -211,11 +225,13 @@ const NewPost = () => {
         <div>
         <h2>Hi! New Posts!</h2>
         {!isLoading && loadedPosts && loadedCategories && <PostList items={loadedPosts} onDeletePost={deletedPostHandler} />}
-        {!createMode && <Button onClick={handleClick}>Neuer post</Button>}
+        {!createMode && <Button onClick={handleClick}>Neuer Post</Button>}
         </div>
         <div>
           {createMode && <form onChange={formChangeChecker} autoComplete="off" className="post-form" onSubmit={createPostHandler}>
           <h2>Neuer Post</h2>
+          <ImageUpload  center id="image" onInput={inputHandler} errorText="Please provide an image" />
+
           <div>
           <Input
             element="input"
@@ -231,8 +247,8 @@ const NewPost = () => {
             id="content"
             type="text"
             label="Inhalt"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter some valid content."
+            validators={[VALIDATOR_REQUIRE(),VALIDATOR_MAXLENGTH(1500)]}
+            errorText="Please enter some valid content. (MAX. 1500 Zeichen)"
             onInput={inputHandler}  
           />
           </div>
@@ -282,7 +298,7 @@ const NewPost = () => {
             type="number"
             label="Heim"
             placeholder="Halbzeit-Score"
-            validators={[]}
+            validators={[VALIDATOR_MIN(0)]}
             errorText="Please enter a valid score."
             onInput={inputHandler}
           />
@@ -292,7 +308,7 @@ const NewPost = () => {
             type="number"
             label="Gast"
             placeholder="Halbzeit-Score"
-            validators={[]}
+            validators={[VALIDATOR_MIN(0)]}
             errorText="Please enter a valid score."
             onInput={inputHandler}
           />
@@ -305,8 +321,8 @@ const NewPost = () => {
             type="input"
             label="Heim"
             placeholder="End-Score"
-            validators={[]}
-            errorText="Please enter a valid score."
+            validators={[VALIDATOR_MIN(formState.inputs.htshome.value)]}
+            errorText="Score muss höher sein als Halbzeit-Score."
             onInput={inputHandler}
           />
         <Input 
@@ -315,15 +331,27 @@ const NewPost = () => {
             type="input"
             label="Gast"
             placeholder="End-Score"
-            validators={[]}
-            errorText="Please enter a valid score."
+            validators={[VALIDATOR_MIN(formState.inputs.htsguest.value)]}
+            errorText="Score muss höher sein als Halbzeit-Score."
             onInput={inputHandler}
           />
         </div>
-        <Button danger onClick={quitIsReportHandler}>Bericht Verwerfen</Button>
-
+        <div>
+       
+        </div>
           </div>}
-          <div className="halfwidth">
+          <div className="flex-checkers">
+          {isReport && <Checkbox
+            id="homematch"
+            type="checkbox"
+            label="Heimspiel"
+            validators={[]}
+            errorText="unknown error."
+            onCheck={inputHandler}  
+            initialValid={true} 
+            checkedText="Dieses Spiel ist ein Heimspiel."
+
+          />  }
           <Checkbox
             id="published"
             type="checkbox"
@@ -331,6 +359,9 @@ const NewPost = () => {
             validators={[]}
             errorText="Please enter a title."
             onCheck={inputHandler}  
+            initialValid={true}
+            checkedText="Geht nach dem Erstellen sofort Online."  
+
           />  
           
           <Checkbox
@@ -339,20 +370,20 @@ const NewPost = () => {
             label="Highlight"
             validators={[]}
             errorText="Please enter a title."
-            onCheck={inputHandler}  
+            onCheck={inputHandler}
+            initialValid={true}
+            checkedText="Wird im Titelslider angezeigt."  
+  
           />
-
+          
           </div>
-          <ImageUpload  center id="image" onInput={inputHandler} errorText="Please provide an image" />
           <div>
           <Button type="submit" disabled={!formState.isValid}>
-          Neuer Post
+          Post erstellen
         </Button>
         <Button type="button" inverse onClick={cancelCreateMode}>
           Abbruch
-        </Button>
-        <Button type="button" onClick={testData}>DATA</Button>
-       
+        </Button>       
 
           </div>
 

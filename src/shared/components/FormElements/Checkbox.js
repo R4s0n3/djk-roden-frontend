@@ -56,6 +56,7 @@ const Checkbox = (props) =>{
           'form-control--invalid'}`}
       >
         <label htmlFor={props.id}>{props.label}</label>
+        <div className="checkbox-container">
         <input 
             id={props.id}
             type="checkbox"
@@ -64,6 +65,9 @@ const Checkbox = (props) =>{
             value={checkboxState.value}
         />
         {!checkboxState.isValid && checkboxState.isTouched && <p>{props.errorText}</p>}
+        {checkboxState.value === true && <p className="checked-text">{props.checkedText}</p>}
+        </div>
+     
       </div>
     )
 }

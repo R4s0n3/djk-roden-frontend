@@ -1,0 +1,61 @@
+.team-grid__card-item{
+    padding:0.25rem;
+
+}
+
+h3.team-grid__card-title{
+    color:#4BB05A;
+    font-size: 1.5rem;
+    width:90%;
+    margin:0;
+}
+.team-grid__card{
+    height: 375px;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+.team-grid__card-info{
+    font-size: 0.75rem;
+    width:90%;
+    margin:0;
+}
+
+.team-grid__card-content{
+    font-size: 1rem;
+    width:90%;
+    display:flex;
+    margin:0;
+}
+
+.team-grid__card-content-container{
+    padding:0 1rem;
+    flex:4;
+    margin-top:0.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.team-grid__card-footer{
+    width:90%;
+    padding:0 1rem;
+    flex:1;
+    align-items:center;
+    display:flex;
+}
+.team-grid__card-footer a{
+    color:#4BB05A;
+    font-weight:bold;
+    text-decoration:none;
+    
+}
+.team-grid__card-footer a:hover{
+    text-decoration:underline;
+    transition:0.2s;
+
+}
+.team-grid__card-item{
+
+}
+
+

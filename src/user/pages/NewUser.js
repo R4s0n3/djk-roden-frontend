@@ -134,7 +134,7 @@ const NewUser = () => {
           
         </div>
         <Button type="submit" disabled={!formState.isValid}>
-          CREATE USER
+          User erstellen
         </Button>
         <Button inverse onClick={cancelCreateMode}>
           Abbruch

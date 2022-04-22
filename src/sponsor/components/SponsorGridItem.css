@@ -1,0 +1,36 @@
+.sponsor-grid__card{
+    height:300px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin:0.5rem 0;
+}
+
+.sponsor-grid__card-content-container{
+    padding:0 1rem;
+    flex:2;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    
+}
+.sponsor-grid__card-info{
+    margin:0;
+}
+.sponsor-grid__card-title{
+    color:#4BB05A;
+ 
+    margin:0;
+}
+
+.sponsor-grid__card-link{
+    color:#13120B;
+    text-decoration: none;
+}
+
+.sponsor-grid__card-link::before{
+    margin:0;
+    content:"@ ";
+    font-weight:bold;
+    font-size: 1rem;
+}

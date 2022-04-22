@@ -7,3 +7,16 @@ main{
 .main-container{
     margin-top:10rem;
 }
+
+.sr-only{
+    position:absolute;
+left:-10000px;
+top:auto;
+width:1px;
+height:1px;
+overflow:hidden;
+}
+.slick-arrow{
+    display:none !important;
+
+}
