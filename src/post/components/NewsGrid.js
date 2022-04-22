@@ -1,11 +1,8 @@
-import React,{useEffect,useState}from 'react';
+import React,{useState}from 'react';
 import './NewsGrid.css';
-import { useHttpClient } from '../../shared/hooks/http-hook';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
-import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import PostGridItemLarge from './PostGridItemLarge';
 import Button from '../../shared/components/FormElements/Button';
-const NewsGrid = () => {
+const NewsGrid = props => {
     const initialCount = 4;
     const [count, setCount] = useState(initialCount);
     const [filterState, setFilterState] = useState();
@@ -25,7 +22,7 @@ const NewsGrid = () => {
         )
     }
     const increaseCount = () =>{
-      const postsCount = loadedPosts.length;
+      const postsCount = props.items.length;
       
       if(count <= postsCount){
         console.log("c1: ", count);
@@ -64,14 +61,6 @@ const NewsGrid = () => {
     }
 
     return(<React.Fragment>
-     <ErrorModal error={error} onClear={clearError} />
-     
-  
-{isLoading && (
-  <div className="center">
-    <LoadingSpinner asOverlay/>
-  </div>
-)}
 
 <div style={{margin:"0 0 1rem 0.5%"}}>
        <Button inverse={!filterState} type="button"  onClick={handleAll}>Alle</Button>
