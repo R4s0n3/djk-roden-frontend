@@ -10,7 +10,6 @@ import Select from '../../shared/components/FormElements/Select';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import {
     VALIDATOR_MINLENGTH,
-    VALIDATOR_MAXLENGTH,
     VALIDATOR_REQUIRE,
     VALIDATOR_MIN
   } from "../../shared/util/validators";
