@@ -247,8 +247,8 @@ const NewPost = () => {
             id="content"
             type="text"
             label="Inhalt"
-            validators={[VALIDATOR_REQUIRE(),VALIDATOR_MAXLENGTH(1500)]}
-            errorText="Please enter some valid content. (MAX. 1500 Zeichen)"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter some valid content."
             onInput={inputHandler}  
           />
           </div>

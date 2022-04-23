@@ -10,6 +10,7 @@ import Select from '../../shared/components/FormElements/Select';
 
 import {
     VALIDATOR_MINLENGTH,
+    VALIDATOR_MAXLENGTH,
     VALIDATOR_REQUIRE
   } from "../../shared/util/validators";
 import { useForm} from "../../shared/hooks/form-hook";
@@ -187,7 +188,7 @@ const NewTeam = () => {
                         id="desc"
                         type="text"
                         label="Beschreibung"
-                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
+                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MAXLENGTH(750)]}
                         errorText="Please enter a description"
                         onInput={inputHandler}
                     />
