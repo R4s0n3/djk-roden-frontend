@@ -25,10 +25,10 @@ const IconNavLinks = () => {
     <ul className="icon-nav-links">
 
     <li className="hide-on-mobile">
-          <NavLink to="/sponsoring">Sponsoring</NavLink>
+          <NavLink reloadDocument to="/sponsoring">Sponsoring</NavLink>
         </li>
         <li className="hide-on-mobile">
-          <NavLink to="/kontakt">Kontakt</NavLink>
+          <NavLink reloadDocument to="/kontakt">Kontakt</NavLink>
     </li>
     <li>
     <button onClick={handleCal}>
@@ -39,7 +39,7 @@ const IconNavLinks = () => {
 
       {!auth.isLoggedIn && (
         <li>
-          <NavLink to="/auth"><Icon className="djk-icon" icon="bxs:user" height="20px" color="#4BB05A" /></NavLink>
+          <NavLink reloadDocument to="/auth"><Icon className="djk-icon" icon="bxs:user" height="20px" color="#4BB05A" /></NavLink>
         </li>
       )}
 
