@@ -8,7 +8,6 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import TickersList from '../../ticker/components/TickersList';
 
 import PostList from '../../post/components/PostList';
-import UsersList from '../components/UsersList';
 import TeamsList from '../../team/components/TeamsList';
 import PlayersList from '../../player/components/PlayersList';
 import TrainersList from '../../trainer/components/TrainersList';
@@ -28,7 +27,6 @@ const Dashboard = () => {
                 
         const {isLoading, error, sendRequest, clearError} = useHttpClient(); 
         const [loadedSponsors, setLoadedSponsors] = useState();
-        const [loadedUsers, setLoadedUsers] = useState();
         const [loadedTrainers, setLoadedTrainers] = useState();
         const [loadedPosts, setLoadedPosts] = useState();
         const [loadedTickers, setLoadedTickers] = useState();
@@ -60,7 +58,6 @@ const Dashboard = () => {
                 const fetchData = async () => {
                     try{
             
-                        const responseUsers = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/users');
                         const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
                         const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
                         const responsePlayers = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/players');
@@ -71,7 +68,6 @@ const Dashboard = () => {
                         const responseTickers = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/tickers');
                         const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
 
-                        setLoadedUsers(responseUsers.users)
                         setLoadedPosts(responsePosts.posts)
                         setLoadedTeams(responseTeams.teams)
                         setLoadedPlayers(responsePlayers.players)
@@ -102,10 +98,7 @@ const Dashboard = () => {
               setLoadedTickers(prevTickers => prevTickers.filter(ticker => ticker.id !== deletedTickerId));
             }
 
-            const deletedUserHandler = deletedUserId => {
-      
-              setLoadedUsers(prevUsers => prevUsers.filter(user => user.id !== deletedUserId));
-            }
+           
 
             const deletedTrainingHandler = deletedTrainingId => {
       
@@ -211,11 +204,6 @@ const tickersHandler= () =>{
 
       </form>
     </div>}
-</div>
-<div>
-<h2>Users</h2>
-<UsersList items={loadedUsers} onDeleteUser={deletedUserHandler}/>
-<Button to="/dashboard/users">Neuer User</Button>
 </div>
 <div>
 <h2>Posts</h2>
