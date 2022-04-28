@@ -18,7 +18,8 @@ const DatesList = props => {
                 key={index}
                 id={data.id}
                 title={data.title}
-                date={data.date}
+                startDate={data.startDate}
+                endDate={data.endDate}
                 category={data.category.title}
                 onDelete={props.onDeleteDate}
             />
@@ -32,7 +33,7 @@ const DatesList = props => {
           <TableHead>
             <TableRow>
             <TableCell component="th" scope="row">Titel</TableCell>
-            <TableCell align="center" >Datum</TableCell>
+            <TableCell align="center" >Start</TableCell>
             <TableCell align="center" >Kategorie</TableCell>
             <TableCell align="center">Edit</TableCell>
             <TableCell align="center">Löschen</TableCell>

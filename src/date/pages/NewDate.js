@@ -3,7 +3,6 @@ import DatesList from '../components/DatesList';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
-import Checkbox from '../../shared/components/FormElements/Checkbox';
 import Select from '../../shared/components/FormElements/Select';
 
 
@@ -19,12 +18,20 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 const NewDate = props => {
     const auth = useContext(AuthContext);
     const [createMode, setCreateMode] = useState(false);
-    const [formState, inputHandler, setFormData] = useForm({
+    const [formState, inputHandler] = useForm({
       title:{
           value:"",
           isValid:false
       }, 
-      date:{
+      startDate:{
+          value:"",
+          isValid:false
+      },
+      endDate:{
+          value:"",
+          isValid:false
+      },
+      location:{
           value:"",
           isValid:false
       },
@@ -34,53 +41,33 @@ const NewDate = props => {
       }
 }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
-    const [isGame, setIsGame] = useState(false)
     const [loadedDates, setLoadedDates] = useState();
-    const [loadedTeams, setLoadedTeams] = useState();
+    // const [loadedTeams, setLoadedTeams] = useState();
     const [loadedCategories, setLoadedCategories] = useState();
+
     const createDateHandler = async event =>{
         event.preventDefault();
-        let dateData;
+      
         
 
-          if(formState.inputs.category.value === "6239156487b6da644f43d199"){
             try{
-            dateData = await sendRequest(
+            const dateData = await sendRequest(
               process.env.REACT_APP_BACKEND_URL + '/dates',
               'POST',
               JSON.stringify({
                title: formState.inputs.title.value,
-               date: formState.inputs.date.value,
+               startDate: formState.inputs.startDate.value,
+               endDate: formState.inputs.endDate.value,
                category: formState.inputs.category.value,
-               team: formState.inputs.team.value,
-               opponent: formState.inputs.opponent.value,
-               homematch: formState.inputs.homematch.value
-  
+               location: formState.inputs.location.value
               }),{
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + auth.token
               });
               setLoadedDates([...loadedDates, dateData.date]);
-
+              window.scroll(0,0)
             }catch(err){}
-          }else{
-            try{
-            dateData = await sendRequest(
-              process.env.REACT_APP_BACKEND_URL + '/dates',
-              'POST',
-              JSON.stringify({
-               title: formState.inputs.title.value,
-               date: formState.inputs.date.value,
-               category: formState.inputs.category.value  
-              }),{
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + auth.token
-              });
-              setLoadedDates([...loadedDates, dateData.date]);
 
-          }catch(err){}
-           
-          }
     }
 
     useEffect(()=>{
@@ -88,10 +75,10 @@ const NewDate = props => {
           try{
   
               const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/dates');
-              const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
+              // const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
               const responseCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
               setLoadedDates(responseData.dates);
-              setLoadedTeams(responseTeams.teams);
+              // setLoadedTeams(responseTeams.teams);
               setLoadedCategories(responseCategories.categories);
               
           }catch(err){
@@ -110,53 +97,6 @@ const NewDate = props => {
       
       setLoadedDates(prevDates => prevDates.filter(date => date.id !== deletedDateId));
     }
-    const formChangeHandler = event => {
-        console.log(event.target.id);
-              if(event.target.id === 'category' && event.target.value === "6239156487b6da644f43d199" ){
-                console.log("triggered1")
-        setFormData({
-          ...formState.inputs,
-          team: {
-            value: "",
-            isValid: false,
-          },
-          opponent: {
-            value: "",
-            isValid: false,
-          },
-          homematch: {
-            value: false,
-            isValid: true,
-          }
-        },
-        false)
-        setIsGame(true);
-
-
-    }else if(event.target.id === 'category' && event.target.value !== "6239156487b6da644f43d199"){
-      console.log("triggered2")
-      setFormData({
-        title:{
-            value:formState.inputs.title.value,
-            isValid:formState.inputs.title.isValid
-        }, 
-        date:{
-            value:formState.inputs.date.value,
-            isValid:formState.inputs.date.isValid
-
-        },
-        category:{
-          value:formState.inputs.category.value,
-          isValid:formState.inputs.category.isValid
-
-        }
-},false)
-      setIsGame(false);
-    }
-    }
-const gimmeData = () => {
-  console.log(formState.inputs);
-}
     return(
         <React.Fragment>
          <ErrorModal error={error} onClear={clearError} />
@@ -174,12 +114,12 @@ const gimmeData = () => {
               {!isLoading && loadedDates && <DatesList items={loadedDates} onDeleteDate={deletedDateHandler}/>}
               <Button inverse={createMode} onClick={handleClick}>{createMode ? "Abbruch" : "Neuer Termin"}</Button>
               </div>
-        {createMode && loadedCategories && loadedTeams &&  <div>
+        {createMode && loadedCategories &&  <div>
             <h2>Termine</h2>
             <p>Erstelle Termine</p>
-            <div className="halfwidth">
+           
             <div>
-            <form onChange={formChangeHandler} autoComplete="off" className="date-form" onSubmit={createDateHandler}>
+            <form autoComplete="off" className="date-form" onSubmit={createDateHandler}>
             <Input 
                 element="input"
                 id="title"
@@ -191,11 +131,29 @@ const gimmeData = () => {
             />
             <Input 
                 element="input"
-                id="date"
-                type="date"
-                label="Datum"
+                id="startDate"
+                type="datetime-local"
+                label="Start"
                 validators={[VALIDATOR_REQUIRE()]}
                 errorText="Please enter a date."
+                onInput={inputHandler}
+            />
+            <Input 
+                element="input"
+                id="endDate"
+                type="datetime-local"
+                label="Ende"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter a date."
+                onInput={inputHandler}
+            />
+            <Input 
+                element="input"
+                id="location"
+                type="text"
+                label="Ort"
+                validators={[]}
+                errorText="Please enter a location."
                 onInput={inputHandler}
             />
            
@@ -207,43 +165,11 @@ const gimmeData = () => {
                 errorText="Please enter a category."
                 onInput={inputHandler}
             />
-            {isGame && <div className="game-control">
-            <div className="halfwidth">
-            <Select 
-                id="team"
-                label="Mannschaft"
-                options={loadedTeams}
-                validators={[]}
-                errorText="Please enter a team."
-                onInput={inputHandler}
-            />
-             <Input 
-                element="input"
-                id="opponent"
-                type="text"
-                label="Gegner"
-                validators={[]}
-                errorText="Please enter an opponent."
-                onInput={inputHandler}
-            />
-            </div>
-                <Checkbox
-            id="homematch"
-            type="checkbox"
-            label="Heimspiel"
-            validators={[]}
-            errorText="Please enter a title."
-            onCheck={inputHandler}  
-          />
-           
-
-            </div>}
-            <Button type="submit">+</Button>
-            <Button type="button" onClick={gimmeData}>DATA</Button>
-            <Button type="button" onClick={() => console.log(formState.inputs)}>State</Button>
+  
+            <Button type="submit">Neuer Termin</Button>
             </form>
             </div>
-            </div>
+          
             </div>}
      </div>
           </div>

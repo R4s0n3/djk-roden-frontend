@@ -51,7 +51,7 @@ const LeadSlider = props => {
                     category={data.category.title}
                     tel={data.tel}
                     email={data.email}
-                    comment={data.comment}
+                    position={data.position}
 
                 />
             )   

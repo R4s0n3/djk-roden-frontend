@@ -4,8 +4,6 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import Select from '../../shared/components/FormElements/Select';
-import formstates from '../../shared/util/formstates';
-
 
 import {
     VALIDATOR_MINLENGTH,
@@ -17,10 +15,30 @@ import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const NewTrainer = props => {
-    const {trainerform} = formstates
     const auth = useContext(AuthContext);
     const [createMode, setCreateMode] = useState(false);
-    const [formState, inputHandler] = useForm(trainerform, false);
+    const [formState, inputHandler] = useForm({
+      prename:{
+          value:"",
+          isValid:false
+      },
+      name:{
+          value:"",
+          isValid:false
+      },
+      tel:{
+          value:"",
+          isValid:true
+      },
+      email:{
+          value:"",
+          isValid:false
+      },
+      team:{
+          value:"",
+          isValid:false
+      }
+  }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedTrainers, setLoadedTrainers] = useState();
     const [loadedTeams, setLoadedTeams] = useState();
@@ -46,6 +64,8 @@ const NewTrainer = props => {
             });
 
             setLoadedTrainers([...loadedTrainers, trainerData.trainer]);
+            window.scrollTo(0, 0);
+
         }catch(err){}
     }
 
@@ -55,7 +75,7 @@ const NewTrainer = props => {
   
               const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/trainers');
               const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
-              setLoadedTrainers(responseData.trainers);
+              setLoadedTrainers(responseData.trainers.reverse());
               setLoadedTeams(responseTeams.teams);
               
           }catch(err){
@@ -104,7 +124,7 @@ const NewTrainer = props => {
                 id="name"
                 type="text"
                 label="Name"
-                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
+                validators={[VALIDATOR_REQUIRE()]}
                 errorText="Please enter a name."
                 onInput={inputHandler}
             />
@@ -113,7 +133,7 @@ const NewTrainer = props => {
                 id="prename"
                 type="text"
                 label="Vorname"
-                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
+                validators={[VALIDATOR_REQUIRE()]}
                 errorText="Please enter a prename."
                 onInput={inputHandler}
             />
@@ -122,9 +142,10 @@ const NewTrainer = props => {
                 id="tel"
                 type="number"
                 label="Telefon"
-                validators={[VALIDATOR_REQUIRE()]}
+                validators={[]}
                 errorText="Please enter a valid age."
                 onInput={inputHandler}
+                initialValid={true}
             />
             <Select 
                 id="team"

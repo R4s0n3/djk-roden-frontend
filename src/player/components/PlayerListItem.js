@@ -6,7 +6,7 @@ import Modal from '../../shared/components/UIElements/Modal';
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-
+import Avatar from '../../shared/components/UIElements/Avatar';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { Icon } from '@iconify/react';
@@ -29,14 +29,15 @@ const PlayerListItem = props => {
     const confirmDeleteHandler = async () => {
         setShowConfirmModal(false);
         try {
-            console.log(props.id);
           sendRequest(process.env.REACT_APP_BACKEND_URL + `/players/${props.id}`, 'DELETE',null, {Authorization: 'Bearer ' + auth.token});
-          props.onDelete(props.id);
         } catch (error) {
           
         }
       };
       function getAge(dateString) {
+        if(dateString === null){
+          return ''
+        }
         var today = new Date();
         var birthDate = new Date(dateString);
         var age = today.getFullYear() - birthDate.getFullYear();
@@ -81,12 +82,16 @@ const PlayerListItem = props => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {shortPre}. {props.name}
+              <Avatar name={props.name} prename={props.prename} imgSrc={props.image} alt={props.name} height="50px" width="50px" />
+              </TableCell>
+              <TableCell>
+              {shortPre}. {props.name}
+
               </TableCell>
               <TableCell align="center">{playerAge}</TableCell>
               <TableCell align="center">{props.position}</TableCell>
               <TableCell align="center">{props.number}</TableCell>
-              <TableCell align="center"><Button to={`${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
+              <TableCell align="center"><Button to={`../dashboard/players/${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
               <TableCell align="center"><Button danger onClick={showDeleteWarningHandler}><Icon className="djk-icon" icon="fluent:delete-16-regular" height="20px" color="#fff" /></Button></TableCell>
             </TableRow>
             </React.Fragment>

@@ -1,0 +1,42 @@
+.update-sponsor{
+    
+    flex-direction: column;
+}
+
+.update-sponsor div{
+    flex:1; height:100%;
+
+}
+.update__image-container{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+   
+}
+.update-image__preview-container{
+    width: 100%;
+    height: 100%;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+
+}
+
+.update-image__preview-container img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+    .update-image__form-container form{
+        padding:1rem;
+    }
+    .update-sponsor{
+    
+        flex-direction: row;
+    }
+    
+}

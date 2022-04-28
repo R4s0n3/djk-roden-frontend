@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from '../../shared/components/UIElements/Card';
 import './PostGridItemLarge.css';
-import {Link}from 'react-router-dom';
+import {Link, useNavigate}from 'react-router-dom';
 
 const PostGridItemLarge = (props) => {
-
+    const navigate = useNavigate();
     const formatDate = d => {
         let oldDate = d;
         const year = oldDate.slice(0,4);
@@ -27,10 +27,17 @@ const PostGridItemLarge = (props) => {
     flex:"3"
     }
 
+    const navigateHandler = () => {
+        navigate(`../posts/${props.id}`);
+        window.scroll(0, 0);
+        document.location.reload();
+
+    }
+
     return(
         <div className="post-grid__card-item">
             <Card className="post-grid__card">
-            <div style={CardBGstyle}></div>
+            <div onClick={navigateHandler} style={CardBGstyle}></div>
            
             <div className="post-grid__card-content-container">
                 <h3 className="post-grid__card-title">{props.title.length > 28 ? `${shortTitle} ...` : props.title}</h3>
@@ -38,7 +45,7 @@ const PostGridItemLarge = (props) => {
                 <p className="post-grid__card-content">{shortContent} ...</p>
             </div>
             <div className="post-grid__card-footer">
-                <Link reloadDocument to={`/posts/${props.id}`}>Mehr</Link>
+                <Link reloadDocument to={`../posts/${props.id}`}>Mehr</Link>
             </div>
             </Card>
         </div>

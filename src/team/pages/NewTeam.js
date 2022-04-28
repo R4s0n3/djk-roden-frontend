@@ -188,8 +188,8 @@ const NewTeam = () => {
                         id="desc"
                         type="text"
                         label="Beschreibung"
-                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MAXLENGTH(750)]}
-                        errorText="Please enter a description"
+                        validators={[VALIDATOR_REQUIRE(),VALIDATOR_MAXLENGTH(1000)]}
+                        errorText="Please enter a description. (max. 1000 Zeichen)"
                         onInput={inputHandler}
                     />
                     <Input 

@@ -19,7 +19,7 @@ const Post = () => {
         try{
             const myPost = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/posts/${postId}`)
             const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
-            setLoadedPosts(responsePosts.posts.filter(post => post.category.title === myPost.post.category.title));
+            setLoadedPosts(responsePosts.posts.filter(post => post.id !== myPost.post.id && post.category.title === myPost.post.category.title).reverse());
             setSinglePost(p => [...p, myPost.post]);
             setLoadedData(true);
             }catch(err){}
@@ -31,7 +31,6 @@ const Post = () => {
     const createItem = (data, index) => {
         if(data.category.title === "Spielbericht"){
             const { opponent, htshome, htsguest, homematch, eshome, esguest} = data.report; 
-            console.log(data.report.id);
 
             return(
                 <PostItem

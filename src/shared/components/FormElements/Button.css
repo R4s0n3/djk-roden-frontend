@@ -1,9 +1,9 @@
 .button {
   font: inherit;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #4BB05A;
+  border: 1px solid #006400;
   border-radius: 6px;
-  background:  #4BB05A;
+  background:  #006400;
   color: #fff;
   box-shadow: 1px 1px 2px #052e1438;
   cursor: pointer;
@@ -23,18 +23,18 @@
   background: transparent;
   transform: scale(90%);
   transition: 0.2s;
-  color: #4BB05A;
+  color: #006400;
 }
 
 .button--inverse {
   background: transparent;
-  color: #4BB05A;
+  color: #006400;
 }
 
 .button--inverse:hover,
 .button--inverse:active {
   color: white;
-  background: #4BB05A;
+  background: #006400;
 }
 
 .button--danger {
@@ -44,8 +44,8 @@
 
 .button--danger:hover,
 .button--danger:active {
-  background: #4BB05A;
-  border-color: #4BB05A;
+  background: #006400;
+  border-color: #006400;
 }
 
 .button:disabled,

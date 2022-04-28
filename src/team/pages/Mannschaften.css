@@ -7,7 +7,7 @@
 }
 
 #Mannschaften div.halfwidth div{
-    background-color: #4BB05A;
+    background-color: #006400;
     height:200px;    
     display:flex;
     border-radius: 8px;
@@ -16,7 +16,7 @@
 }
 
 #Mannschaften div.halfwidth div:last-child{
-    background-color: #4BB05A80;
+    background-color: #00640080;
 }
 
 #Mannschaften{

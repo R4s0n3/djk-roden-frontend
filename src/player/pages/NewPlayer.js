@@ -6,7 +6,6 @@ import Input from '../../shared/components/FormElements/Input';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import Select from '../../shared/components/FormElements/Select';
 
-
 import {
     VALIDATOR_MINLENGTH,
     VALIDATOR_REQUIRE
@@ -19,6 +18,7 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 const NewPlayer = props => {
     const auth = useContext(AuthContext);
     const [createMode, setCreateMode] = useState(false);
+   
     const [formState, inputHandler] = useForm({
       name:{
           value:"",
@@ -29,19 +29,19 @@ const NewPlayer = props => {
           isValid:false
       },
       age:{
-          value:" ",
-          isValid:true
-      },
-      image:{
-          value:null,
-          isValid:false
-      },
-      position:{
           value:"",
           isValid:true
       },
+      image:{
+          value: null,
+          isValid:true
+      },
+      position:{
+          value:null,
+          isValid:true
+      },
       number:{
-          value:"0",
+          value:"",
           isValid:true
       },
       team:{
@@ -108,28 +108,29 @@ const NewPlayer = props => {
   }
 
     const createPlayerHandler = async event =>{
-        console.log(formState);
         event.preventDefault();
-        let playerData;
-        try{
-          const formData = new FormData();
-          formData.append('name',formState.inputs.name.value);
-          formData.append('prename',formState.inputs.prename.value);
-          formData.append('age',formState.inputs.age.value);
-          formData.append('image',formState.inputs.image.value);
-          formData.append('team',formState.inputs.team.value);
-          formData.append('position',formState.inputs.position.value);
-          formData.append('number',formState.inputs.number.value);
-    
-          playerData = await sendRequest(
-            process.env.REACT_APP_BACKEND_URL + '/players',
-            'POST',
-            formData,{
-              Authorization: 'Bearer ' + auth.token
-            });
 
-            setLoadedPlayers([...loadedPlayers, playerData.player]);
-        }catch(err){}
+
+            try{
+            const formData = new FormData();
+            formData.append('name',formState.inputs.name.value);
+            formData.append('prename',formState.inputs.prename.value);
+            formData.append('age',formState.inputs.age.value);
+            formData.append('image', formState.inputs.image.value);
+            formData.append('team',formState.inputs.team.value);
+            formData.append('position',formState.inputs.position.value);
+            formData.append('number',formState.inputs.number.value);
+      
+            const playerData = await sendRequest(
+              process.env.REACT_APP_BACKEND_URL + '/players',
+              'POST',
+              formData,{
+                Authorization: 'Bearer ' + auth.token
+              });
+              setLoadedPlayers([...loadedPlayers, playerData.player]);
+
+            }catch(err){}
+      
     }
 
     useEffect(()=>{
@@ -182,7 +183,7 @@ const NewPlayer = props => {
             <div className="halfwidth">
             <div>
             <form className="player-form" onSubmit={createPlayerHandler}>
-            <ImageUpload  center id="image" onInput={inputHandler} errorText="Please provide an image" />
+            <ImageUpload center id="image" onInput={inputHandler} errorText="Please provide an image" />
             <Input 
                 element="input"
                 id="name"
@@ -216,7 +217,7 @@ const NewPlayer = props => {
                 type="text"
                 datalist="positions"
                 label="Position"
-                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
+                validators={[]}
                 errorText="Please enter a position."
                 onInput={inputHandler}
               />

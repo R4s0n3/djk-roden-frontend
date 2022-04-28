@@ -25,7 +25,7 @@ import { useForm } from "../../shared/hooks/form-hook";
 
 const Dashboard = () => {
         const auth = useContext(AuthContext);
-        
+                
         const {isLoading, error, sendRequest, clearError} = useHttpClient(); 
         const [loadedSponsors, setLoadedSponsors] = useState();
         const [loadedUsers, setLoadedUsers] = useState();
@@ -201,6 +201,7 @@ const tickersHandler= () =>{
             type="url"
             label="Link"
             validators={[]}
+            initialValid={true}
             errorText="Please enter a valid link."
             onInput={inputHandler}
           />
@@ -231,7 +232,6 @@ const tickersHandler= () =>{
 <PlayersList items={loadedPlayers} onDeletePlayer={deletedPlayerHandler}/>
 <Button to="/dashboard/players">Neuer Spieler</Button>
 </div>
-<div className="halfwidth">
 <div>
 <h2>Trainer</h2>
 <TrainersList items={loadedTrainers} onDeleteTrainer={deletedTrainerHandler}/>
@@ -249,8 +249,6 @@ const tickersHandler= () =>{
 
 </div>
 
-</div>
-<div className="halfwidth">
 <div>
 <h2>Termine</h2>
 <DatesList items={loadedDates} onDeleteDate={deletedDateHandler}/>
@@ -268,7 +266,6 @@ const tickersHandler= () =>{
 </div>
 </div>
 
-</div>
 <div>
 <h2>Sponsoren</h2>
 <SponsorsList items={loadedSponsors} onDeleteSponsor={deletedSponsorHandler}/>

@@ -1,5 +1,6 @@
 import React from "react";
 import logo from '../../assets/SVG/djk-white.svg';
+import {Link}from 'react-router-dom';
 import {Icon} from '@iconify/react';
 import "./Footer.css";
 const Footer = () => {
@@ -14,11 +15,11 @@ const Footer = () => {
   <div>
   <img src={logo} alt="logo" height="150px"/>
   <ul className="footer-ul">
-      <li><a href="https://www.example.com">First Link</a></li>
-      <li><a href="https://www.example.com">Second Link</a></li>
-      <li><a href="https://www.example.com">Third Link</a></li>
-      <li><a href="https://www.example.com">Fourth Link</a></li>
-      <li><a href="https://www.example.com">Fifth Link</a></li>
+      <li><a href="https://www.hvsaar.de/nc/spielbetrieb/hallenverzeichnis/">Hallenverzeichnis</a></li>
+      <li><Link reloadDocument to="/kontakt">Kontakt</Link></li>
+      <li><Link reloadDocument to="/impressum">Impressum</Link></li>
+      <li><Link reloadDocument to="/datenschutz">Datenschutz</Link></li>
+    
   </ul>
   <div className="maintance-social-links">
             <a href="https://www.instagram.com/hgs_the.next.ones_/"><Icon className="djk-icon" icon="akar-icons:instagram-fill" height="40px" color="#fff" /></a>

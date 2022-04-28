@@ -21,6 +21,7 @@ const LeadsList = props => {
                 prename={data.prename}
                 tel={data.tel}
                 email={data.email}
+                image={data.image}
                 category={data.category.title}
                 onDelete={props.onDeleteLead}
             />
@@ -33,10 +34,11 @@ const LeadsList = props => {
         <Table stickyHeader aria-label="simple table">
           <TableHead>
             <TableRow>
-            <TableCell component="th" scope="row">Name</TableCell>
-            <TableCell align="center" >Telefon</TableCell>
-            <TableCell align="center" >E-Mail</TableCell>
-            <TableCell align="center" >Kategorie</TableCell>
+            <TableCell component="th" scope="row"></TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Telefon</TableCell>
+            <TableCell>E-Mail</TableCell>
+            <TableCell>Kategorie</TableCell>
             <TableCell align="center">Edit</TableCell>
             <TableCell align="center">Löschen</TableCell>
             </TableRow>

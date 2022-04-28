@@ -18,7 +18,7 @@ const PostSliderTopItem = (props) => {
 }
   const shortContent = props.content.slice(0, 85);
   const imgStyles={
-    backgroundImage: "linear-gradient(45deg,rgba(194, 223, 194, 0.5), rgba(255, 244, 191,0.25)),url(" + process.env.REACT_APP_AWS_URL +  `/${props.image})`,
+    backgroundImage: "url(" + process.env.REACT_APP_AWS_URL +  `/${props.image})`,
     backgroundSize: "cover",
     filter: "contrast(1.25)",
     backgroundPosition:"center center"

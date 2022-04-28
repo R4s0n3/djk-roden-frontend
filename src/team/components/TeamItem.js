@@ -1,3 +1,4 @@
+import React,{useState} from 'react';
 import './TeamItem.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -6,17 +7,24 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ImageModal from '../../shared/components/UIElements/ImageModal';
 import {Icon} from '@iconify/react';
 import logo from '../../shared/assets/SVG/djk-green-ol.svg';
 import ball from '../../shared/assets/SVG/ball-green.svg';
+import Avatar from '../../shared/components/UIElements/Avatar';
+import Button from '../../shared/components/FormElements/Button';
 
 const TeamItem = props => {
+    const [imgBox, setImgBox] = useState(false);
+    
+    const noNumbers = props.players.filter(p => p.number === null);
+    let withNumbers = props.players.filter(p => p.number !== null).sort((a,b) => a.number - b.number);
+withNumbers.push(...noNumbers);
 
     const createPlayerRows = (data, index) =>{
 
 
         const shortPre = data.prename.slice(0,1);
-
         return(
             <TableRow
               id={data.id}
@@ -24,9 +32,14 @@ const TeamItem = props => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {data.number}
+              <Avatar name={data.name} prename={data.prename} imgSrc={data.image} alt={data.name} height="50px" width="50px" />
+
               </TableCell>
               <TableCell>{shortPre}. {data.name}</TableCell>
+              <TableCell >
+                {data.number}
+              </TableCell>
+            
               <TableCell align="center">{data.position}</TableCell>
             </TableRow>
         )
@@ -43,8 +56,8 @@ const TeamItem = props => {
             <TableCell component="th" scope="row">
               {data.prename} {data.name}
             </TableCell>
-            <TableCell align="center"><a href={`tel:${data.tel}`}><Icon className="djk-icon" icon="carbon:phone-filled" height="30px" color="#4BB05A" /></a></TableCell>
-            <TableCell align="center"><a href={`mailto:${data.email}`}><Icon className="djk-icon" icon="clarity:email-solid" height="35px" color="#4BB05A" /></a></TableCell>
+            <TableCell align="center">{data.tel && <a href={`tel:${data.tel}`}><Icon className="djk-icon" icon="carbon:phone-filled" height="30px" color="#006400" /></a>}</TableCell>
+            <TableCell align="center"><a href={`mailto:${data.email}`}><Icon className="djk-icon" icon="clarity:email-solid" height="35px" color="#006400" /></a></TableCell>
          
           </TableRow>
         )
@@ -67,10 +80,26 @@ const TeamItem = props => {
         )
     }
 
-   return(
+    const handleImgClick = () =>{
+      setImgBox(true);
+
+    }
+    
+   return(<React.Fragment>
+
+   <ImageModal
+   show={imgBox}
+        onCancel={()=>setImgBox(false)}
+        footerClass="player-item__modal-actions"
+          >
+       
+        <img src={ process.env.REACT_APP_AWS_URL + `/${props.imageUrl}`} alt={props.title} />
+  
+   </ImageModal>
+
        <div id={props.id} className="team-item">
        <div className="team-item__header">
-       <div className="team-item__header-img-container">
+       <div className="team-item__header-img-container" onClick={handleImgClick}>
        <img src={ process.env.REACT_APP_AWS_URL + `/${props.imageUrl}`} alt={props.title} />
        </div>
        <div className="team-item__header-content-container">
@@ -80,8 +109,8 @@ const TeamItem = props => {
 
 <p className="team-content__paragraph" >{props.content}</p>
 <div className="social-icons-container">
-    <a href={props.fb}><Icon className="djk-icon" icon="akar-icons:instagram-fill" height="40px" color="#4BB05A" /></a>
-    <a href={props.insta}><Icon className="djk-icon" icon="akar-icons:facebook-fill" height="40px" color="#4BB05A" /></a>
+    <a href={props.fb}><Icon className="djk-icon" icon="akar-icons:instagram-fill" height="40px" color="#006400" /></a>
+    <a href={props.insta}><Icon className="djk-icon" icon="akar-icons:facebook-fill" height="40px" color="#006400" /></a>
 </div>
        </div>
        </div>
@@ -89,17 +118,18 @@ const TeamItem = props => {
        <div className="team-item__stats-container">
        {props.players.length !== 0 && <div className="stats-container__short">
         <h2>Spieler</h2>
-        <TableContainer sx={{maxHeight: 420}} component={Paper}>
+        <TableContainer className="player-table" sx={{maxHeight: 420, overflow: 'scroll'}} component={Paper}>
         <Table stickyHeader aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell component="th" scope="row">Nr</TableCell>
-              <TableCell align="center">Name</TableCell>
+              <TableCell component="th" scope="row"></TableCell>
+              <TableCell style={{minWidth:90}}>Name</TableCell>
+              <TableCell>Nr</TableCell>
               <TableCell align="center">Position</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.players.map(createPlayerRows)} 
+            {withNumbers.map(createPlayerRows)} 
           </TableBody>
         </Table>
 
@@ -159,6 +189,10 @@ const TeamItem = props => {
         </div>
        </div>
        </div>
+
+   </React.Fragment>
+
+ 
        )
 }
 

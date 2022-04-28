@@ -24,6 +24,7 @@ const PlayersList = props => {
                 name={data.name}
                 prename={data.prename}
                 onDelete={props.onDeletePlayer}
+                image={data.image}
             />
         )
 
@@ -34,6 +35,7 @@ const PlayersList = props => {
         <Table stickyHeader aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell></TableCell>
               <TableCell>Name</TableCell>
               <TableCell align="center">Alter</TableCell>
               <TableCell align="center">Position</TableCell>

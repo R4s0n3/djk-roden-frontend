@@ -27,12 +27,12 @@ const LeadSliderItem = props => {
                <p className="lead-slider__card-info"><b>{props.category}</b></p>
            
 
-               <p className="lead-slider__card-content">{props.comment}</p>
+               <p className="lead-slider__card-content">{props.position}</p>
 
            </div>
            <div className="social-icons-container post-grid__card-footer">
-    <a href={`tel:${props.tel}`}><Icon className="djk-icon" icon="carbon:phone-filled" height="20px" color="#4BB05A" /></a>
-    <a href={`mailto:${props.email}`}><Icon className="djk-icon" icon="clarity:email-solid" height="20px" color="#4BB05A" /></a>
+    <a href={`tel:${props.tel}`}><Icon className="djk-icon" icon="carbon:phone-filled" height="20px" color="#006400" /></a>
+    <a href={`mailto:${props.email}`}><Icon className="djk-icon" icon="clarity:email-solid" height="20px" color="#006400" /></a>
 </div>
         </Card>
         </div>

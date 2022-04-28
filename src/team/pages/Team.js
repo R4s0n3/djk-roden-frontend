@@ -26,7 +26,7 @@ const Team = () => {
                 
                 const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
 
-                setLoadedPosts(responsePosts.posts.filter(p => p.category.title === "Spielbericht"));
+                setLoadedPosts(responsePosts.posts.filter(p => p.category.title === "Spielbericht").reverse());
                 setLoadedData(true);
 
 

@@ -6,6 +6,7 @@ import Modal from '../../shared/components/UIElements/Modal';
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import Avatar from '../../shared/components/UIElements/Avatar';
 
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
@@ -69,12 +70,13 @@ const LeadsListItem = props => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {shortPre}. {props.name}
+              <Avatar name={props.name} prename={props.prename} imgSrc={props.image} alt={props.name} height="50px" width="50px" />
               </TableCell>
-              <TableCell align="center">{props.tel}</TableCell>
-              <TableCell align="center">{props.email}</TableCell>
-              <TableCell align="center">{props.category}</TableCell>
-              <TableCell align="center"><Button to={`${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
+              <TableCell style={{minWidth:90}}>{shortPre}. {props.name}</TableCell>
+              <TableCell >{props.tel}</TableCell>
+              <TableCell >{props.email}</TableCell>
+              <TableCell >{props.category}</TableCell>
+              <TableCell align="center"><Button to={`../dashboard/leads/${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
               <TableCell align="center"><Button danger onClick={showDeleteWarningHandler}><Icon className="djk-icon" icon="fluent:delete-16-regular" height="20px" color="#fff" /></Button></TableCell>
             </TableRow>
             </React.Fragment>

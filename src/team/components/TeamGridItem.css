@@ -4,7 +4,7 @@
 }
 
 h3.team-grid__card-title{
-    color:#4BB05A;
+    color:#006400;
     font-size: 1.5rem;
     width:90%;
     margin:0;
@@ -44,7 +44,7 @@ h3.team-grid__card-title{
     display:flex;
 }
 .team-grid__card-footer a{
-    color:#4BB05A;
+    color:#006400;
     font-weight:bold;
     text-decoration:none;
     

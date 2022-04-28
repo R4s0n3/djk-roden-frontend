@@ -13,6 +13,9 @@ const AdminNavLinks = props => {
           <NavLink reloadDocument to="/dashboard/users">Users</NavLink>
         </li>
         <li className="admin-li">
+          <NavLink reloadDocument to="/dashboard/categories">Kategorien</NavLink>
+        </li>
+        <li className="admin-li">
           <NavLink reloadDocument to="/dashboard/posts">Posts</NavLink>
         </li>
         <li className="admin-li">

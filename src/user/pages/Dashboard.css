@@ -8,8 +8,12 @@
     margin: 10rem auto 5rem;
     width:100%;
     max-width: 980px;
+    display:flex;
+    padding:0 0.5rem;
+
 }
 
 .dash-container div.halfwidth div{
     flex:1;
+    position:relative;
 }

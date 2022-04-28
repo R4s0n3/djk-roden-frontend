@@ -13,7 +13,7 @@ import TrainersListItem from './TrainersListItem';
 const TrainersList = props => {
 
     const createRows = (data, index) =>{
-        console.log(data.team)
+       
         return(
             <TrainersListItem 
                 key={index}
@@ -28,6 +28,7 @@ const TrainersList = props => {
         )
 
     }
+
     
     return(
         <TableContainer sx={{maxHeight: 420}} component={Paper}>

@@ -5,23 +5,51 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import Select from '../../shared/components/FormElements/Select';
-import formstates from '../../shared/util/formstates';
-
 
 import {
+  VALIDATOR_EMAIL,
     VALIDATOR_MINLENGTH,
     VALIDATOR_REQUIRE,
   } from "../../shared/util/validators";
+  
 import { useForm} from "../../shared/hooks/form-hook";
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const NewLead = props => {
-    const {leadsform} = formstates
     const auth = useContext(AuthContext);
     const [createMode, setCreateMode] = useState(false);
-    const [formState, inputHandler] = useForm(leadsform, false);
+    const [formState, inputHandler] = useForm({
+      name:{
+          value:"",
+          isValid:false
+      },
+      prename:{
+          value:"",
+          isValid:false
+      },
+      tel:{
+          value:"",
+          isValid:false
+      },
+      image:{
+          value:null,
+          isValid:false
+      },
+      category:{
+          value:"",
+          isValid:false
+      },
+      email:{
+          value:"",
+          isValid:false
+      },
+      position:{
+          value:"",
+          isValid:false
+      }
+  }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedLeads, setLoadedLeads] = useState();
     const [loadedCategories, setLoadedCategories] = useState();
@@ -39,7 +67,7 @@ const NewLead = props => {
             formData.append('email', formState.inputs.email.value);
             formData.append('category', formState.inputs.category.value);
             formData.append('image', formState.inputs.image.value);
-            formData.append('comment', formState.inputs.comment.value);
+            formData.append('position', formState.inputs.position.value);
           leadData = await sendRequest(
             process.env.REACT_APP_BACKEND_URL + '/leads',
             'POST',
@@ -48,16 +76,20 @@ const NewLead = props => {
             });
 
             setLoadedLeads([...loadedLeads, leadData.lead]);
+            window.scrollTo(0, 0);
+      
+
         }catch(err){}
     }
 
     useEffect(()=>{
+       
       const fetchData = async () => {
           try{
   
               const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/leads');
               const responseCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
-              setLoadedLeads(responseData.leads);
+              setLoadedLeads(responseData.leads.reverse());
               setLoadedCategories(responseCategories.categories);
               
           }catch(err){
@@ -121,30 +153,30 @@ const NewLead = props => {
                 onInput={inputHandler}
             />
             <Input 
-                element="textarea"
-                id="comment"
+                element="input"
+                id="position"
                 type="text"
-                label="Kommentar"
+                label="Funktion"
                 validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
-                errorText="Please enter a comment."
+                errorText="Please enter a lead position."
                 onInput={inputHandler}
             />
             <Input 
                 element="input"
                 id="email"
-                type="text"
+                type="email"
                 label="E-Mail"
-                validators={[VALIDATOR_REQUIRE()]}
+                validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
                 errorText="Please enter a valid E-Mail."
                 onInput={inputHandler}
             />
             <Input 
                 element="input"
                 id="tel"
-                type="number"
+                type="text"
                 label="Telefon"
                 validators={[VALIDATOR_REQUIRE()]}
-                errorText="Please enter a valid age."
+                errorText="Please enter a phone number."
                 onInput={inputHandler}
             />
             <Select 

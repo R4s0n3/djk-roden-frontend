@@ -53,7 +53,7 @@ justify-content: space-between;
 .post-grid__card-short a{
     text-decoration: none;
     font-weight: bold;
-    color:#4BB05A;
+    color:#006400;
     font-size: 0.8rem;
 }
 .post-grid__card-short a:hover{

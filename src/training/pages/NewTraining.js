@@ -115,7 +115,7 @@ const NewTraining = props => {
                 type="time"
                 label="Ende"
                 validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
-                errorText="Please enter a prename."
+                errorText="Please enter a end time."
                 onInput={inputHandler}
             />
             <Input 
@@ -124,15 +124,16 @@ const NewTraining = props => {
                 type="text"
                 label="Standort"
                 validators={[VALIDATOR_REQUIRE()]}
-                errorText="Please enter a link."
+                errorText="Please enter a location."
                 onInput={inputHandler}
             />
             <Input 
                 element="input"
                 id="link"
-                type="text"
+                type="url"
                 label="Link"
-                validators={[VALIDATOR_REQUIRE()]}
+                validators={[]}
+                initialValid={true}
                 errorText="Please enter a valid link."
                 onInput={inputHandler}
             />

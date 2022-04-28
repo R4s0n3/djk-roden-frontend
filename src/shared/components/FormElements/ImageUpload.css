@@ -1,11 +1,12 @@
 .image-upload.center {
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
   }
   
   .image-upload__preview {
+   
     width: 8rem;
     height: 8rem;
     border: 2px solid #013936;

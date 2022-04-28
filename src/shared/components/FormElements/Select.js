@@ -50,21 +50,20 @@ const Select = props => {
         });
     };
 
-    const createOption = (data) =>{
+    const createOption = (data, index) =>{
         return(
             <React.Fragment>
-                <option key={data.id} id={data.id} value={data.id}>{data.title || data.name}</option>
+                <option key={index} id={data.id} value={data.id}>{data.title || data.name}</option>
             </React.Fragment>
         )
     }
-
         
     return (
         <div
             className={`form-control ${!inputState.isValid && inputState.isTouched &&
         'form-control--invalid'}`}>
         <label htmlFor={props.id}>{props.label}</label>
-        <select id={props.id} onChange={changeHandler} onBlur={touchHandler} >
+        <select id={props.id} onChange={changeHandler} value={inputState.value} onBlur={touchHandler} >
             <option id="placeholderoption" key="0" value="--">--</option>
             {props.options.map(createOption)}
         </select>
