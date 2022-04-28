@@ -71,7 +71,7 @@ const DatesListItem = props => {
               <TableCell component="th" scope="row">
                 {props.title}
               </TableCell>
-              <TableCell align="center">{formatedStartDate}</TableCell>
+              <TableCell align="center">{formatedStartDate} - {formatedEndDate}</TableCell>
               <TableCell align="center">{props.category}</TableCell>
               <TableCell align="center"><Button to={`${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
               <TableCell align="center"><Button danger onClick={showDeleteWarningHandler}><Icon className="djk-icon" icon="fluent:delete-16-regular" height="20px" color="#fff" /></Button></TableCell>

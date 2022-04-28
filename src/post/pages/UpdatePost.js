@@ -29,8 +29,8 @@ const UpdatePost = () => {
     const [isUpload, setIsUpload] = useState();
     const [loadedCategories, setLoadedCategories] = useState(); 
     const [loadedTeams, setLoadedTeams] = useState(); 
-    const [isReport, setIsReport] = useState(false);
-
+    // const [isReport, setIsReport] = useState(false);
+    const isReport = false;
     const postId = useParams().postId;
     const navigate = useNavigate();
 

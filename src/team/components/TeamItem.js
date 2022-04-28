@@ -12,7 +12,6 @@ import {Icon} from '@iconify/react';
 import logo from '../../shared/assets/SVG/djk-green-ol.svg';
 import ball from '../../shared/assets/SVG/ball-green.svg';
 import Avatar from '../../shared/components/UIElements/Avatar';
-import Button from '../../shared/components/FormElements/Button';
 
 const TeamItem = props => {
     const [imgBox, setImgBox] = useState(false);
