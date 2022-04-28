@@ -43,6 +43,7 @@ import UpdateTraining from './training/pages/UpdateTraining';
 import UpdateTrainer from './trainer/pages/UpdateTrainer';
 import UpdateTeam from './team/pages/UpdateTeam';
 import UpdatePost from './post/pages/UpdatePost';
+import UpdateUser from './user/pages/UpdateUser';
 
 import ForgotPassword from './user/pages/ForgotPassword';
 import ResetPassword from './user/pages/ResetPassword';
@@ -132,10 +133,8 @@ useEffect(()=>{
         <Route path="/dashboard/sponsors" element={<NewSponsor />} />
         <Route path="/dashboard/categories" element={<NewCategory />} />
 
-{/* 
-        <Route path="/dashboard/users/:userId" element={<UpdateUser />} />
-*/}     
 
+        <Route path="/dashboard/users/:userId" element={<UpdateUser />} />
         <Route path="/dashboard/posts/:postId" element={<UpdatePost />} />
         <Route path="/dashboard/players/:playerId" element={<UpdatePlayer />} />
         <Route path="/dashboard/trainers/:trainerId" element={<UpdateTrainer />} />

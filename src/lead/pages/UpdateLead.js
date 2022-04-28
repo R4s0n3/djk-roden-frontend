@@ -225,7 +225,7 @@ const uploadHandler = () => {
   return(
       <React.Fragment>
     <ErrorModal error={error} onClear={clearError} />
-    <div className="update-lead dash-container">
+    <div className="update dash-container">
     <div className="update-image__form-container">
     <form onSubmit={confirmImageUploadHandler}>
     <div className="update-image__preview-container">
@@ -237,7 +237,7 @@ const uploadHandler = () => {
     </form>
     </div>
     <div>
-    <form className="lead-form" onSubmit={leadUpdateSubmitHandler}>
+    <form className="update-form" onSubmit={leadUpdateSubmitHandler}>
     <h2>Update Lead</h2>
     <Input
         id="name"

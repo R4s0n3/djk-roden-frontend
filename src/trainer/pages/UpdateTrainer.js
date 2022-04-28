@@ -135,9 +135,9 @@ const trainerUpdateSubmitHandler = async event => {
   return(
       <React.Fragment>
     <ErrorModal error={error} onClear={clearError} />
-    <div className="update-trainer dash-container">
+    <div className="update dash-container">
     <div>
-    <form className="trainer-form" onSubmit={trainerUpdateSubmitHandler}>
+    <form className="update-form" onSubmit={trainerUpdateSubmitHandler}>
     <h2>Update Trainer</h2>
     <Input 
                 element="input"

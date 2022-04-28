@@ -139,9 +139,9 @@ const dateUpdateSubmitHandler = async event => {
   return(
       <React.Fragment>
     <ErrorModal error={error} onClear={clearError} />
-    {!isLoading && loadedCategories && <div className="update-date dash-container">
+    {!isLoading && loadedCategories && <div className="update dash-container">
     <div>
-    <form className="date-form" onSubmit={dateUpdateSubmitHandler}>
+    <form className="update-form" onSubmit={dateUpdateSubmitHandler}>
     <h2>Update Kategorie</h2>
     <Input
         id="title"

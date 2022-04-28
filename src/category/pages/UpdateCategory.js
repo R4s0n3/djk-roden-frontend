@@ -100,9 +100,9 @@ const categoryUpdateSubmitHandler = async event => {
   return(
       <React.Fragment>
     <ErrorModal error={error} onClear={clearError} />
-    <div className="update-category dash-container">
+    <div className="update dash-container">
     <div>
-    <form className="category-form" onSubmit={categoryUpdateSubmitHandler}>
+    <form className="update-form" onSubmit={categoryUpdateSubmitHandler}>
     <h2>Update Kategorie</h2>
     <Input
         id="title"

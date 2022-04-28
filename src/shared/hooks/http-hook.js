@@ -7,6 +7,7 @@ export const useHttpClient = () => {
     
     const sendRequest = useCallback(async (url, method = "GET", body = null, headers = {}) => {
         setIsLoading(true);
+        window.scroll(0, 0);
 
         try{
             const response = await fetch(url, {

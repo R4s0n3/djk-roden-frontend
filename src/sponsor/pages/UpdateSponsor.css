@@ -1,9 +1,9 @@
-.update-sponsor{
+.update{
     
     flex-direction: column;
 }
 
-.update-sponsor div{
+.update div{
     flex:1; height:100%;
 
 }
@@ -34,7 +34,7 @@
     .update-image__form-container form{
         padding:1rem;
     }
-    .update-sponsor{
+    .update{
     
         flex-direction: row;
     }

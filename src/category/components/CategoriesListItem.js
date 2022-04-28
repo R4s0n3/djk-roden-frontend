@@ -30,7 +30,7 @@ const CategorieListItem = props => {
         setShowConfirmModal(false);
         try {
             console.log(props.id);
-          sendRequest(process.env.REACT_APP_BACKEND_URL + `/categorie/${props.id}`, 'DELETE',null, {Authorization: 'Bearer ' + auth.token});
+          sendRequest(process.env.REACT_APP_BACKEND_URL + `/categories/${props.id}`, 'DELETE',null, {Authorization: 'Bearer ' + auth.token});
           props.onDelete(props.id);
         } catch (error) {
           

@@ -15,7 +15,7 @@ import Card from '../../shared/components/UIElements/Card';
 import { AuthContext} from '../../shared/context/auth-context';
 import {useForm} from "../../shared/hooks/form-hook";
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import './UpdateTrainer.css';
+import './UpdateUser.css';
 
 const UpdateUser = () => {
 

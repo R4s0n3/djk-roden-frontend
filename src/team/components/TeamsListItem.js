@@ -76,7 +76,7 @@ const TeamsListItem = props => {
               <TableCell align="center">{props.players.length}</TableCell>
               <TableCell align="center">{props.trainers.length}</TableCell>
               <TableCell align="center">{props.reports.length}</TableCell>
-              <TableCell align="center"><Button to={`${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
+              <TableCell align="center"><Button to={`../dashboard/teams/${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
               <TableCell align="center"><Button danger onClick={showDeleteWarningHandler}><Icon className="djk-icon" icon="fluent:delete-16-regular" height="20px" color="#fff" /></Button></TableCell>
             </TableRow>
             </React.Fragment>

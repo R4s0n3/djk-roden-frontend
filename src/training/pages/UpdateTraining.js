@@ -140,9 +140,9 @@ const trainingUpdateSubmitHandler = async event => {
   return(
       <React.Fragment>
     <ErrorModal error={error} onClear={clearError} />
-    <div className="update-training dash-container">
+    <div className="update dash-container">
     <div>
-    <form className="training-form" onSubmit={trainingUpdateSubmitHandler}>
+    <form className="update-form" onSubmit={trainingUpdateSubmitHandler}>
     <h2>Update Training</h2>
             <Input 
                 element="input"
