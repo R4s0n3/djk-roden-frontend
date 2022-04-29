@@ -21,6 +21,7 @@ import MainNavigation from './shared/components/Navigation/MainNavigation';
 import Footer from './shared/components/UIElements/Footer';
 import Modal from './shared/components/UIElements/Modal'
 import Cookies from 'universal-cookie';
+import Datenschutz from './user/pages/Datenschutz';
 
 import NewTeam from './team/pages/NewTeam';
 import NewDate from './date/pages/NewDate';
@@ -58,6 +59,7 @@ import Verein from './user/pages/Verein';
 import History from './user/pages/History';
 import Sponsors from './sponsor/pages/Sponsors';
 import Kontakt from './user/pages/Kontakt';
+import Impressum from './user/pages/Impressum';
 
 function App() {
   const { token, reset, login, logout, userId } = useAuth();
@@ -119,6 +121,9 @@ useEffect(()=>{
         <Route path="/mannschaften/jugend/:teamId" element={<Team />} />
         <Route path="/posts/:postId" element={<Post />} />
         <Route path="/kontakt" element={<Kontakt />} />
+        <Route path="/impressum" element={<Impressum />} />
+        <Route path="/datenschutz" element={<Datenschutz />} />
+
 
         <Route path="/dashboard" element={<Dashboard />} />
 
@@ -160,6 +165,9 @@ useEffect(()=>{
         <Route path="/verein/history" element={<History />} />
         <Route path="/sponsoring" element={<Sponsors />} />
         <Route path="/kontakt" element={<Kontakt />} />
+        <Route path="/impressum" element={<Impressum />} />
+        <Route path="/datenschutz" element={<Datenschutz />} />
+
         <Route path="/mannschaften" element={<Mannschaften />} />
         <Route path="/teams" element={<Mannschaften />} />
         <Route path="/mannschaften/aktive" element={<Teams filter="Aktive" />} />

@@ -8,9 +8,12 @@
   
   .slider-item__img-container{
     flex:3;
+  
   }
 
   .slider-item__img-container > img {
+    height:100%;
+    object-fit: cover;
   }
 
 .slider-item__content-container {

@@ -21,7 +21,8 @@ const PostSliderTopItem = (props) => {
     backgroundImage: "url(" + process.env.REACT_APP_AWS_URL +  `/${props.image})`,
     backgroundSize: "cover",
     filter: "contrast(1.25)",
-    backgroundPosition:"center center"
+    backgroundPosition:"center center",
+    flex:'3'
   }
   const itemClickHandler = () =>{
     navigate(`/posts/${props.id}`);
