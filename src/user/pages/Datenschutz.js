@@ -1,9 +1,9 @@
 const Datenschutz = () => {
     return(
-        <div style={{marginBottom:"5rem"}}className="main-container">
+        <div style={{margin:"5rem auto",width:"90%",maxWidth:"980px"}}className="main-container">
         <h1>Datenschutz</h1>
         <hr />
-        <h2>Datenschutzerklärung/Datenschutzhinweis</h2>
+        <h2>Datenschutzerklärung/ Datenschutzhinweis</h2>
         <p>
         Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne deine ausdrückliche Zustimmung nicht an Dritte weitergegeben.
         </p>

@@ -1,6 +1,6 @@
 
 const Impressum = () => {
-    return(<div style={{marginBottom:"5rem"}}  className="main-container">
+    return(<div style={{margin:"5rem auto",width:"90%",maxWidth:"980px"}} className="main-container">
     <h1>IMPRESSUM</h1>
     <hr />
     <p>DJK Saarlouis-Roden<br />
