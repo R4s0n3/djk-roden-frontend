@@ -3,12 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import {
     VALIDATOR_REQUIRE,
+    VALIDATOR_MINLENGTH
 } from "../../shared/util/validators";
 
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import Select from '../../shared/components/FormElements/Select';
 
 import Card from '../../shared/components/UIElements/Card';
 import { AuthContext} from '../../shared/context/auth-context';
@@ -21,6 +23,7 @@ const UpdateTrainer = () => {
 const auth = useContext(AuthContext);
 const {isLoading, error, sendRequest, clearError } = useHttpClient();
 const [loadedTrainer, setLoadedTrainer] = useState();
+const [loadedTeams, setLoadedTeams] = useState();
 
 const trainerId = useParams().trainerId;
 const navigate = useNavigate();
@@ -54,6 +57,8 @@ useEffect(()=>{
     const fetchTrainer = async () => {
 
         try{
+            const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/teams");
+            setLoadedTeams(responseTeams.teams);
             const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/trainers/${trainerId}`);
             setLoadedTrainer(responseData.trainer);
             setFormData({
@@ -74,7 +79,7 @@ useEffect(()=>{
                     isValid:true
                 },
                 team:{
-                    value:responseData.trainer.team,
+                    value:responseData.team,
                     isValid:true
                 }
             }, true
@@ -100,7 +105,8 @@ const trainerUpdateSubmitHandler = async event => {
          name: formState.inputs.name.value,
          prename: formState.inputs.prename.value,
          tel: formState.inputs.tel.value,
-         email: formState.inputs.email.value
+         email: formState.inputs.email.value,
+         team: formState.inputs.team.value
         }),
         { 'Content-Type': 'application/json', Authorization: 'Bearer ' + auth.token
       }
@@ -111,7 +117,7 @@ const trainerUpdateSubmitHandler = async event => {
     }
   };
 
-  
+   
 
   if (isLoading) {
     return (
@@ -183,7 +189,16 @@ const trainerUpdateSubmitHandler = async event => {
                 errorText="Please enter a valid E-Mail."
                 onInput={inputHandler}
             />
- 
+            {loadedTeams && <Select 
+                id="team"
+                label="Team"
+                options={loadedTeams}
+                initialValid={true}
+                initialValue={loadedTrainer.team.id}
+                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
+                errorText="Please enter a team."
+                onInput={inputHandler}
+            />}
 
         <Button type="submit" disabled={!formState.isValid}>
             Update Trainer

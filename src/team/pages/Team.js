@@ -5,6 +5,7 @@ import TeamItem from '../components/TeamItem';
 import PostGrid from '../../post/components/PostGrid';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import SponsorSlider from '../../sponsor/components/SponsorSlider';
 import './Team.css';
 
 
@@ -12,6 +13,7 @@ import './Team.css';
 const Team = () => {
     const [loadedTeam, setLoadedTeam] = React.useState([]);
     const [loadedPosts, setLoadedPosts] = React.useState();
+    const [loadedSponsors, setLoadedSponsors] = React.useState();
     const [loadedData, setLoadedData ] = React.useState(false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const {teamId} = useParams(); 
@@ -27,8 +29,12 @@ const Team = () => {
                 const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
 
                 setLoadedPosts(responsePosts.posts.filter(p => p.category.title === "Spielbericht").reverse());
-                setLoadedData(true);
 
+                const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
+                const teamSponsors = responseSponsors.sponsors.filter(s => s.team === teamId);
+                setLoadedSponsors(teamSponsors);
+                setLoadedData(true);
+        
 
                 }catch(err){}
         }
@@ -79,7 +85,9 @@ const Team = () => {
     <h2>Spielberichte</h2>
    <PostGrid items={filteredPosts(loadedPosts)} />
 </div> }
-
+{loadedData && loadedSponsors.length > 0 && <div className="featured-sponsors__container">
+    <SponsorSlider items={loadedSponsors} />
+    </div>}
         </div>
     </React.Fragment>)
 }

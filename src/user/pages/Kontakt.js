@@ -2,7 +2,6 @@
 import './Kontakt.css';
 import Button from '../../shared/components/FormElements/Button';
 import Vereinsanmeldung from '../../shared/assets/DJK/Vereinsanmeldung.pdf';
-import Datenschutz from '../../shared/assets/DJK/Datenschutz.pdf';
 import Förderverein from '../../shared/assets/DJK/Foerderverein.pdf';
 
 const Kontakt = () => {
@@ -13,7 +12,6 @@ const Kontakt = () => {
             <h3>Ansprechpartner DJK Saarlouis-Roden Abt. Handball</h3>
             <h2>Formulare zum Download</h2>
             <Button clasName="dl-button" type="button" href={Vereinsanmeldung} download>Vereinsanmeldung</Button>
-            <Button clasName="dl-button" type="button" href={Datenschutz} download>Datenschutzerklärung</Button>
             <Button clasName="dl-button" type="button" href={Förderverein} download>Förderverein</Button>
             <h2>Allgemeine Rückfragen:</h2>
             <ul>

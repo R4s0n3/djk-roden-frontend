@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './TeamGrid.css';
+import Button from '../../shared/components/FormElements/Button';
 import TeamGridItem from './TeamGridItem';
 
 const TeamGrid = props => {
+  const [filterState, setFilterState] = useState();
+  const genderOptions = [{title:'Weiblich'},{title:'Männlich'},{title:'Gemischt'}];
 
     const createCardsLG =(data,index)=>{
         return(<TeamGridItem
@@ -19,10 +22,32 @@ const TeamGrid = props => {
         )
     }
 
+
+    const handleAll = () => {
+      setFilterState(false);
+    }
+    
+    const handleFilters = e => {
+      e.preventDefault();
+      setFilterState(e.target.innerHTML);
+    }
+
+    const createFilter = (data, index) => {
+      return(
+        <Button key={index} inverse={filterState === data.title} type="button" onClick={handleFilters}>{data.title}</Button>
+        
+      )
+    }
+
     return(
         <div className="team-grid">
+       <div style={{margin:"0 0 1rem 0.5%"}}>
+       <Button inverse={!filterState} type="button"  onClick={handleAll}>Alle</Button>
+      {genderOptions.map(createFilter)}
+     </div>
         <div className="team-grid__col-full">
-          {props.items.map(createCardsLG)}
+        {filterState && props.items.filter(team => team.gender === filterState).map(createCardsLG)}
+          {!filterState && props.items.map(createCardsLG)}
         </div>
         </div>
        )}

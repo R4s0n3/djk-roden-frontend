@@ -6,6 +6,35 @@ flex:1
 
 }
 
-.top-slider .slick-dots{
-    bottom:25px;
+
+
+.slick-dots {
+	display: flex;
+	justify-content: center;
+	margin: 0;
+	padding: 0.5rem 0;
+	bottom: 0.25rem;
+	list-style-type: none;
 }
+
+	.slick-dots	li {
+			margin: 0 0.5rem;
+		}
+	
+	.slick-dots li button {
+			display: block;
+			width: 0.85rem;
+			height: 0.85rem;
+			padding: 0;
+			
+			border: none;
+			border-radius: 100%;
+			background-color: hsl(120, 80%, 40%);
+			
+			text-indent: -9999px;
+		}
+	
+		li.slick-active button {
+			background-color: #006400;
+		}
+	

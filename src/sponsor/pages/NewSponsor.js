@@ -5,7 +5,6 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import Select from '../../shared/components/FormElements/Select';
-import formstates from '../../shared/util/formstates';
 
 
 import {
@@ -18,12 +17,34 @@ import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const NewSponsor = props => {
-    const {sponsorsform} = formstates
     const auth = useContext(AuthContext);
     const [createMode, setCreateMode] = useState(false);
-    const [formState, inputHandler] = useForm(sponsorsform, false);
+    const [formState, inputHandler] = useForm({
+      name:{
+          value:"",
+          isValid:false
+      },
+     
+      link:{
+          value:"",
+          isValid:false
+      },
+      image:{
+          value:null,
+          isValid:false
+      },
+      category:{
+          value:"",
+          isValid:false
+      },
+      team:{
+        value:"",
+        isValid:false
+      }
+  }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedSponsors, setLoadedSponsors] = useState();
+    const [loadedTeams, setLoadedTeams] = useState();
     const [loadedCategories, setLoadedCategories] = useState();
 
     const createSponsorHandler = async event =>{
@@ -37,6 +58,7 @@ const NewSponsor = props => {
             formData.append('category', formState.inputs.category.value);
             formData.append('image', formState.inputs.image.value);
             formData.append('link', formState.inputs.link.value);
+            formData.append('team', formState.inputs.team.value);
           sponsorData = await sendRequest(
             process.env.REACT_APP_BACKEND_URL + '/sponsors',
             'POST',
@@ -53,13 +75,13 @@ const NewSponsor = props => {
           try{
   
               const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
-              const responseCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
               setLoadedSponsors(responseData.sponsors);
+              const responseCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
               setLoadedCategories(responseCategories.categories);
+              const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
+              setLoadedTeams(responseTeams.teams);
               
-          }catch(err){
-                  console.log(err)
-  
+          }catch(err){  
           }
       };
       fetchData();
@@ -123,6 +145,14 @@ const NewSponsor = props => {
                 options={loadedCategories}
                 validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
                 errorText="Please enter a category."
+                onInput={inputHandler}
+            />
+            <Select 
+                id="team"
+                label="Team"
+                options={loadedTeams}
+                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
+                errorText="Please enter a team."
                 onInput={inputHandler}
             />
            

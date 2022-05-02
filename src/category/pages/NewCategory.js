@@ -3,6 +3,7 @@ import CategoriesList from '../components/CategoriesList';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
+import Checkbox from '../../shared/components/FormElements/Checkbox';
 
 import {
     VALIDATOR_REQUIRE,
@@ -19,6 +20,10 @@ const NewCategory = props => {
       title:{
           value:"",
           isValid:false
+      },
+      filter:{
+        value:"",
+        isValid:false
       }
   }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
@@ -33,7 +38,8 @@ const NewCategory = props => {
             process.env.REACT_APP_BACKEND_URL + '/categories',
             'POST',
             JSON.stringify({
-              title: formState.inputs.title.value
+              title: formState.inputs.title.value,
+              filter: formState.inputs.filter.value.toString()
             }),{
               'Content-Type': 'application/json',
               Authorization: 'Bearer ' + auth.token
@@ -103,7 +109,16 @@ const NewCategory = props => {
                 errorText="Please enter a title."
                 onInput={inputHandler}
             />
-          
+
+          <Checkbox
+            id="filter"
+            type="checkbox"
+            label="Filtern in News"
+            validators={[]}
+            onCheck={inputHandler}  
+            checkedText="Wird als Filter in News angezeigt."  
+          />    
+
             <Button type="submit">Kategory erstellen</Button>
             </form>
             </div>

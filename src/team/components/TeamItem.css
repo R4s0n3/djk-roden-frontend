@@ -13,11 +13,7 @@
 }
 .stats-container__long{
     flex:2;
-    padding:0 1rem
-}
-.stats-container__short{
-    flex:1;
-    padding:0 1rem
+    padding:0 0.5rem
 }
 
 .tabellen-link{
@@ -46,13 +42,18 @@
 .team-item__header-img-container{
     flex:1;
 }
+.zooming{
+    pointer-events: auto;
+    cursor: zoom-in;
+}
 .team-item__header-img-container img{
     border-radius:8px;
     display:block;
     width:100%;
     max-width: 600px;
-
+    
 }
+
 .team-item__header-img-container{
    
    
@@ -60,7 +61,6 @@
 
 @media (min-width: 768px) {
     .player-table{
-        max-width: 300px;
     }
     .stats-container__short{
     

@@ -43,30 +43,27 @@ const NewsGrid = props => {
       setOutOfPosts(false);
       setFilterState(false);
     }
-    const handleActions = () => {
+    
+    const handleFilters = e => {
+      e.preventDefault();
+      console.log(e.target)
       setCount(initialCount);
       setOutOfPosts(false);
-      setFilterState("Aktion");
+      setFilterState(e.target.innerHTML);
     }
-    const handleNews = () => {
-      setCount(initialCount);
-      setOutOfPosts(false);
-      setFilterState("News");
 
-    }
-    const handleReports = () => {
-      setCount(initialCount);
-      setOutOfPosts(false);
-      setFilterState("Spielbericht");
+    const createFilter = (data, index) => {
+      return(
+        <Button key={index} inverse={filterState === data.title} type="button" onClick={handleFilters}>{data.title}</Button>
+        
+      )
     }
 
     return(<React.Fragment>
 
 <div style={{margin:"0 0 1rem 0.5%"}}>
        <Button inverse={!filterState} type="button"  onClick={handleAll}>Alle</Button>
-       <Button inverse={filterState === "Aktion"} type="button" onClick={handleActions}>Aktion</Button>
-       <Button inverse={filterState === "News"} type="button" onClick={handleNews}>News</Button>
-       <Button inverse={filterState === "Spielbericht"} type="button" onClick={handleReports}>Spielbericht</Button>
+      {props.filters.map(createFilter)}
      </div>
 
       <div className="post-grid">

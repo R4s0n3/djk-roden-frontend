@@ -73,11 +73,11 @@ const Verein = () => {
            <h1>Vorstände der DJK Roden</h1>
            <hr />
             <div className="verein-container__lead">
-            <h2>Gesamtvorstand</h2>
+            <h2>Vorstand Gesamtverein</h2>
             <LeadSlider speed={7000} items={loadedLeads.filter(p => p.category.title === "Gesamtvorstand")} />
             </div>
             <div className="verein-container__lead">
-            <h2>Abteilungsvorstand</h2>
+            <h2>Vorstand Handballabteilung</h2>
             <LeadSlider speed={8000}items={loadedLeads.filter(p => p.category.title === "Abteilungsvorstand")} />
             </div>
             <div className="verein-container__lead">

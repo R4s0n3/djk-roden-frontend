@@ -18,7 +18,7 @@ const Teams = props => {
             try{
     
                 const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');             
-                setLoadedTeams(responseTeams.teams.filter(p => p.status === props.filter));            
+                setLoadedTeams(responseTeams.teams.filter(p => p.status === props.filter).sort());            
                 setIsData(true);
                 
             }catch(err){}
@@ -40,7 +40,7 @@ const Teams = props => {
 
         <h2>Mannschaften {props.filter}</h2>
         <div>
-            <TeamGrid items={loadedTeams} />
+            <TeamGrid items={loadedTeams.reverse()} />
         </div>
         </div>}
    </React.Fragment> )

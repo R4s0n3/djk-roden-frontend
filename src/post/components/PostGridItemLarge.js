@@ -5,6 +5,12 @@ import {Link, useNavigate}from 'react-router-dom';
 
 const PostGridItemLarge = (props) => {
     const navigate = useNavigate();
+
+    const navigateHandler = () => {
+        navigate(`../posts/${props.id}`);
+        document.location.reload();
+
+    }
     const formatDate = d => {
         let oldDate = d;
         const year = oldDate.slice(0,4);
@@ -27,12 +33,7 @@ const PostGridItemLarge = (props) => {
     flex:"3"
     }
 
-    const navigateHandler = () => {
-        navigate(`../posts/${props.id}`);
-        window.scroll(0, 0);
-        document.location.reload();
-
-    }
+   
 
     return(
         <div className="post-grid__card-item">

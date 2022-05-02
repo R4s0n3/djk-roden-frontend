@@ -2,6 +2,22 @@ import './SponsorSlider.css';
 import Slider from "react-slick";
 
 const SponsorSlider = (props) => {
+  const calcSlides = (i) => {
+      const items = i.length;
+      if(items < 4){
+        return items
+      }
+      return 4
+  }
+
+  const calcMobileSlides = (i) => {
+    const items = i.length;
+    if(items < 2){
+      return items
+    }
+
+    return 2
+  }
     const settings = {
         infinite: true,
         slidesToShow: 4,
@@ -16,14 +32,14 @@ const SponsorSlider = (props) => {
             {
               breakpoint: 1024,
               settings: {
-                slidesToShow: 4,
+                slidesToShow: calcSlides(props.items),
                 slidesToScroll: 1,
               }
             },
             {
               breakpoint: 600,
               settings: {
-                slidesToShow: 3,
+                slidesToShow: calcMobileSlides(props.items),
                 slidesToScroll: 1,
                 initialSlide: 1
               }
@@ -31,7 +47,7 @@ const SponsorSlider = (props) => {
             {
               breakpoint: 480,
               settings: {
-                slidesToShow: 2,
+                slidesToShow: calcMobileSlides(props.items),
                 slidesToScroll: 1
               }
             }

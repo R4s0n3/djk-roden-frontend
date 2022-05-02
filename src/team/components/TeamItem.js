@@ -73,8 +73,8 @@ withNumbers.push(...noNumbers);
             <TableCell component="th" scope="row">
               {shortDay}
             </TableCell>
-            <TableCell align="center">{data.start}-{data.end}</TableCell>
-            <TableCell align="right">{data.location}</TableCell>
+            <TableCell align="center">{data.start} - {data.end}</TableCell>
+            <TableCell align="right"><a className="contact-link" href={data.link}>{data.location}</a></TableCell>
           </TableRow>
         )
     }
@@ -82,6 +82,16 @@ withNumbers.push(...noNumbers);
     const handleImgClick = () =>{
       setImgBox(true);
 
+    }
+
+    const handleZoom = (e) =>{
+      console.log(e.target)
+      e.target.classList.add("zooming");
+    }
+
+    const handleZoomOut = (e) =>{
+      e.target.classList.remove("zooming"); 
+      console.log(e.target)
     }
     
    return(<React.Fragment>
@@ -98,8 +108,8 @@ withNumbers.push(...noNumbers);
 
        <div id={props.id} className="team-item">
        <div className="team-item__header">
-       <div className="team-item__header-img-container" onClick={handleImgClick}>
-       <img src={ process.env.REACT_APP_AWS_URL + `/${props.imageUrl}`} alt={props.title} />
+       <div className="team-item__header-img-container" onMouseOut={handleZoomOut} onMouseOver={handleZoom} onClick={handleImgClick}>
+       <img className="team-image" src={ process.env.REACT_APP_AWS_URL + `/${props.imageUrl}`} alt={props.title} />
        </div>
        <div className="team-item__header-content-container">
        <h2>{props.title}</h2>
@@ -108,14 +118,14 @@ withNumbers.push(...noNumbers);
 
 <p className="team-content__paragraph" >{props.content}</p>
 <div className="social-icons-container">
-    <a href={props.fb}><Icon className="djk-icon" icon="akar-icons:instagram-fill" height="40px" color="#006400" /></a>
-    <a href={props.insta}><Icon className="djk-icon" icon="akar-icons:facebook-fill" height="40px" color="#006400" /></a>
+    <a href={props.insta}><Icon className="djk-icon" icon="akar-icons:instagram-fill" height="40px" color="#006400" /></a>
+    <a href={props.fb}><Icon className="djk-icon" icon="akar-icons:facebook-fill" height="40px" color="#006400" /></a>
 </div>
        </div>
        </div>
       
        <div className="team-item__stats-container">
-       {props.players.length !== 0 && <div className="stats-container__short">
+       {props.players.length !== 0 && <div className="stats-container__long">
         <h2>Spieler</h2>
         <TableContainer className="player-table" sx={{maxHeight: 420, overflow: 'scroll'}} component={Paper}>
         <Table stickyHeader aria-label="simple table">
@@ -133,6 +143,8 @@ withNumbers.push(...noNumbers);
         </Table>
 
       </TableContainer>
+      <a className="tabellen-link" href={props.link}>Spiele und Tabelle</a>
+
         </div>}
         {props.players.length === 0 && <div className="stats-container__short">
       <div className="no-players"> 
@@ -144,7 +156,7 @@ withNumbers.push(...noNumbers);
         <div className="stats-container__long">
         <div>
         <h2>Trainingszeiten</h2>
-        <TableContainer sx={{maxHeight: 420}} component={Paper}>
+        <TableContainer sx={{maxHeight: 210}} component={Paper}>
         <Table stickyHeader aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -160,16 +172,8 @@ withNumbers.push(...noNumbers);
         {props.trainings.length === 0 && <h2 style={{textAlign: "center"}}>Diese Mannschaft hat derzeit keine Trainingszeiten.</h2>}
 
       </TableContainer>
-
-        </div>
-       {props.players.length !== 0 &&  <div>
-        <a className="tabellen-link" href={props.link}>Spiele und Tabelle</a>
-        </div>}
-        </div>
-       
-        <div className="stats-container__short">
-        <h2>Trainer</h2>
-        <TableContainer sx={{maxHeight: 420}} component={Paper}>
+      <h2>Trainer</h2>
+        <TableContainer sx={{maxHeight: 210}} component={Paper}>
         <Table stickyHeader aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -186,6 +190,9 @@ withNumbers.push(...noNumbers);
 
       </TableContainer>
         </div>
+     
+        </div>
+       
        </div>
        </div>
 

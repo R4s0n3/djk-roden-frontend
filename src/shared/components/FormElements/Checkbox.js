@@ -62,6 +62,7 @@ const Checkbox = (props) =>{
             type="checkbox"
             onChange={changeHandler}
             onBlur={touchHandler}
+            checked={checkboxState.value}
             value={checkboxState.value}
         />
         {!checkboxState.isValid && checkboxState.isTouched && <p>{props.errorText}</p>}

@@ -35,19 +35,26 @@ const PostGrid = props => {
     }
   
     return( <div className="post-grid">
-        <div className="post-grid__col-long">
+       {props.items.length > 0 &&
+       <>
+              <div className="post-grid__col-long">
           {props.items.slice(0,3).map(createCardsLG)}
         </div>
         <div className="post-grid__col-short">
         {props.items.slice(3,5).map(createCardsSM)}
         <div>
+
+
         <div style={{padding:"0 0.5rem"}}>
         <Button to="/news">Mehr News</Button>
 
         </div>
-
+      
         </div>
         </div>
+        </>
+            
+        }
         </div>)
 }
 

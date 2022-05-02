@@ -19,3 +19,9 @@
     max-width:100vw;
     background-color: #006400;
 }
+
+@media(min-width: 789px){
+    .live-ticker-item a{
+        font-size: 1.1rem;
+    }
+}

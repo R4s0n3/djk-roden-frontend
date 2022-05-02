@@ -2,7 +2,6 @@ import * as React from 'react';
 import './News.css';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import PostSliderTop from '../../post/components/PostSliderTop';
 import SponsorSlider from '../../sponsor/components/SponsorSlider';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import NewsGrid from '../../post/components/NewsGrid';
@@ -13,6 +12,7 @@ const News = () => {
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedSponsors, setLoadedSponsors] = React.useState();
     const [loadedPosts, setLoadedPosts] = React.useState();
+    const [loadedCategories, setLoadedCategories] = React.useState();
     const [loadedTickers, setLoadedTickers] = React.useState();
     const [isData, setIsData] = React.useState(false);
 
@@ -25,10 +25,12 @@ const News = () => {
                 const responseTickers = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/tickers');             
                 const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
                 const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
+                const responseCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
 
                 setLoadedPosts(responsePosts.posts.filter(p => p.published === "true").reverse());
                 setLoadedTickers(responseTickers.tickers)
                 setLoadedSponsors(responseSponsors.sponsors)
+                setLoadedCategories(responseCategories.categories.filter(c => c.filter === "true").sort().reverse())
                 setIsData(true);
                 
             }catch(err){
@@ -69,7 +71,7 @@ const News = () => {
 
 
 <div>
-      <NewsGrid items={loadedPosts} />
+      <NewsGrid items={loadedPosts} filters={loadedCategories} />
 </div>
     
     
@@ -88,9 +90,6 @@ const News = () => {
     <Button to="/mannschaften">Teams</Button>
 </div>
 </div>
-
-    <PostSliderTop items={loadedPosts} />
-
    <SponsorSlider items={loadedSponsors} /> 
     </div>}
  </React.Fragment>

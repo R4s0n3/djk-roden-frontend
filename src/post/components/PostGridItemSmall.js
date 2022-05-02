@@ -1,9 +1,16 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import Card from '../../shared/components/UIElements/Card';
 import './PostGridItemSmall.css';
 
 const PostGridItemSmall = (props) => {
+    const navigate = useNavigate();
+
+    const navigateHandler = () => {
+        navigate(`../posts/${props.id}`);
+        document.location.reload();
+
+    }
     const formatDate = d => {
         let oldDate = d;
         const year = oldDate.slice(0,4);
@@ -23,7 +30,7 @@ const PostGridItemSmall = (props) => {
         <div className="post-grid__card-short-container">
             <Card className="post-grid__card-short">
 <div className="post-grid__card-short__header">
-        <h2 className="post-grid__card-title">{props.title.length > 20 ? `${shortTitle} ...` : props.title}</h2>
+        <h2 onClick={navigateHandler} className="post-grid__card-title">{props.title.length > 20 ? `${shortTitle} ...` : props.title}</h2>
         <div className="post-round-img">
             <img src={process.env.REACT_APP_AWS_URL +  `/${props.image}`} alt={props.title} />
         </div>

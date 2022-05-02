@@ -7,6 +7,10 @@
     align-items: center;
 
 }
+
+.post-round-img:hover{
+
+}
 .post-round-img > img{
     display: block;
     border-radius: 50%;
@@ -20,11 +24,13 @@
 
     position:relative;
    flex:1;
-   padding:0.5rem;
+   padding:0.5rem 0.75rem;
 display:flex;
 flex-direction: column;
 justify-content: space-between;
 }
+
+
 .post-grid__cards-short__content-container{
     flex:2;
 }
@@ -43,18 +49,18 @@ justify-content: space-between;
 .post-grid__card-short h2{
     flex:3;
     font-size: 1rem;
-    line-height: 1.35;
+    line-height: 1.25;
 }
 .post-grid__card-short-content{
-    font-size: 0.8rem;
-    margin:0;
+    font-size: 0.9rem;
+    margin:0.25rem 0;
     line-height: 1.25;
 }
 .post-grid__card-short a{
     text-decoration: none;
     font-weight: bold;
     color:#006400;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 .post-grid__card-short a:hover{
     text-decoration:underline;

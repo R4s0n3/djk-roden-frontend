@@ -1,7 +1,6 @@
 .news-page{
     width:100%;
     max-width: 100vw;
-    margin-top:12rem;
     display:flex;
     flex-direction: column;
     position:relative;

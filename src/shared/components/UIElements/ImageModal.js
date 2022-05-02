@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 
@@ -6,8 +6,9 @@ import Backdrop from './Backdrop';
 import './ImageModal.css';
 
 const ModalOverlay = props => {
+  const modalRef = useRef(null);
   const content = (
-    <div className={`image-modal ${props.className}`} style={props.style}>
+    <div ref={modalRef} className={`image-modal ${props.className}`} style={props.style}>
     
         <div onClick={props.onCancel} className={`image-modal__content ${props.contentClass}`}>
           {props.children}

@@ -25,6 +25,7 @@ const UpdateSponsor = () => {
 const auth = useContext(AuthContext);
 const {isLoading, error, sendRequest, clearError } = useHttpClient();
 const [loadedSponsor, setLoadedSponsor] = useState();
+const [loadedTeams, setLoadedTeams] = useState();
 const [loadedCategories, setLoadedCategories] = useState();
 const [isUpload, setIsUpload] = useState();
 
@@ -43,8 +44,12 @@ const [formState, inputHandler, setFormData] = useForm({
     category:{
         value:"",
         isValid:false
+    },
+    team:{
+        value:"",
+        isValid:false
     }
-});
+},false);
 
 
 useEffect(()=>{
@@ -66,6 +71,10 @@ useEffect(()=>{
                 category:{
                     value:responseData.sponsor.category.id,
                     isValid:true
+                },
+                team:{
+                    value:responseData.sponsor.team,
+                    isValid:true
                 }
             },true
             );
@@ -82,8 +91,15 @@ useEffect(()=>{
 
     }
 
+    const fetchTeams = async () => {
+        try{
+            const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
+            setLoadedTeams(responseTeams.teams);
+        }catch(err){        }
+    }
     fetchSponsor();
     fetchCategories();
+    fetchTeams();
 
 },[sendRequest, sponsorId, setFormData]);
 
@@ -231,6 +247,17 @@ const uploadHandler = () => {
         initialValid={true}
 
         />
+        {loadedTeams && <Select 
+                id="team"
+                label="Team"
+                options={loadedTeams}
+                initialValid={true}
+                initialValue={loadedSponsor.team}
+                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
+                errorText="Please enter a team."
+                onInput={inputHandler}
+        />}
+
 
         <Button type="submit" disabled={!formState.isValid}>
             Update Sponsor

@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-.update div{
+.update > div{
     flex:1; height:100%;
 
 }
@@ -11,7 +11,9 @@
     position: relative;
     display:flex;
     flex-direction: column;
-   
+}
+.update-form{
+    padding:2rem 1rem;
 }
 .update-image__preview-container{
     width: 100%;
@@ -21,7 +23,6 @@
     align-items: center;
 
 }
-
 .update-image__preview-container img{
     display:block;
     width:100%;

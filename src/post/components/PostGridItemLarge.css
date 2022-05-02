@@ -17,13 +17,13 @@ h3.post-grid__card-title{
     justify-content:space-between;
 }
 .post-grid__card-info{
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     width:90%;
     margin:0;
 }
 
 .post-grid__card-content{
-    font-size: 1rem;
+    font-size: 1.1rem;
     width:90%;
     display:flex;
     margin:0;

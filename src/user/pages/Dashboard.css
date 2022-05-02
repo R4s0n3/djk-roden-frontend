@@ -9,11 +9,15 @@
     width:100%;
     max-width: 980px;
     display:flex;
-    padding:0 0.5rem;
-
+    
 }
 
-.dash-container div.halfwidth div{
-    flex:1;
-    position:relative;
+.dash-container > div{
+    margin:0 auto;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width:95%;
+    max-width:980px;
 }
+   
