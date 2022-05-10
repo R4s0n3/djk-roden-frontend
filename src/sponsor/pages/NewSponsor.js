@@ -38,8 +38,8 @@ const NewSponsor = props => {
           isValid:false
       },
       team:{
-        value:"",
-        isValid:false
+        value:null,
+        isValid:true
       }
   }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
@@ -151,9 +151,11 @@ const NewSponsor = props => {
                 id="team"
                 label="Team"
                 options={loadedTeams}
-                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
+                validators={[]}
                 errorText="Please enter a team."
+                initialValue={""}
                 onInput={inputHandler}
+                initialValid={true}
             />
            
             <Button type="submit">Sponsor erstellen</Button>

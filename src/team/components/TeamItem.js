@@ -9,8 +9,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ImageModal from '../../shared/components/UIElements/ImageModal';
 import {Icon} from '@iconify/react';
-import logo from '../../shared/assets/SVG/djk-green-ol.svg';
-import ball from '../../shared/assets/SVG/ball-green.svg';
 import Avatar from '../../shared/components/UIElements/Avatar';
 
 const TeamItem = props => {
@@ -118,16 +116,16 @@ withNumbers.push(...noNumbers);
 
 <p className="team-content__paragraph" >{props.content}</p>
 <div className="social-icons-container">
-    <a href={props.insta}><Icon className="djk-icon" icon="akar-icons:instagram-fill" height="40px" color="#006400" /></a>
-    <a href={props.fb}><Icon className="djk-icon" icon="akar-icons:facebook-fill" height="40px" color="#006400" /></a>
+    <a href={props.insta} target="_blank" rel="noreferrer"><Icon className="djk-icon" icon="akar-icons:instagram-fill" height="40px" color="#006400" /></a>
+    <a href={props.fb} target="_blank" rel="noreferrer"><Icon className="djk-icon" icon="akar-icons:facebook-fill" height="40px" color="#006400" /></a>
 </div>
        </div>
        </div>
       
        <div className="team-item__stats-container">
-       {props.players.length !== 0 && <div className="stats-container__long">
+       {props.players && <div className="stats-container__long">
         <h2>Spieler</h2>
-        <TableContainer className="player-table" sx={{maxHeight: 420, overflow: 'scroll'}} component={Paper}>
+        <TableContainer className="player-table" sx={{maxHeight: 420}} component={Paper}>
         <Table stickyHeader aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -141,18 +139,13 @@ withNumbers.push(...noNumbers);
             {withNumbers.map(createPlayerRows)} 
           </TableBody>
         </Table>
+        {props.trainings.length === 0 && <h2 style={{textAlign: "center",padding:"0 0.5rem"}}>Diese Mannschaft hat derzeit keine Spieler.</h2>}
 
       </TableContainer>
-      <a className="tabellen-link" href={props.link}>Spiele und Tabelle</a>
+      {props.link && <a className="tabellen-link" href={props.link}>Spiele und Tabelle</a>}
 
         </div>}
-        {props.players.length === 0 && <div className="stats-container__short">
-      <div className="no-players"> 
-      <img src={logo} width="150" alt="logo" />
-      <img src={ball} width="100" alt="ball" />
-      </div>
      
-        </div>}
         <div className="stats-container__long">
         <div>
         <h2>Trainingszeiten</h2>
@@ -169,7 +162,7 @@ withNumbers.push(...noNumbers);
             {props.trainings.map(createTrainingRows)} 
           </TableBody>
         </Table>
-        {props.trainings.length === 0 && <h2 style={{textAlign: "center"}}>Diese Mannschaft hat derzeit keine Trainingszeiten.</h2>}
+        {props.trainings.length === 0 && <h2 style={{textAlign: "center",padding:"0 0.5rem"}}>Diese Mannschaft hat derzeit keine Trainingszeiten.</h2>}
 
       </TableContainer>
       <h2>Trainer</h2>
@@ -186,7 +179,7 @@ withNumbers.push(...noNumbers);
             {props.trainers.map(createTrainerRows)} 
           </TableBody>
         </Table>
-        {props.trainers.length === 0 && <h2 style={{textAlign: "center"}}>Diese Mannschaft hat derzeit keine Trainer.</h2>}
+        {props.trainers.length === 0 && <h2 style={{textAlign: "center",padding:"0 0.5rem"}}>Diese Mannschaft hat derzeit keine Trainer.</h2>}
 
       </TableContainer>
         </div>

@@ -1,6 +1,7 @@
  import './PostItem.css';
+ import {Link} from 'react-router-dom';
 import Card from '../../shared/components/UIElements/Card';
-import hgsLogo from '../../shared/assets/PNG/hgs-logo.png'
+import hgsLogo from '../../shared/assets/PNG/hgs-logo.png';
  const PostItem = props => {
     const formatDate = d => {
         let oldDate = d;
@@ -21,7 +22,7 @@ import hgsLogo from '../../shared/assets/PNG/hgs-logo.png'
         <div className="post-item_content__inner">
         <h2>{props.title}</h2>
 
-<p>{props.author} | <b>{props.category}</b> | {formatDate(props.date)} </p>
+<p>{props.author} | <b>{props.category}</b> | {formatDate(props.date)} {props.team && '| ' + props.team.name }</p> 
 
 <p className="post-content__paragraph" >{props.content}</p>
         </div>
@@ -32,7 +33,7 @@ import hgsLogo from '../../shared/assets/PNG/hgs-logo.png'
         
         <div className="report-stats">
         {props.category === "Spielbericht" && props.homematch === "false" && <div><h3>{props.opponent}</h3></div>}
-        {props.category === "Spielbericht" && props.homematch === "true" && <div className="logo-container"><img src={hgsLogo} alt="hgs" /></div>}
+        {props.category === "Spielbericht" && props.homematch === "true" && <div className="logo-container"><Link to={`../mannschaften/${props.team.status.toLowerCase()}/${props.team.id}`} ><img src={hgsLogo} alt="hgs" /></Link></div>}
         <div className="report-stats__count">
             <div></div>
             {props.category === "Spielbericht" && <div><h2> {props.eshome} : {props.esguest}</h2></div>}
@@ -40,7 +41,7 @@ import hgsLogo from '../../shared/assets/PNG/hgs-logo.png'
         </div>
         <div>
         {props.category === "Spielbericht" && props.homematch === "true" && <div><h3>{props.opponent}</h3></div>}
-        {props.category === "Spielbericht" && props.homematch === "false" && <div className="logo-container"><img src={hgsLogo} alt="hgs" /></div>}
+        {props.category === "Spielbericht" && props.homematch === "false" && <div className="logo-container"><Link to={`../mannschaften/${props.team.status.toLowerCase()}/${props.team.id}`} ><img src={hgsLogo} alt="hgs" /></Link></div>}
 
         </div>
 

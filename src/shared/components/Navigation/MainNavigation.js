@@ -39,7 +39,7 @@ const MainNavigation = props => {
           <NavLinks />
         </nav>
         <div className="main-navigation_header-logo">
-        <Link to="/"><img src={logo} alt="logo" height="25px" /></Link>
+        <Link reloadDocument to="/"><img src={logo} alt="logo" height="25px" /></Link>
         </div>
         <nav className="main-navigation__header-icon-nav">
           <IconNavLinks />

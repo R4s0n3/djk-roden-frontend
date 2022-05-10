@@ -71,14 +71,16 @@ const Verein = () => {
             </div>
            { isData && <React.Fragment>
            <h1>Vorstände der DJK Roden</h1>
-           <hr />
+            <div className="leads-img__container">
+            <img src={historyImg} alt="history" />
+            </div>
             <div className="verein-container__lead">
             <h2>Vorstand Gesamtverein</h2>
-            <LeadSlider speed={7000} items={loadedLeads.filter(p => p.category.title === "Gesamtvorstand")} />
+            <LeadSlider speed={7000} items={loadedLeads.filter(p => p.category.title === "Vorstand Gesamtverein")} />
             </div>
             <div className="verein-container__lead">
             <h2>Vorstand Handballabteilung</h2>
-            <LeadSlider speed={8000}items={loadedLeads.filter(p => p.category.title === "Abteilungsvorstand")} />
+            <LeadSlider speed={8000}items={loadedLeads.filter(p => p.category.title === "Vorstand Handballabteilung")} />
             </div>
             <div className="verein-container__lead">
             <h2>Förderverein</h2>

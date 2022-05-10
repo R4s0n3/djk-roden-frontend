@@ -63,7 +63,7 @@ const Auth = () => {
 
       <Card className="authentication">
         {isLoading && <LoadingSpinner asOverlay />}
-        <h2>Wilkommen zurück!</h2>
+        <h2>Login für Vereinsmitglieder</h2>
         <p>Gebe deine Daten unten ein.</p>
         <form onSubmit={authSubmitHandler}>
 

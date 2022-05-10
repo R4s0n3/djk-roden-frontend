@@ -72,7 +72,7 @@ const TrainingsListItem = props => {
                 {shortDay}
               </TableCell>
               <TableCell align="center">{props.start} - {props.end}</TableCell>
-              <TableCell align="center"><a href={props.link}>{props.location}</a></TableCell>
+              <TableCell align="center"><a href={props.link} target="_blank" rel="noreferrer">{props.location}</a></TableCell>
               <TableCell align="center">{props.team}</TableCell>
               <TableCell align="center"><Button to={`../dashboard/trainings/${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
               <TableCell align="center"><Button danger onClick={showDeleteWarningHandler}><Icon className="djk-icon" icon="fluent:delete-16-regular" height="20px" color="#fff" /></Button></TableCell>

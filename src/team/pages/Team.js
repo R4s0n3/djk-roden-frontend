@@ -5,7 +5,7 @@ import TeamItem from '../components/TeamItem';
 import PostGrid from '../../post/components/PostGrid';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import SponsorSlider from '../../sponsor/components/SponsorSlider';
+import SponsorGrid from '../../sponsor/components/SponsorGrid';
 import './Team.css';
 
 
@@ -34,7 +34,7 @@ const Team = () => {
                 const teamSponsors = responseSponsors.sponsors.filter(s => s.team === teamId);
                 setLoadedSponsors(teamSponsors);
                 setLoadedData(true);
-        
+                console.log(teamSponsors)
 
                 }catch(err){}
         }
@@ -69,6 +69,8 @@ const Team = () => {
             }
             return thePosts;
         }
+
+        
        
     return(<React.Fragment>
         <ErrorModal error={error} onClear={clearError} />
@@ -81,12 +83,14 @@ const Team = () => {
         <div className="team">
 {loadedData && loadedTeam && loadedTeam.slice(0,1).map(createItem)}
 
-{loadedData && loadedPosts && <div className="featured-posts__container">
+{loadedData && loadedPosts && loadedPosts.length > 0 && <div className="featured-posts__container">
     <h2>Spielberichte</h2>
    <PostGrid items={filteredPosts(loadedPosts)} />
+
 </div> }
 {loadedData && loadedSponsors.length > 0 && <div className="featured-sponsors__container">
-    <SponsorSlider items={loadedSponsors} />
+    <h2>{loadedTeam[0].name} Sponsoren</h2>
+{loadedSponsors && <SponsorGrid items={loadedSponsors} />}
     </div>}
         </div>
     </React.Fragment>)

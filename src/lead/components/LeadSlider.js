@@ -3,12 +3,30 @@ import Slider from "react-slick";
 import LeadSliderItem from "./LeadSliderItem";
 
 const LeadSlider = props => {
+
+  const calcSlides = (i) => {
+    const items = i.length;
+    if(items < 4){
+      return items
+    }
+    return 4
+}
+
+const calcMobileSlides = (i) => {
+  const items = i.length;
+  if(items < 1){
+    return items
+  }
+
+  return 1
+}
+
         const settings = {
             dots: true,
             prevArrow: false,
           nextArrow: false,
             infinite: true,
-            slidesToShow: 4,
+            slidesToShow: calcSlides(props.items),
             slidesToScroll: 1,
             autoplay: true,
             speed: 750,
@@ -18,14 +36,14 @@ const LeadSlider = props => {
             {
               breakpoint: 1024,
               settings: {
-                slidesToShow: 4,
+                slidesToShow: calcSlides(props.items),
                 slidesToScroll: 1,
               }
             },
             {
               breakpoint: 600,
               settings: {
-                slidesToShow: 1,
+                slidesToShow: calcMobileSlides(props.items),
                 slidesToScroll: 1,
                 initialSlide: 1
               }
@@ -33,7 +51,7 @@ const LeadSlider = props => {
             {
               breakpoint: 480,
               settings: {
-                slidesToShow: 1,
+                slidesToShow: calcMobileSlides(props.items),
                 slidesToScroll: 1
               }
             }

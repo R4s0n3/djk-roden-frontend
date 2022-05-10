@@ -36,3 +36,22 @@
 .verein-container__history h1{
     font-size:2.5rem;
 }
+.leads-img__container{
+    width:100%;
+    height:300px;
+    max-width: 1200px;
+}
+.leads-img__container img{
+    width:100%;
+    height:100%;
+    border-radius:8px;
+    object-fit: cover;
+}
+
+@media (min-width: 768px){
+    .leads-img__container{
+        width:100%;
+        height:600px;
+        max-width: 1200px;
+    }
+}

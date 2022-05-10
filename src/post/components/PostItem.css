@@ -5,7 +5,7 @@
 }
 
 .post-content__paragraph{
-
+    white-space: pre-wrap;
 }
 .post-item_content{
     padding:0 1rem;

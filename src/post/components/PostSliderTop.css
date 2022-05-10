@@ -8,7 +8,7 @@ flex:1
 
 
 
-.slick-dots {
+.top-slider .slick-dots {
 	display: flex;
 	justify-content: center;
 	margin: 0;
@@ -18,13 +18,13 @@ flex:1
 }
 
 	.slick-dots	li {
-			margin: 0 0.5rem;
+			margin: 0 0.25rem;
 		}
 	
 	.slick-dots li button {
 			display: block;
-			width: 0.85rem;
-			height: 0.85rem;
+			width: 0.75rem;
+			height: 0.75rem;
 			padding: 0;
 			
 			border: none;

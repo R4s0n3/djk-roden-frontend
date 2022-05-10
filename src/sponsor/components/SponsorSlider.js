@@ -20,7 +20,7 @@ const SponsorSlider = (props) => {
   }
     const settings = {
         infinite: true,
-        slidesToShow: 4,
+        slidesToShow: calcSlides(props.items),
         slidesToScroll: 1,
         autoplay: true,
         speed: 10000,
@@ -60,7 +60,7 @@ const SponsorSlider = (props) => {
             return(
                 <div className="sponsor-slider-item" id={index} key={index}>
                     
-                    <a href={data.link}><img src={process.env.REACT_APP_AWS_URL + `/${data.image}`} height="85px" alt={data.title} /></a>
+                    <a href={data.link} target="_blank" rel="noreferrer"><img src={process.env.REACT_APP_AWS_URL + `/${data.image}`} height="85px" alt={data.title} /></a>
                 </div>
             )
         }

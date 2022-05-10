@@ -7,7 +7,6 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 
 
 const Teams = props => {
-
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedTeams, setLoadedTeams] = React.useState();
     const [isData, setIsData] = React.useState(false);
@@ -17,14 +16,25 @@ const Teams = props => {
       
             try{
     
-                const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');             
-                setLoadedTeams(responseTeams.teams.filter(p => p.status === props.filter).sort());            
+                const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');    
+                const filteredTeams = responseTeams.teams.filter(p => p.status === props.filter)         
+                const sortedTeams = filteredTeams.sort()         
+                setLoadedTeams(sortedTeams);            
                 setIsData(true);
                 
             }catch(err){}
         };
         fetchData();
     },[sendRequest, props.filter]);
+
+    let teamFilters;
+    if(props.filter === "Aktive"){
+        teamFilters = ['Damen', 'Herren'];
+    }
+    if(props.filter === "Jugend"){
+        teamFilters = ['Männlich','Weiblich', 'Gemischt'];
+    }
+    
 
     return(<React.Fragment>
         <ErrorModal error={error} onClear={clearError} />
@@ -40,7 +50,7 @@ const Teams = props => {
 
         <h2>Mannschaften {props.filter}</h2>
         <div>
-            <TeamGrid items={loadedTeams.reverse()} />
+            <TeamGrid items={loadedTeams} filters={teamFilters} />
         </div>
         </div>}
    </React.Fragment> )

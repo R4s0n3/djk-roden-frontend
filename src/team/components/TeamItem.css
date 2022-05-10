@@ -33,7 +33,7 @@
     margin:1rem 0;
 }
 .tabellen-link::before{
-    content:"→"
+    content:"→ "
 }
 .social-icons-container a{
     margin-right: 1rem;
@@ -58,7 +58,9 @@
    
    
 }
-
+.team-content__paragraph{
+    white-space: pre-wrap;
+}
 @media (min-width: 768px) {
     .player-table{
     }

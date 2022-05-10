@@ -9,6 +9,7 @@ import './Post.css';
 
 const Post = () => {
     const [singlePost, setSinglePost] = React.useState([]);
+    const [loadedTeam, setLoadedTeam] = React.useState();
     const [loadedPosts, setLoadedPosts] = React.useState([]);
     const [loadedData, setLoadedData ] = React.useState(false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
@@ -16,14 +17,26 @@ const Post = () => {
 
    React.useEffect(()=>{
     const fetchData = async () => {
+
         try{
-            const myPost = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/posts/${postId}`)
+            const userPost = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/posts/${postId}`)
             const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
-            setLoadedPosts(responsePosts.posts.filter(post => post.id !== myPost.post.id && post.category.title === myPost.post.category.title).reverse());
-            setSinglePost(p => [...p, myPost.post]);
-            setLoadedData(true);
+            setLoadedPosts(responsePosts.posts.filter(post => post.id !== userPost.post.id && post.category.title === userPost.post.category.title).reverse());
+            setSinglePost(p => [...p, userPost.post]);
+            if(userPost.post.report){
+            const teamId = userPost.post.report.team;
+            const reportTeam = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams/' + teamId);
+            setLoadedTeam(reportTeam.team);
+            }
+            setLoadedData(true)
             }catch(err){}
+
+       
+
+    
     }
+    
+
    fetchData()
     },[sendRequest, postId]);
 
@@ -43,12 +56,14 @@ const Post = () => {
                     category={data.category.title}
                     content={data.content}
                     reportId={data.report.id}
+                    team={loadedTeam}
                     opponent={opponent}
                     homematch={homematch}
                     htshome={htshome}
                     htsguest={htsguest}
                     eshome={eshome}
                     esguest={esguest}
+                    
     
     
                 />

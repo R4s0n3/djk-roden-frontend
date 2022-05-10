@@ -10,8 +10,8 @@ const Kontakt = () => {
             <h1>Kontakt</h1>
             <hr />
             <h3>Ansprechpartner DJK Saarlouis-Roden Abt. Handball</h3>
-            <h2>Formulare zum Download</h2>
-            <Button clasName="dl-button" type="button" href={Vereinsanmeldung} download>Vereinsanmeldung</Button>
+            <h2>Beitrittsformulare zum Download</h2>
+            <Button clasName="dl-button" type="button" href={Vereinsanmeldung} download>Verein</Button>
             <Button clasName="dl-button" type="button" href={Förderverein} download>Förderverein</Button>
             <h2>Allgemeine Rückfragen:</h2>
             <ul>

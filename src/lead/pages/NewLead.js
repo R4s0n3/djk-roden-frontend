@@ -7,7 +7,6 @@ import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import Select from '../../shared/components/FormElements/Select';
 
 import {
-  VALIDATOR_EMAIL,
     VALIDATOR_MINLENGTH,
     VALIDATOR_REQUIRE,
   } from "../../shared/util/validators";
@@ -166,7 +165,7 @@ const NewLead = props => {
                 id="email"
                 type="email"
                 label="E-Mail"
-                validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
+                validators={[]}
                 errorText="Please enter a valid E-Mail."
                 onInput={inputHandler}
             />

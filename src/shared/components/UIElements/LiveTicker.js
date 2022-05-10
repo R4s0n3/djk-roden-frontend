@@ -11,7 +11,7 @@ const LiveTicker = (props) => {
     const settings = {
         infinite: true,
         slidesToShow: 2,
-        slidesToScroll: -1,
+        slidesToScroll: 1,
         autoplay: true,
         speed: 15000,
         autoplaySpeed:0,
@@ -23,21 +23,21 @@ const LiveTicker = (props) => {
           breakpoint: 1024,
           settings: {
             slidesToShow: 2,
-            slidesToScroll: -1,
+            slidesToScroll: 1,
           }
         },
         {
           breakpoint: 600,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: -1,
+            slidesToScroll: 1,
           }
         },
         {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: -1
+            slidesToScroll: 1
           }
         }
       ]
@@ -49,7 +49,7 @@ const LiveTicker = (props) => {
 
             return(
                 <div className="live-ticker-item" id={data.id} key={index}>
-                    <a href={data.link || ""}>-- {data.title.length > 40 && size.width < 980 ?`${shortTitle} ...`: data.title} --</a>
+                    <a href={data.link || ""} target="_blank" rel="noreferrer">-- {data.title.length > 40 && size.width < 980 ?`${shortTitle} ...`: data.title} --</a>
                 </div>
             )
         }

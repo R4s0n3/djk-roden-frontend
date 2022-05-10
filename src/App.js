@@ -91,17 +91,7 @@ useEffect(()=>{
   let routes;
   let maintance = false;
 
-  if(maintance && !token){
-    routes = (
-      <Routes>
-        <Route path="/" element={<Maintance />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/dashboard" element={<Auth />} />
-        <Route path="/dashboard/*" element={<Auth />} />
-        <Route path="/*" element={<Maintance />} />
-      </Routes>
-    );
-  }
+ 
 
   if (token) {
     routes = (
@@ -184,6 +174,21 @@ useEffect(()=>{
     );
   }
 
+  if(!token && maintance){
+    routes = (
+      <Routes>
+        <Route path="/" element={<Maintance />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/kontakt" element={<Kontakt />} />
+        <Route path="/impressum" element={<Impressum />} />
+        <Route path="/datenschutz" element={<Datenschutz />} />
+        <Route path="/dashboard" element={<Auth />} />
+        <Route path="/dashboard/*" element={<Auth />} />
+        <Route path="/*" element={<Maintance />} />
+      </Routes>
+    );
+  }
+
   return (
     <AuthContext.Provider
     value={{ isLoggedIn: !!token,  token: token, userId: userId, login: login, logout: logout, reset: reset }}  >
@@ -206,7 +211,7 @@ useEffect(()=>{
         Wenn Sie auf der Seite weitersurfen, erklären Sie sich mit der 
         Verwendung von Cookies einverstanden.
         Mehr über die Verwendung von Cookies erfahren Sie in unseren
-        <a href="https://www.djk-roden.de/datenschutz"> Datenschutz-Richtlinien.</a>
+        <a href="https://www.djk-roden.de/datenschutz" target="_blank" rel="noreferrer" >Datenschutz-Richtlinien.</a>
         </p>
         </Modal>}
   <BrowserRouter>

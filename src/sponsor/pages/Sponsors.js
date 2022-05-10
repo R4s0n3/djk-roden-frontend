@@ -46,6 +46,24 @@ const Sponsors = () => {
   )}
 
    { !isLoading && isData && <div className="verein">
+           
+           
+           { isData && <React.Fragment>
+           <h1>Sponsoren der DJK Roden</h1>
+           <hr />
+           <p className="home-content__paragraph">
+            Wir möchten uns ganz herzlich bei unseren Sponsoren für ihre Hilfe bedanken, die unseren Verein möglich macht. Ohne ihre Unterstützung wären wir nicht in der Lage, die großartige Arbeit zu leisten, die wir tun. Vielen Dank für Ihre anhaltende Unterstützung!
+            </p>
+            <div className="verein-container__lead">
+            <h2>Sponsoren Verein</h2>
+          
+            <SponsorGrid items={loadedSponsors.filter(s => s.category.title === "Sponsoren Verein")} />
+            </div>
+            <div className="verein-container__lead">
+            <h2>Sponsoren Teams</h2>
+            <SponsorGrid items={loadedSponsors.filter(s => s.category.title === "Sponsoren Teams")} />
+            </div>
+            </React.Fragment>}
             <div className="verein-container__header">
             <h1>Sponsoring</h1>
             <hr />
@@ -58,28 +76,9 @@ const Sponsors = () => {
            
             </div>
             </div>
-           
-           { isData && <React.Fragment>
-           <h1>Sponsoren der DJK Roden</h1>
-           <hr />
-           <p className="home-content__paragraph">
-            Wir möchten uns ganz herzlich bei unseren Sponsoren für ihre Hilfe bedanken, die unseren Verein möglich macht. Ohne ihre Unterstützung wären wir nicht in der Lage, die großartige Arbeit zu leisten, die wir tun. Vielen Dank für Ihre anhaltende Unterstützung!
-            </p>
-            <div className="verein-container__lead">
-            <h2>Hauptsponsoren</h2>
-          
-            <SponsorGrid items={loadedSponsors.filter(s => s.category.title === "Sponsor")} />
-            </div>
-            <div className="verein-container__lead">
-            <h2>Teilsponsoren</h2>
-            <SponsorGrid items={loadedSponsors.filter(s => s.category.title === "Sponsor")} />
-            </div>
-            <div className="verein-container__lead">
-            <h2>Minisponsoren</h2>
-            <SponsorGrid items={loadedSponsors.filter(s => s.category.title === "Sponsor")} />
-            </div>
-            </React.Fragment>}
             </div>}
+
+            
             
    
            

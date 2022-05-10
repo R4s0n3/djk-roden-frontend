@@ -28,17 +28,16 @@ const PostSliderTopItem = (props) => {
     navigate(`/posts/${props.id}`);
   }
   
-  const DateString = props.createdAt.slice(0,11);
 
   return (
     <div className="slider-item">
       <div className="slider-item__content-container">
       <i  onClick={itemClickHandler}>
-        {formatDate(DateString)}
+        {formatDate(props.date)}
       </i>
       <div className="slider-item__inner">
       <h2  onClick={itemClickHandler}>{props.title}</h2>
-        <p>{formatDate(props.date)}</p>
+       
         <p  onClick={itemClickHandler}>{shortContent}...</p>
         <div>
         <Button to={`/posts/${props.id}`}>MEHR</Button>
