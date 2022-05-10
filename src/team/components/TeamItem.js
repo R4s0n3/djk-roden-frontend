@@ -139,7 +139,7 @@ withNumbers.push(...noNumbers);
             {withNumbers.map(createPlayerRows)} 
           </TableBody>
         </Table>
-        {props.trainings.length === 0 && <h2 style={{textAlign: "center",padding:"0 0.5rem"}}>Diese Mannschaft hat derzeit keine Spieler.</h2>}
+        {props.players.length === 0 && <h2 style={{textAlign: "center",padding:"0 0.5rem"}}>Diese Mannschaft hat derzeit keine Spieler.</h2>}
 
       </TableContainer>
       {props.link && <a className="tabellen-link" href={props.link}>Spiele und Tabelle</a>}
