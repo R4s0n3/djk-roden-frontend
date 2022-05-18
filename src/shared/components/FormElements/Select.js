@@ -64,7 +64,7 @@ const Select = props => {
         'form-control--invalid'}`}>
         <label htmlFor={props.id}>{props.label}</label>
         <select id={props.id} onChange={changeHandler} value={inputState.value} onBlur={touchHandler} >
-            <option id="placeholderoption" key="0" value={null}>--</option>
+            <option id="placeholderoption" key="placeholder" value={null}>--</option>
             {props.options.map(createOption)}
         </select>
         {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}

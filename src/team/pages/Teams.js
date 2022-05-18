@@ -18,7 +18,7 @@ const Teams = props => {
     
                 const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');    
                 const filteredTeams = responseTeams.teams.filter(p => p.status === props.filter)         
-                const sortedTeams = filteredTeams.sort()         
+                const sortedTeams = filteredTeams.sort((a, b) => a.name.localeCompare(b.name))   
                 setLoadedTeams(sortedTeams);            
                 setIsData(true);
                 

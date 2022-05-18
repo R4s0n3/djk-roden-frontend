@@ -29,7 +29,7 @@ const News = () => {
 
                 setLoadedPosts(responsePosts.posts.filter(p => p.published === "true").reverse());
                 setLoadedTickers(responseTickers.tickers)
-                setLoadedSponsors(responseSponsors.sponsors)
+                setLoadedSponsors(responseSponsors.sponsors.filter(s => s.category.title === "Sponsoren Verein"));
                 setLoadedCategories(responseCategories.categories.filter(c => c.filter === "true").sort().reverse())
                 setIsData(true);
                 

@@ -51,6 +51,10 @@ const UpdatePost = () => {
           value: "",
           isValid: false
         },
+        link: {
+          value: "",
+          isValid: false
+        },
         published: { 
           value: false,
           isValid: true
@@ -80,6 +84,10 @@ const UpdatePost = () => {
                     content:{
                         value:responseData.post.content,
                         isValid:true
+                    },
+                    link:{
+                      value:responseData.post.link,
+                      isValid:true
                     },
                     date:{
                         value:responseData.post.date,
@@ -126,6 +134,7 @@ const UpdatePost = () => {
                 content: formState.inputs.content.value,
                 date: formState.inputs.date.value,
                 category: formState.inputs.category.value,
+                link: formState.inputs.link.value,
                 report: formState.inputs.report.value,
                 published: formState.inputs.published.value,
                 highlighted: formState.inputs.highlighted.value
@@ -178,6 +187,10 @@ const UpdatePost = () => {
                 category:{
                     value:loadedPost.category,
                     isValid:true
+                },
+                link:{
+                  value:loadedPost.link,
+                  isValid:true
                 },
                 report:{
                     value:loadedPost.report,
@@ -267,6 +280,17 @@ const UpdatePost = () => {
             onInput={inputHandler}
             initialValid={true}
             initialValue={loadedPost.content}
+          />
+           <Input 
+          element="input"
+          id="link"
+          type="text"
+          label="Link"
+          validators={[]}
+          errorText="Please enter a link."
+          onInput={inputHandler}
+          initialValid={true}
+          initialValue={loadedPost.link}
           />
           </div>
           <div className="halfwidth">

@@ -44,7 +44,7 @@ const Post = () => {
     const createItem = (data, index) => {
         if(data.category.title === "Spielbericht"){
             const { opponent, htshome, htsguest, homematch, eshome, esguest} = data.report; 
-
+            
             return(
                 <PostItem
                     key={index}
@@ -53,6 +53,7 @@ const Post = () => {
                     imageUrl={data.image}
                     author={data.creator.name}
                     date={data.date}
+                    link={data.link}
                     category={data.category.title}
                     content={data.content}
                     reportId={data.report.id}
@@ -63,7 +64,7 @@ const Post = () => {
                     htsguest={htsguest}
                     eshome={eshome}
                     esguest={esguest}
-                    
+                    gallery={data.gallery}
     
     
                 />
@@ -74,13 +75,14 @@ const Post = () => {
                     key={index}
                     id={data.id}
                     title={data.title}
+                    link={data.link}
                     imageUrl={data.image}
                     author={data.creator.name}
                     date={data.date}
                     category={data.category.title}
                     content={data.content}
-    
-    
+                    gallery={data.gallery}
+                
                 />
             )
         }

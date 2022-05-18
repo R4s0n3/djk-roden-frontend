@@ -44,12 +44,10 @@ const Home = () => {
 
                     setLoadedPosts(responsePosts.posts.filter(p => p.published === "true").reverse())
                     setLoadedTickers(responseTickers.tickers)
-                    setLoadedSponsors(responseSponsors.sponsors)
+                    setLoadedSponsors(responseSponsors.sponsors.filter(s => s.category.title === "Sponsoren Verein"));
                     setLoadedData(true);
                     
-                }catch(err){
-                        console.log(err)
-        
+                }catch(err){        
                 }
             };
             fetchData();

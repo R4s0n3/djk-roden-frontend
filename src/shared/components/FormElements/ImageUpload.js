@@ -11,6 +11,7 @@ const ImageUpload = props =>{
     const filePickerRef = useRef();
 
     useEffect(()=>{
+        console.log('triggered');
         /* Reading the file and setting the previewUrl to the fileReader.result. */
         if(!file){
             return;
@@ -20,6 +21,7 @@ const ImageUpload = props =>{
             setPreviewUrl(fileReader.result);
         }
         fileReader.readAsDataURL(file);
+       
     },[file]);
 
     const pickedHandler = event => {
@@ -28,6 +30,7 @@ const ImageUpload = props =>{
         if (event.target.files && event.target.files.length === 1){
             pickedFile = event.target.files[0];
             setFile(pickedFile);
+            console.log(pickedFile)
             setIsValid(true);
             fileIsValid = true;
         }else{

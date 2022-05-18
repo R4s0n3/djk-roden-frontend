@@ -47,6 +47,9 @@
     height:100%;
     max-height: 50px;
 }
+.gallery-image{
+    border-radius:8px;
+}
 @media (min-width: 768px) {
    .post-item_content{
        flex-direction: row;
