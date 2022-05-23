@@ -5,6 +5,7 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import LeadSlider from '../../lead/components/LeadSlider';
 import historyImg from '../../shared/assets/PNG/placeholder.png';
+import leadsImg from '../../shared/assets/PNG/Gesamt.JPG';
 import {Link} from 'react-router-dom';
 import Button from '../../shared/components/FormElements/Button';
 
@@ -21,8 +22,8 @@ const Verein = () => {
             try{
     
                 const responseLeads = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/leads');
-
-                setLoadedLeads(responseLeads.leads);
+                const sortedLeads = responseLeads.leads.sort((a, b) => a.position.localeCompare(b.position));
+                setLoadedLeads(sortedLeads);
                 setIsData(true);
                 
             }catch(err){
@@ -72,7 +73,7 @@ const Verein = () => {
            { isData && <React.Fragment>
            <h1>Vorstände der DJK Roden</h1>
             <div className="leads-img__container">
-            <img src={historyImg} alt="history" />
+            <img src={leadsImg} alt="history" />
             </div>
             <div className="verein-container__lead">
             <h2>Vorstand Gesamtverein</h2>

@@ -113,7 +113,8 @@ const sponsorUpdateSubmitHandler = async event => {
         JSON.stringify({
          name: formState.inputs.name.value,
          link: formState.inputs.link.value,
-         category: formState.inputs.category.value
+         category: formState.inputs.category.value,
+         team: formState.inputs.team.value
         }),
         { 'Content-Type': 'application/json', Authorization: 'Bearer ' + auth.token
       }
@@ -158,6 +159,10 @@ const uploadHandler = () => {
             },
             category:{
                 value:loadedSponsor.category.id,
+                isValid:true
+            },
+            team:{
+                value:loadedSponsor.team,
                 isValid:true
             }
         },true

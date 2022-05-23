@@ -1,11 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {Icon} from '@iconify/react';
-// import Calendar from './Calendar';
+// import DateCalendar from './DateCalendar';
 import { AuthContext } from '../../context/auth-context';
 import './IconNavLinks.css';
 import SideDrawer from './SideDrawer';
-// import Backdrop from '../UIElements/Backdrop';
 import AdminNavLinks from './AdminNavLinks';
 
 const IconNavLinks = () => {
@@ -53,8 +52,7 @@ const IconNavLinks = () => {
         <button onClick={auth.logout}><Icon className="djk-icon" icon="ic:round-logout" height="20px" color="#006400" /></button>
       </li>
     )}
-    {/* <Calendar show={isCal} onClick={handleCal}/>
-    {isAdminBar && <Backdrop onClick={closeBarHandler} />} */}
+    {/* <DateCalendar show={isCal} onClick={handleCal}/> */}
      { <SideDrawer show={isAdminBar} onClick={closeBarHandler}>
         <nav className="admin-navigation__drawer-nav">
           <AdminNavLinks />
