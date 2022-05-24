@@ -10,7 +10,7 @@ const LeadSliderItem = props => {
         backgroundImage: "url(" + process.env.REACT_APP_AWS_URL +  `/${props.image})`,
         backgroundSize: "cover",
         filter: "contrast(1.25)",
-        backgroundPosition:"center top",
+        backgroundPosition:"center center",
         borderRadius:"8px 8px 0 0",
         flex:"4",
         
