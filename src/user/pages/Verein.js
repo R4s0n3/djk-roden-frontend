@@ -5,7 +5,7 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import LeadSlider from '../../lead/components/LeadSlider';
 import historyImg from '../../shared/assets/PNG/placeholder.png';
-import leadsImg from '../../shared/assets/PNG/Gesamt.JPG';
+import leadsImg from '../../shared/assets/PNG/Gesamt.png';
 import {Link} from 'react-router-dom';
 import Button from '../../shared/components/FormElements/Button';
 
