@@ -22,7 +22,6 @@ import Button from '../../shared/components/FormElements/Button';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import {AuthContext} from '../../shared/context/auth-context';
 import './NewPost.css';
-import FormSlider from '../../shared/components/FormElements/FormSlider';
 
 const NewPost = () => {
   const auth = useContext(AuthContext);

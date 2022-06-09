@@ -18,9 +18,7 @@ import {
   KBarAnimator,
   KBarSearch,
   useMatches,
-  useKBar,
   KBarResults,
-  NO_GROUP
 } from "kbar";
 
 import Auth from './user/pages/Auth';

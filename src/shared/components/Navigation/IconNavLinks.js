@@ -1,27 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {Icon} from '@iconify/react';
-import DateCalendar from './DateCalendar';
+// import DateCalendar from './DateCalendar';
 import { AuthContext } from '../../context/auth-context';
 import './IconNavLinks.css';
 import SideDrawer from './SideDrawer';
 import AdminNavLinks from './AdminNavLinks';
-import {useWindowSize} from '../../hooks/size-hook';
+// import {useWindowSize} from '../../hooks/size-hook';
 const IconNavLinks = () => {
-  const [isMobile, setIsMobile] = useState()
-  const size = useWindowSize(true);
-  useEffect(()=>{
-    console.log(size)
-    const checkMobile = ()=>{
-      if(size.width > 420){
-        setIsMobile(false);
-      }else if(size.width < 420){
-        setIsMobile(true);
-      }
-    }
-
-    checkMobile();
-  },[size]);
+  // const [isMobile, setIsMobile] = useState()
+  // const size = useWindowSize(true);
+  // useEffect(()=>{
+  //   const checkMobile = ()=>{
+  //     if(size.width > 420){
+  //       setIsMobile(false);
+  //     }else if(size.width < 420){
+  //       setIsMobile(true);
+  //     }
+  //   }
+  //   checkMobile();
+  // },[size]);
  
   const auth = useContext(AuthContext);
   // const [ isCal, setIsCal ] = useState(false)

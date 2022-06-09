@@ -8,7 +8,7 @@ import LoadingSpinner from '../UIElements/LoadingSpinner';
 import Calendar from 'react-calendar';
 const DateCalendar = (props) => {
     const {isLoading, error, clearError, sendRequest} = useHttpClient();
-    const [value, onChange] = React.useState(new Date());
+    const [value, setValue] = React.useState(new Date());
     const [loadedDates, setLoadedDates] = React.useState();
 
     React.useEffect(()=>{
@@ -22,8 +22,7 @@ const DateCalendar = (props) => {
         fetchDates();
     },[sendRequest])
     const gimmeChange = event => {
-       
-        console.log(new Date(event).toLocaleDateString());
+       setValue(new Date(new Date(event).toLocaleDateString()))
 
     }
     return(<>

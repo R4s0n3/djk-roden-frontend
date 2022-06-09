@@ -82,7 +82,6 @@ const UpdatePost = () => {
             
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/posts/${postId}`);
-                const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
                 const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
                 const responseDataCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
                 setLoadedTeams(responseTeams.teams);
