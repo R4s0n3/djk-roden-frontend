@@ -1,10 +1,12 @@
 import React, {useEffect, useState, useContext} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {Icon} from '@iconify/react';
+import FormSlider from '../../shared/components/FormElements/FormSlider';
 
 import {
     VALIDATOR_REQUIRE,
-    VALIDATOR_MINLENGTH
+    VALIDATOR_MINLENGTH,
+    VALIDATOR_MIN
 } from "../../shared/util/validators";
 
 import Input from '../../shared/components/FormElements/Input';
@@ -14,6 +16,7 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 
 import Card from '../../shared/components/UIElements/Card';
+import MultipleSelect from '../../shared/components/FormElements/MultipleSelect';
 import { AuthContext} from '../../shared/context/auth-context';
 import {useForm} from "../../shared/hooks/form-hook";
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -27,7 +30,12 @@ const {isLoading, error, sendRequest, clearError } = useHttpClient();
 const [loadedSponsor, setLoadedSponsor] = useState();
 const [loadedTeams, setLoadedTeams] = useState();
 const [loadedCategories, setLoadedCategories] = useState();
+const [loadedSponsors, setLoadedSponsors] = useState();
 const [isUpload, setIsUpload] = useState();
+const [isLink, setIsLink] = useState(false);
+const [isTeams, setIsTeams] = useState(false);
+const [isIndex, setIsIndex] = useState(false);
+
 
 const sponsorId = useParams().sponsorId;
 const navigate = useNavigate();
@@ -47,6 +55,10 @@ const [formState, inputHandler, setFormData] = useForm({
     },
     team:{
         value:"",
+        isValid:false
+    },
+    index:{
+        value:0,
         isValid:false
     }
 },false);
@@ -75,6 +87,10 @@ useEffect(()=>{
                 team:{
                     value:responseData.sponsor.team,
                     isValid:true
+                },
+                index:{
+                    value:responseData.sponsor.index,
+                    isValid:true
                 }
             },true
             );
@@ -95,7 +111,7 @@ useEffect(()=>{
         try{
             const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
             setLoadedTeams(responseTeams.teams);
-        }catch(err){        }
+        }catch(err){}
     }
     fetchSponsor();
     fetchCategories();
@@ -113,8 +129,9 @@ const sponsorUpdateSubmitHandler = async event => {
         JSON.stringify({
          name: formState.inputs.name.value,
          link: formState.inputs.link.value,
+         index: formState.inputs.index.value,
          category: formState.inputs.category.value,
-         team: formState.inputs.team.value
+         teams: formState.inputs.teams.value
         }),
         { 'Content-Type': 'application/json', Authorization: 'Bearer ' + auth.token
       }
@@ -161,14 +178,21 @@ const uploadHandler = () => {
                 value:loadedSponsor.category.id,
                 isValid:true
             },
-            team:{
-                value:loadedSponsor.team,
+            teams:{
+                value:loadedSponsor.teams,
+                isValid:true
+            },
+            index:{
+                value:loadedSponsor.index,
                 isValid:true
             }
         },true
         );
         setIsUpload(false);
     }
+
+    const lengthOfSponsors = (loadedSponsors ? loadedSponsors.filter(s => s.category.id.includes(formState.inputs.category.value)).length : 0 );
+
 
     if(!isUpload){
         setFormData({
@@ -230,17 +254,6 @@ const uploadHandler = () => {
         initialValue={loadedSponsor.name}
         initialValid={true}
         />
-    <Input
-        id="link"   
-        element="input"
-        type="url"
-        label="Link"
-        validators={[]}
-        errorText="Please enter a valid link."
-        onInput={inputHandler}
-        initialValue={loadedSponsor.link}
-        initialValid={true}
-        />
     <Select 
         id="category"
         label="Kategorie"
@@ -252,17 +265,44 @@ const uploadHandler = () => {
         initialValid={true}
 
         />
-        {loadedTeams && <Select 
-                id="team"
+      
+         <div className="form-buttons">
+            <Button inverse={isLink} type="button" onClick={()=>{setIsLink(prev => !prev)}} size="small">Link</Button>
+            <Button inverse={isTeams} type="button" onClick={()=>{setIsTeams(prev => !prev)}} size="small">Teams</Button>
+            <Button inverse={isIndex} type="button" onClick={()=>{setIsIndex(prev => !prev)}} size="small">Index</Button>
+            </div>
+
+            {isLink && <Input 
+                element="input"
+                id="link"
+                type="url"
+                label="Link"
+                validators={[]}
+                errorText="Please enter a link."
+                onInput={inputHandler}
+            />}
+            
+            {isTeams && <MultipleSelect 
+                id="teams"
                 label="Team"
                 options={loadedTeams}
-                initialValid={true}
-                initialValue={loadedSponsor.team}
-                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
+                optionsName="team-option"
+                validators={[]}
                 errorText="Please enter a team."
+                initialValue={[]}
                 onInput={inputHandler}
-        />}
-
+                initialValid={true}
+            />}
+        
+            {isIndex && <FormSlider
+            id="index"
+            onInput={inputHandler}
+            min={0}
+            max={lengthOfSponsors}
+            step={1}
+            label="Index"
+            validators={[VALIDATOR_MIN(0)]}
+          />}
 
         <Button type="submit" disabled={!formState.isValid}>
             Update Sponsor

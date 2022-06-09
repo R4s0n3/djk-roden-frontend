@@ -30,7 +30,7 @@ const LeadsListItem = props => {
     const confirmDeleteHandler = async () => {
         setShowConfirmModal(false);
         try {
-            console.log(props.id);
+          
           sendRequest(process.env.REACT_APP_BACKEND_URL + `/leads/${props.id}`, 'DELETE',null, {Authorization: 'Bearer ' + auth.token});
           props.onDelete(props.id);
         } catch (error) {

@@ -1,13 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {Icon} from '@iconify/react';
-// import DateCalendar from './DateCalendar';
+import DateCalendar from './DateCalendar';
 import { AuthContext } from '../../context/auth-context';
 import './IconNavLinks.css';
 import SideDrawer from './SideDrawer';
 import AdminNavLinks from './AdminNavLinks';
-
+import {useWindowSize} from '../../hooks/size-hook';
 const IconNavLinks = () => {
+  const [isMobile, setIsMobile] = useState()
+  const size = useWindowSize(true);
+  useEffect(()=>{
+    console.log(size)
+    const checkMobile = ()=>{
+      if(size.width > 420){
+        setIsMobile(false);
+      }else if(size.width < 420){
+        setIsMobile(true);
+      }
+    }
+
+    checkMobile();
+  },[size]);
+ 
   const auth = useContext(AuthContext);
   // const [ isCal, setIsCal ] = useState(false)
   const [ isAdminBar, setIsAdminBar ] = useState(false)
@@ -29,11 +44,9 @@ const IconNavLinks = () => {
         <li className="hide-on-mobile">
           <NavLink reloadDocument to="/kontakt">Kontakt</NavLink>
     </li>
-    {/* <li>
-    <button onClick={handleCal}>
-          <Icon className="djk-icon" icon="akar-icons:calendar" height="20px" color="#006400" />
-          </button>
-
+    {/* <li className="nav-calendar" onClick={handleCal}>
+      {!isMobile && "Termine"}
+      {isMobile && <Icon className="djk-icon" icon="bx:calendar" height="20px" color="#006400" />}
     </li> */}
 
       {!auth.isLoggedIn && (

@@ -1,13 +1,15 @@
 import React,{useEffect, useState, useContext}from 'react';
 import PlayersList from '../components/PlayersList';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import FormSlider from '../../shared/components/FormElements/FormSlider';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import Select from '../../shared/components/FormElements/Select';
-
+import Card from '../../shared/components/UIElements/Card';
 import {
     VALIDATOR_MINLENGTH,
+    VALIDATOR_MIN,
     VALIDATOR_REQUIRE
     } from "../../shared/util/validators";
 import { useForm} from "../../shared/hooks/form-hook";
@@ -28,6 +30,10 @@ const NewPlayer = props => {
           value:"",
           isValid:false
       },
+      index:{
+        value:0,
+        isValid:true
+      },
       age:{
           value:"",
           isValid:true
@@ -37,7 +43,7 @@ const NewPlayer = props => {
           isValid:true
       },
       position:{
-          value:null,
+          value:"",
           isValid:true
       },
       number:{
@@ -55,6 +61,10 @@ const NewPlayer = props => {
 
     const [isAge, setIsAge] = useState(false);
     const [isNumber, setIsNumber] = useState(false);
+    const [isPos, setIsPos] = useState(false);
+    const [isImg, setIsImg] = useState(false);
+    const [isIndex, setIsIndex] = useState(false)
+
 
     const positions = [
       {
@@ -99,14 +109,6 @@ const NewPlayer = props => {
     )
   }
 
-  const handleAge = () => {
-    setIsAge(prev => !prev);
-  }
-
-  const handleNumbers = () => {
-    setIsNumber(prev => !prev);
-  }
-
     const createPlayerHandler = async event =>{
         event.preventDefault();
 
@@ -117,6 +119,7 @@ const NewPlayer = props => {
             formData.append('prename',formState.inputs.prename.value);
             formData.append('age',formState.inputs.age.value);
             formData.append('image', formState.inputs.image.value);
+            formData.append('index', formState.inputs.index.value);
             formData.append('team',formState.inputs.team.value);
             formData.append('position',formState.inputs.position.value);
             formData.append('number',formState.inputs.number.value);
@@ -155,9 +158,11 @@ const NewPlayer = props => {
     }
 
     const deletedPlayerHandler = deletedPlayerId => {
-      
+
       setLoadedPlayers(prevPlayers => prevPlayers.filter(player => player.id !== deletedPlayerId))
+     
     }
+    const lengthOfPlayers = (loadedPlayers ? loadedPlayers.filter(p => p.team.includes(formState.inputs.team.value)).length : 0 );
 
 
     return(
@@ -180,10 +185,10 @@ const NewPlayer = props => {
         {createMode &&  <div>
             <h2>Spielerliste</h2>
             <p>Erstelle Spieler</p>
-            <div className="halfwidth">
             <div>
+              <Card className="form-card">
             <form className="player-form" onSubmit={createPlayerHandler}>
-            <ImageUpload center id="image" onInput={inputHandler} errorText="Please provide an image" />
+           {isImg && <ImageUpload center id="image" onInput={inputHandler} errorText="Please provide an image" />}
             <Input 
                 element="input"
                 id="name"
@@ -210,8 +215,14 @@ const NewPlayer = props => {
                 errorText="Please enter a team."
                 onInput={inputHandler}
             />
-
-              <Input 
+            <div className="form-buttons">
+            <Button inverse={isImg} type="button" onClick={()=>{setIsImg(prev => !prev)}} size="small">Bild</Button>
+            <Button inverse={isPos} type="button" onClick={()=>{setIsPos(prev => !prev)}} size="small">Position</Button>
+            <Button inverse={isAge} type="button" onClick={()=>{setIsAge(prev => !prev)}} size="small">Geburtstag</Button>
+            <Button inverse={isNumber} type="button" onClick={()=>{setIsNumber(prev => !prev)}} size="small">Nummer</Button>
+            <Button inverse={isIndex} type="button" onClick={()=>{setIsIndex(prev => !prev)}} size="small">Index</Button>
+            </div>
+             {isPos && <Input 
                 element="input"
                 id="position"
                 type="text"
@@ -220,13 +231,9 @@ const NewPlayer = props => {
                 validators={[]}
                 errorText="Please enter a position."
                 onInput={inputHandler}
-              />
-
-            <div className="player-input__optional">
-       
-
-            {isAge &&
-  <Input 
+                initialValid={true}
+              />}
+            {isAge && <Input 
                 element="input"
                 id="age"
                 type="date"
@@ -234,16 +241,9 @@ const NewPlayer = props => {
                 validators={[]}
                 errorText="Please enter a valid age."
                 onInput={inputHandler}
+                initialValid={true}
             />}
-                 <Button inverse={isAge} onClick={handleAge} type="button">{isAge ? "Verwerfen" : "Geburtstag"}</Button>
-            </div>
-          
-         
-
-            <div className="player-input__optional">
-
-
-              {isNumber &&  <Input 
+            {isNumber &&  <Input 
                 element="input"
                 id="number"
                 type="number"
@@ -251,17 +251,29 @@ const NewPlayer = props => {
                 validators={[]}
                 errorText="Please enter a number" 
                 onInput={inputHandler}
+                initialValid={true}
             />}
-            <Button inverse={isNumber} onClick={handleNumbers} type="button">{isNumber ? "Verwerfen" : "Nummer"}</Button>
-            </div> 
-            <Button danger type="submit">Spieler erstellen</Button>
+             {isIndex && <FormSlider
+            id="index"
+            onInput={inputHandler}
+            min={0}
+            initialValid={true}
+            initialValue={lengthOfPlayers}
+            max={lengthOfPlayers}
+            step={1}
+            label="Index"
+            validators={[VALIDATOR_MIN(0)]}
+          />}
+           
+            <Button disabled={!formState.isValid} type="submit">Spieler erstellen</Button>
             <datalist id="positions">
  {positions.map(createOptions)}
 </datalist>
             </form>
+            </Card>
             </div>
             </div>
-            </div>}
+           }
      </div>
           </div>
 

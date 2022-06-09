@@ -1,0 +1,44 @@
+.post-teams-item{
+    display:flex;
+    justify-content: left;
+    align-items: left;
+    flex:1;
+    width: 100%;
+   height:80px;
+   max-width:350px;
+   border-radius:8px;
+   margin-right:10px;
+   margin-top:10px;
+   background-color:#fff;
+}
+.post-teams-item__image-container{
+    flex:1;
+    width: 100%;
+    height: 100%;
+    display: flex; 
+    
+}
+.post-teams-item__image-container img{
+    display: block;
+    height:80px;
+    width: 120px;
+    border-radius:8px 0 0 8px;
+    object-fit: cover;
+    margin-left:auto;
+}
+.post-teams-item__info-container{
+    
+    flex:2;
+    margin: 0.5rem 0 0 0;
+   
+}
+.post-teams-item__info-container div > h2{
+    font-size:1rem;
+    margin:0 0.5rem;
+}
+.post-teams-item__info-container div > h3{
+    font-size:0.7rem;
+    margin:0 0.5rem;
+    font-weight:regular;
+
+}

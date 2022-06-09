@@ -1,9 +1,11 @@
  import './PostItem.css';
  import {Link} from 'react-router-dom';
 import Card from '../../shared/components/UIElements/Card';
+import Button from '../../shared/components/FormElements/Button';
 import hgsLogo from '../../shared/assets/PNG/hgs-logo.png';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import PostTeams from '../../team/components/PostTeams';
  const PostItem = props => {
     const formatDate = d => {
         let oldDate = d;
@@ -15,6 +17,7 @@ import ImageListItem from '@mui/material/ImageListItem';
         )
 
     }
+    console.log(props.teams);
     const createGallery = (data, index) => {
         return (
             <ImageListItem key={index}>
@@ -40,7 +43,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 <p>{props.author} | <b>{props.category}</b> | {formatDate(props.date)} {props.team && '| ' + props.team.name }</p> 
 
 <p className="post-content__paragraph" >{props.content}</p>
-<a className="contact-link" href={props.link} target="_blank" rel="noopener noreferrer">{props.link}</a>
+{props.link && <Button href={props.link}>Mehr</Button>}
         </div>
         <div className="post-item_content__inner">
         <div className="post-report-item">
@@ -69,10 +72,16 @@ import ImageListItem from '@mui/material/ImageListItem';
       
         </div>
         <div className="post-item__gallery-container">
-        <ImageList variant="masonry" cols={3} gap={8}>
+        <ImageList variant="masonry" cols={4} gap={8}>
         {props.gallery && props.gallery.length > 0 && props.gallery.map(createGallery)}
 </ImageList>
         </div>
+
+        {props.teams.length > 0 && props.teams[0] !== null && <div className="post-item__teams">
+            <PostTeams 
+                items={props.teams}
+            />
+        </div>}
         </div>
         )
  }

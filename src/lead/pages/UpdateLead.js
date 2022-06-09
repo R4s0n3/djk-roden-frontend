@@ -5,7 +5,7 @@ import {Icon} from '@iconify/react';
 import {
     VALIDATOR_REQUIRE,
     VALIDATOR_MINLENGTH,
-    VALIDATOR_EMAIL
+    VALIDATOR_MIN
 } from "../../shared/util/validators";
 
 import Input from '../../shared/components/FormElements/Input';
@@ -13,6 +13,7 @@ import Select from '../../shared/components/FormElements/Select';
 import Button from '../../shared/components/FormElements/Button';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import FormSlider from '../../shared/components/FormElements/FormSlider';
 
 import Card from '../../shared/components/UIElements/Card';
 import { AuthContext} from '../../shared/context/auth-context';
@@ -27,6 +28,7 @@ const auth = useContext(AuthContext);
 const {isLoading, error, sendRequest, clearError } = useHttpClient();
 const [loadedLead, setLoadedLead] = useState();
 const [loadedCategories, setLoadedCategories] = useState();
+const [loadedLeads, setLoadedLeads]= useState();
 const [isUpload, setIsUpload] = useState();
 
 const leadId = useParams().leadId;
@@ -53,6 +55,10 @@ const [formState, inputHandler, setFormData] = useForm({
         value:"",
         isValid:false
     },
+    index:{
+        value:0,
+        isValid:false
+    },
     position:{
         value:"",
         isValid:false
@@ -65,6 +71,8 @@ useEffect(()=>{
     const fetchLead = async () => {
 
         try{
+            const responseLeads = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/leads' );
+            setLoadedLeads(responseLeads.leads);
             const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/leads/${leadId}`);
             setLoadedLead(responseData.lead);
             setFormData({
@@ -82,6 +90,10 @@ useEffect(()=>{
                 },
                 category:{
                     value:responseData.lead.category,
+                    isValid:true
+                },
+                index:{
+                    value:responseData.lead.index,
                     isValid:true
                 },
                 email:{
@@ -124,6 +136,7 @@ const leadUpdateSubmitHandler = async event => {
          name: formState.inputs.name.value,
          prename: formState.inputs.prename.value,
          category: formState.inputs.category.value,
+         index: formState.inputs.index.value,
          tel: formState.inputs.tel.value,
          email: formState.inputs.email.value,
          position: formState.inputs.position.value
@@ -173,6 +186,10 @@ const uploadHandler = () => {
                 value:loadedLead.category.id,
                 isValid:true
             },
+            index:{
+                value:loadedLead.index,
+                isValid:true
+            },
             tel:{
                 value:loadedLead.tel,
                 isValid:true
@@ -201,7 +218,8 @@ const uploadHandler = () => {
 
     }
 }
-  
+const lengthOfLeads = (loadedLead ? loadedLeads.filter(l => l.category.id.includes(loadedLead.category.id)).length : 0 );
+
 
   if (isLoading) {
     return (
@@ -266,21 +284,10 @@ const uploadHandler = () => {
         element="input"
         type="text"
         label="E-Mail"
-        validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
+        validators={[]}
         errorText="Please enter a valid email adress."
         onInput={inputHandler}
         initialValue={loadedLead.email}
-        initialValid={true}
-        />
-    <Input
-        id="position"   
-        element="input"
-        type="text"
-        label="Funktion"
-        validators={[]}
-        errorText="Please enter a lead position."
-        onInput={inputHandler}
-        initialValue={loadedLead.position}
         initialValid={true}
         />
     <Select 
@@ -294,7 +301,28 @@ const uploadHandler = () => {
         initialValid={true}
 
         />
-
+        <Input
+        id="position"   
+        element="input"
+        type="text"
+        label="Funktion"
+        validators={[]}
+        errorText="Please enter a lead position."
+        onInput={inputHandler}
+        initialValue={loadedLead.position}
+        initialValid={true}
+        />
+    <FormSlider
+            id="index"
+            onInput={inputHandler}
+            min={0}
+            initialValue={loadedLead.index}
+            initialValid={true}
+            max={lengthOfLeads}
+            step={1}
+            label="Index"
+            validators={[VALIDATOR_MIN(0)]}
+          />
         <Button type="submit" disabled={!formState.isValid}>
             Update Vorstand
         </Button>

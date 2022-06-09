@@ -26,8 +26,9 @@ const News = () => {
                 const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
                 const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
                 const responseCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
-
-                setLoadedPosts(responsePosts.posts.filter(p => p.published === "true").reverse());
+                const filteredPosts = responsePosts.posts.filter(p => p.published === "true");
+                
+                setLoadedPosts(filteredPosts);
                 setLoadedTickers(responseTickers.tickers)
                 setLoadedSponsors(responseSponsors.sponsors.filter(s => s.category.title === "Sponsoren Verein"));
                 setLoadedCategories(responseCategories.categories.filter(c => c.filter === "true").sort().reverse())

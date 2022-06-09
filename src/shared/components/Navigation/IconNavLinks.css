@@ -10,16 +10,19 @@
   }
   .icon-nav-links li {
 }
-  
-  .icon-nav-links a {
+  .nav-calendar{
+    font-size:1.2em;
+    cursor: pointer;
+  }
+  .icon-nav-links a, .nav-calendar {
     border-radius: 6px;
     border: 1px solid transparent;
     padding: 0.25rem;
-
     color:  #006400;
     text-decoration: none;
   }
-  
+  .nav-calendar:hover,
+  .nav-calendar:active,
   .icon-nav-links a:hover,
   .icon-nav-links a:active,
   .icon-nav-links a.active {

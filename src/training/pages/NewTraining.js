@@ -2,9 +2,9 @@ import React,{useEffect, useState, useContext}from 'react';
 import TrainingsList from '../components/TrainingsList';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import Card from '../../shared/components/UIElements/Card';
 import Input from '../../shared/components/FormElements/Input';
 import Select from '../../shared/components/FormElements/Select';
-import formstates from '../../shared/util/formstates';
 
 
 import {
@@ -17,13 +17,38 @@ import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const NewTraining = props => {
-    const {trainingsform} = formstates
     const auth = useContext(AuthContext);
     const [createMode, setCreateMode] = useState(false);
-    const [formState, inputHandler] = useForm(trainingsform, false);
+    const [formState, inputHandler] = useForm({
+      start:{
+        value:"",
+        isValid:false
+    },
+    end:{
+        value:"",
+        isValid:false
+    },
+    day:{
+        value:"",
+        isValid:false
+    },
+    location:{
+        value:"",
+        isValid:false
+    },
+    link:{
+        value:"",
+        isValid:true
+    },
+    team:{
+        value:"",
+        isValid:false
+    }
+    }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedTrainings, setLoadedTrainings] = useState();
     const [loadedTeams, setLoadedTeams] = useState();
+    const [isLink, setIsLink] = useState(false);
     const days = [{title:'Montag'},{title:'Dienstag'},{title:'Mittwoch'},{title:'Donnerstag'},{title:'Freitag'},{title:'Samstag'},{title:'Sonntag'}];
 
     const createTrainingHandler = async event =>{
@@ -97,9 +122,10 @@ const NewTraining = props => {
         {createMode &&  <div>
             <h2>Trainingszeiten</h2>
             <p>Erstelle Training</p>
-            <div className="halfwidth">
+         
             <div>
-            <form autoComplete="off" className="training-form" onSubmit={createTrainingHandler}>
+              <Card className="form-card">
+              <form autoComplete="off" className="training-form" onSubmit={createTrainingHandler}>
             <Input 
                 element="input"
                 id="start"
@@ -127,16 +153,7 @@ const NewTraining = props => {
                 errorText="Please enter a location."
                 onInput={inputHandler}
             />
-            <Input 
-                element="input"
-                id="link"
-                type="url"
-                label="Link"
-                validators={[]}
-                initialValid={true}
-                errorText="Please enter a valid link."
-                onInput={inputHandler}
-            />
+           
             <Select 
                 id="day"
                 label="Tag"
@@ -153,10 +170,26 @@ const NewTraining = props => {
                 errorText="Please enter a team."
                 onInput={inputHandler}
             />
+             <div className="form-buttons">
+            <Button inverse={isLink} type="button" onClick={()=>{setIsLink(prev => !prev)}} size="small">Link</Button>
+          
+            </div>
+             {isLink && <Input 
+                element="input"
+                id="link"
+                type="url"
+                label="Link"
+                validators={[]}
+                initialValid={true}
+                errorText="Please enter a valid link."
+                onInput={inputHandler}
+            />}
             <Button type="submit">Training erstellen</Button>
             </form>
+              </Card>
+           
             </div>
-            </div>
+           
             </div>}
      </div>
           </div>

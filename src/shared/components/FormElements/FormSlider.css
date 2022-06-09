@@ -1,0 +1,19 @@
+.form-slider{
+    position:relative;
+}
+.form-slider::before{
+    position:absolute;
+    content: "Anfang";
+    font-weight: bold;
+    font-size:0.65em;
+    left: 0;
+    padding:0.5rem 0;
+}
+.form-slider::after{
+    position:absolute;
+    content: "Ende";
+    font-weight: bold;
+    font-size:0.65em;
+    right:0;
+    padding:0.5rem 0;
+}

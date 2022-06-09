@@ -71,7 +71,7 @@ const NewsGrid = props => {
         <div className="post-grid__col-full">
           
           {filterState && props.items.filter(post => post.category.title === filterState).slice(0,count).map(createCardsLG)}
-          {!filterState && props.items.slice(0,count).map(createCardsLG)}
+          {!filterState && props.items.slice(0,count).sort((a,b) => a.index - b.index).map(createCardsLG)}
         </div>
        
         </div>

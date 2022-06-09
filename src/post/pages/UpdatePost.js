@@ -10,6 +10,8 @@ import {
 
 import Input from '../../shared/components/FormElements/Input';
 import Select from '../../shared/components/FormElements/Select';
+import MultipleSelect from '../../shared/components/FormElements/MultipleSelect';
+import GalleryUpload from '../../shared/components/FormElements/GalleryUpload';
 import Checkbox from '../../shared/components/FormElements/Checkbox';
 import Button from '../../shared/components/FormElements/Button';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
@@ -29,6 +31,11 @@ const UpdatePost = () => {
     const [isUpload, setIsUpload] = useState();
     const [loadedCategories, setLoadedCategories] = useState(); 
     const [loadedTeams, setLoadedTeams] = useState(); 
+    const [isLink, setIsLink] = useState(false);
+    const [isTeams, setIsTeams] = useState(false);
+    const [galleryMode, setGalleryMode] = useState(false);
+
+
     // const [isReport, setIsReport] = useState(false);
     const isReport = false;
     const postId = useParams().postId;
@@ -53,7 +60,7 @@ const UpdatePost = () => {
         },
         link: {
           value: "",
-          isValid: false
+          isValid: true
         },
         published: { 
           value: false,
@@ -61,6 +68,10 @@ const UpdatePost = () => {
         },
         highlighted: { 
           value: false,
+          isValid: true
+        },
+        teams:{
+          value:[],
           isValid: true
         }
       }, false)
@@ -71,6 +82,7 @@ const UpdatePost = () => {
             
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/posts/${postId}`);
+                const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
                 const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
                 const responseDataCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
                 setLoadedTeams(responseTeams.teams);
@@ -105,6 +117,10 @@ const UpdatePost = () => {
                         value:responseData.post.published,
                         isValid:true
                     },
+                    teams:{
+                      value:responseData.post.teams,
+                      isValid:true
+                    },
                     highlighted:{
                         value:responseData.post.highlighted,
                         isValid:true
@@ -135,6 +151,7 @@ const UpdatePost = () => {
                 date: formState.inputs.date.value,
                 category: formState.inputs.category.value,
                 link: formState.inputs.link.value,
+                teams: formState.inputs.teams.value,
                 report: formState.inputs.report.value,
                 published: formState.inputs.published.value,
                 highlighted: formState.inputs.highlighted.value
@@ -148,6 +165,58 @@ const UpdatePost = () => {
         }
       };
     
+      const handleGallery = () => {
+        setGalleryMode(true);
+        setFormData({
+          gallery:{
+            value: null,
+            isValid: false
+          }
+        },false);
+      }
+  
+      const cancelGallery = () => {
+        setGalleryMode(false);
+        setFormData({
+          title:{
+            value:formState.inputs.title.value,
+            isValid: formState.inputs.title.isValid
+          },
+          content:{
+            value:formState.inputs.content.value,
+            isValid: formState.inputs.content.isValid
+          },
+          link:{
+            value:formState.inputs.link.value,
+            isValid: formState.inputs.link.isValid
+          },
+          date:{
+            value:formState.inputs.date.value,
+            isValid: formState.inputs.date.isValid
+          },
+          category:{
+            value:formState.inputs.category.value,
+            isValid: formState.inputs.category.isValid
+          },
+          highlighted:{
+            value:formState.inputs.highlighted.value,
+            isValid: formState.inputs.highlighted.isValid
+          },
+          teams:{
+            value:formState.inputs.teams.value,
+            isValid: formState.inputs.teams.isValid
+          },
+          published:{
+            value:formState.inputs.published.value,
+            isValid: formState.inputs.published.isValid
+          },
+          image:{
+            value:formState.inputs.image.value,
+            isValid: formState.inputs.image.isValid
+          },
+        },false);
+      }
+
       const confirmImageUploadHandler = async event => {
           event.preventDefault();
           
@@ -203,6 +272,10 @@ const UpdatePost = () => {
                 highlighted:{
                     value:loadedPost.highlighted,
                     isValid:true
+                },
+                teams:{
+                  value:loadedPost.teams,
+                  isValid:true
                 }
             },true);
             setIsUpload(false);
@@ -219,7 +292,26 @@ const UpdatePost = () => {
     
         }
     }
+    const createGalleryHandler = async event => {
+      event.preventDefault();
+      try{
+       
+        const formData = new FormData();
+        for (const file of formState.inputs.gallery.value) {
+          formData.append('gallery', file);
+       }
       
+        await sendRequest(process.env.REACT_APP_BACKEND_URL + `/posts/gallery/${postId}`,
+        'PATCH',
+        formData,{
+          Authorization: 'Bearer ' + auth.token
+        });
+        navigate('/dashboard');
+      }catch( err){
+        console.log(err)
+      }
+
+    }
     
       if (isLoading) {
         return (
@@ -250,9 +342,23 @@ const UpdatePost = () => {
         {!isUpload && loadedPost.image && <img src={process.env.REACT_APP_AWS_URL + `/${loadedPost.image}`} alt={loadedPost.title} />}
         </div>
             {isUpload &&  <ImageUpload  center id="image" onInput={inputHandler} errorText="Please provide an image" /> }
-            <Button onClick={uploadHandler} type="button" ><Icon className="djk-icon" icon={isUpload ? "akar-icons:arrow-back-thick" : "akar-icons:edit"} height="20px" color="#fff" /></Button>
+            <Button disabled={galleryMode} onClick={uploadHandler} type="button" ><Icon className="djk-icon" icon={isUpload ? "akar-icons:arrow-back-thick" : "akar-icons:edit"} height="20px" color="#fff" /></Button>
+            <Button disabled={isUpload} onClick={handleGallery}>Neue Galerie</Button>
             {isUpload && <Button type="submit" danger>Upload</Button>}
         </form>
+       
+        {galleryMode && <form className="gallery-form" onSubmit={createGalleryHandler} >
+            <h2>Galerie erstellen</h2>
+            <GalleryUpload
+              id="gallery"
+              onInput={inputHandler}
+              errorText="Please enter valid gallery images"
+
+            />
+            <Button type="button" onClick={cancelGallery}>Verwerfen</Button>
+            <Button type="submit" disabled={!formState.isValid}>Galerie erstellen</Button>
+            </form>} 
+           
         </div>
         <div>
        {!isLoading &&loadedTeams && loadedCategories && loadedPost && <form className="update-form" onSubmit={postUpdateSubmitHandler}>
@@ -281,7 +387,11 @@ const UpdatePost = () => {
             initialValid={true}
             initialValue={loadedPost.content}
           />
-           <Input 
+          <div className="form-buttons">
+            <Button inverse={isLink} type="button" onClick={()=>{setIsLink(prev => !prev)}} size="small">Link</Button>
+            <Button inverse={isTeams} type="button" onClick={()=>{setIsTeams(prev => !prev)}} size="small">Teams</Button>
+            </div>
+          <Input 
           element="input"
           id="link"
           type="text"
@@ -292,6 +402,18 @@ const UpdatePost = () => {
           initialValid={true}
           initialValue={loadedPost.link}
           />
+         <MultipleSelect 
+                id="teams"
+                label="Teams"
+                options={loadedTeams}
+                optionsName="team-option"
+                validators={[]}
+                errorText="Please enter a team."
+                initialValue={loadedPost.teams}
+                onInput={inputHandler}
+                initialValid={true}
+            />
+          
           </div>
           <div className="halfwidth">
           <Input
@@ -428,7 +550,6 @@ const UpdatePost = () => {
             Update Post
         </Button>
     </form>}
-
     </div>
 
     </div>

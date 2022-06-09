@@ -1,10 +1,12 @@
 import React, {useEffect, useState, useContext} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {Icon} from '@iconify/react';
+import FormSlider from '../../shared/components/FormElements/FormSlider';
 
 import {
     VALIDATOR_REQUIRE,
-    VALIDATOR_MINLENGTH
+    VALIDATOR_MINLENGTH,
+    VALIDATOR_MIN
 } from "../../shared/util/validators";
 
 import Input from '../../shared/components/FormElements/Input';
@@ -25,6 +27,7 @@ const UpdatePlayer = () => {
 const auth = useContext(AuthContext);
 const {isLoading, error, sendRequest, clearError } = useHttpClient();
 const [loadedPlayer, setLoadedPlayer] = useState();
+const [loadedPlayers, setLoadedPlayers] = useState();
 const [loadedTeams, setLoadedTeams] = useState();
 const [isUpload, setIsUpload] = useState();
 
@@ -92,6 +95,10 @@ const [formState, inputHandler, setFormData] = useForm({
         value:null,
         isValid:true
     },
+    index:{
+      value:0,
+      isValid:true
+    },
     number:{
         value:"",
         isValid:true
@@ -108,6 +115,8 @@ useEffect(()=>{
     const fetchPlayer = async () => {
 
         try{
+            const responsePlayers = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/players");
+            setLoadedPlayers(responsePlayers.players);
             const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/players/${playerId}`);
             setLoadedPlayer(responseData.player);
             setFormData({
@@ -134,6 +143,10 @@ useEffect(()=>{
                 team:{
                     value:responseData.player.team,
                     isValid:true
+                },
+                index:{
+                  value:responseData.player.index,
+                  isValid:true
                 }
             }, true
             );
@@ -151,6 +164,9 @@ useEffect(()=>{
 
 },[sendRequest, playerId, setFormData]);
 
+
+const lengthOfPlayers = (loadedPlayers ? loadedPlayers.filter(p => p.team.includes(formState.inputs.team.value)).length : 0 );
+
 const playerUpdateSubmitHandler = async event => {
     event.preventDefault();
 
@@ -163,6 +179,7 @@ const playerUpdateSubmitHandler = async event => {
          prename: formState.inputs.prename.value,
          age: formState.inputs.age.value,
          team: formState.inputs.team.value,
+         index: formState.inputs.index.value,
          number: formState.inputs.number.value,
          position: formState.inputs.position.value
         }),
@@ -214,6 +231,10 @@ const uploadHandler = () => {
             position:{
                 value:loadedPlayer.position,
                 isValid:true
+            },
+            index:{
+              value:loadedPlayer.index,
+              isValid:true
             },
             number:{
                 value:loadedPlayer.number,
@@ -337,11 +358,6 @@ const uploadHandler = () => {
                 errorText="Please enter a valid age."
                 onInput={inputHandler}
             />
-          
-         
-
-
-
               <Input 
                 element="input"
                 id="number"
@@ -353,6 +369,16 @@ const uploadHandler = () => {
                 errorText="Please enter a number" 
                 onInput={inputHandler}
             />
+             <FormSlider
+            id="index"
+            onInput={inputHandler}
+            min={0}
+            initialValue={loadedPlayer.index}
+            max={lengthOfPlayers}
+            step={1}
+            label="Index"
+            validators={[VALIDATOR_MIN(0)]}
+          />
             <datalist id="positions">
  {positions.map(createOptions)}
 </datalist>

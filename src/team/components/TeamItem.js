@@ -116,8 +116,8 @@ withNumbers.push(...noNumbers);
 
 <p className="team-content__paragraph" >{props.content}</p>
 <div className="social-icons-container">
-    <a href={props.insta} target="_blank" rel="noreferrer"><Icon className="djk-icon" icon="akar-icons:instagram-fill" height="40px" color="#006400" /></a>
-    <a href={props.fb} target="_blank" rel="noreferrer"><Icon className="djk-icon" icon="akar-icons:facebook-fill" height="40px" color="#006400" /></a>
+    {props.insta && <a href={props.insta} target="_blank" rel="noreferrer"><Icon className="djk-icon" icon="akar-icons:instagram-fill" height="40px" color="#006400" /></a>}
+    {props.fb && <a href={props.fb} target="_blank" rel="noreferrer"><Icon className="djk-icon" icon="akar-icons:facebook-fill" height="40px" color="#006400" /></a>}
 </div>
        </div>
        </div>

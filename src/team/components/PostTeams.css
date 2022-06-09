@@ -1,0 +1,20 @@
+.post-teams{
+    padding: 0 1rem;
+}
+.post-teams-container{
+    display:flex;
+    padding: 0 1rem;
+    flex-direction:column;
+    
+}
+.post-teams-container div{
+
+}
+
+@media (min-width: 768px) {
+    .post-teams-container{
+        flex-direction:row;
+        flex-wrap: wrap;
+    }
+   
+}

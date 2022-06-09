@@ -4,8 +4,7 @@
 .lead-slider__card{
     display:flex;
     flex-direction: column;
-    height: 375px;
-    justify-content:space-between;
+    height: 300px;
 }
 .lead-slider__card-title{
     margin:0;
@@ -14,17 +13,17 @@
 }
 .lead-slider__card-info{
     margin:0;
-    flex:1;
+  flex:1;
 }
 .lead-slider__card-content{
     margin:0;
-    flex:2;
+    flex:1;
 }
 .lead-slider__card-content-container{
     padding:0 1rem;
-    flex:4;
+    flex:1;
     margin-top:0.5rem;
     display:flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
 }

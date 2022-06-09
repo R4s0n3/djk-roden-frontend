@@ -11,6 +11,17 @@ import './App.css';
 
 import { AuthContext } from './shared/context/auth-context';
 import {useAuth} from './shared/hooks/auth-hook';
+import {
+  KBarProvider,
+  KBarPortal,
+  KBarPositioner,
+  KBarAnimator,
+  KBarSearch,
+  useMatches,
+  useKBar,
+  KBarResults,
+  NO_GROUP
+} from "kbar";
 
 import Auth from './user/pages/Auth';
 import Button from './shared/components/FormElements/Button';
@@ -60,12 +71,12 @@ import History from './user/pages/History';
 import Sponsors from './sponsor/pages/Sponsors';
 import Kontakt from './user/pages/Kontakt';
 import Impressum from './user/pages/Impressum';
+import actions from './shared/util/actions';
 
 function App() {
   const { token, reset, login, logout, userId } = useAuth();
   const [isCookies, setIsCookies] = useState();
 
- 
   const acceptCookies = () => {
     const cookies = new Cookies();
     cookies.set('DJK-Roden', {accept: true}, { path: '/' });
@@ -217,7 +228,18 @@ useEffect(()=>{
   <BrowserRouter>
   <MainNavigation />
   <AdminBar />
- <main>{routes}</main>
+  <KBarProvider className="DJK-Bar" actions={actions}>
+          <KBarPortal> 
+            <KBarPositioner> 
+              <KBarAnimator> 
+                <KBarSearch /> 
+                <RenderResults />;
+              </KBarAnimator>
+            </KBarPositioner>
+          </KBarPortal>
+          <main>{routes}</main>
+        </KBarProvider>
+ 
    <Footer />
 
  
@@ -227,4 +249,26 @@ useEffect(()=>{
   );
 }
 
+function RenderResults() {
+  const { results } = useMatches();
+
+  return (
+    <KBarResults
+      items={results}
+      onRender={({ item, active }) =>
+        typeof item === "string" ? (
+          <div>{item}</div>
+        ) : (
+          <div
+            style={{
+              background: active ? "#eee" : "transparent",
+            }}
+          >
+            {item.name}
+          </div>
+        )
+      }
+    />
+  );
+}
 export default App;

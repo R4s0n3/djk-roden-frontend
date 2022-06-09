@@ -2,6 +2,7 @@ import React,{useEffect, useState, useContext}from 'react';
 import {useNavigate} from "react-router-dom";
 import TeamsList from '../components/TeamsList';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import Card from '../../shared/components/UIElements/Card';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
@@ -25,6 +26,11 @@ const NewTeam = () => {
     const [loadedTeams, setLoadedTeams] = useState();
     const [createMode, setCreateMode] = useState(false); 
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
+    const [isLink, setIsLink] = useState(false);
+    const [isFace, setIsFace] = useState(false);
+    const [isInsta, setIsInsta] = useState(false);
+    const [isLeague, setIsLeague] = useState(false);
+
 
     const [formState, inputHandler] = useForm({
         name:{
@@ -49,7 +55,7 @@ const NewTeam = () => {
         },
         league:{
             value:"",
-            isValid:false
+            isValid:true
         },
         insta:{
             value:"",
@@ -149,9 +155,13 @@ const NewTeam = () => {
                     <Button inverse={createMode} onClick={handleClick}>{createMode ? "Abbruch" : "Neues Team"}</Button>
                     </div>
                    {createMode && <div>
+            <h2>Neue Mannschaft</h2>
+            <p>Erstelle Mannschaften</p>
+            
+            <div>
+                   <Card className="form-card">
                     <form autoComplete="off" className="team-form" onSubmit={createTeamHandler}>
-                    <h2>Teamdaten</h2>
-                    <p>Bitte gebe unten die Teamdaten ein.</p>
+                   
                     <ImageUpload  center id="image" onInput={inputHandler} errorText="Please provide an image" />
                     <Input 
                         element="input"
@@ -192,7 +202,14 @@ const NewTeam = () => {
                         errorText="Please enter a description. (max. 1000 Zeichen)"
                         onInput={inputHandler}
                     />
-                    <Input 
+                    <div className="form-buttons">
+            <Button inverse={isLeague} type="button" onClick={()=>{setIsLeague(prev => !prev)}} size="small">Liga</Button>
+            <Button inverse={isLink} type="button" onClick={()=>{setIsLink(prev => !prev)}} size="small">Link</Button>
+            <Button inverse={isInsta} type="button" onClick={()=>{setIsInsta(prev => !prev)}} size="small">Insta</Button>
+            <Button inverse={isFace} type="button" onClick={()=>{setIsFace(prev => !prev)}} size="small">FB</Button>
+            </div>
+
+                    {isLeague && <Input 
                         element="input"
                         id="league"
                         type="text"
@@ -200,8 +217,9 @@ const NewTeam = () => {
                         validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
                         errorText="Please enter a League"
                         onInput={inputHandler}
-                    />
-                    <Input 
+                        initialValid={true}
+                    />}
+                    {isLink && <Input 
                         element="input"
                         id="link"
                         type="url"
@@ -209,8 +227,10 @@ const NewTeam = () => {
                         validators={[]}
                         errorText="Please enter a link"
                         onInput={inputHandler}
-                    />
-                    <Input 
+                        initialValid={true}
+                    />}
+
+                    {isInsta && <Input 
                         element="input"
                         id="insta"
                         type="url"
@@ -218,8 +238,9 @@ const NewTeam = () => {
                         validators={[]}
                         errorText="Please enter an instagram link"
                         onInput={inputHandler}
-                    />
-                    <Input 
+                        initialValid={true}
+                    />}
+                    {isFace && <Input 
                         element="input"
                         id="fb"
                         type="url"
@@ -227,7 +248,8 @@ const NewTeam = () => {
                         validators={[]}
                         errorText="Please enter a facebook link."
                         onInput={inputHandler}
-                    />
+                        initialValid={true}
+                    />}
          <Button type="submit" disabled={!formState.isValid}>
           Team erstellen
         </Button>
@@ -235,7 +257,7 @@ const NewTeam = () => {
           Abbruch
         </Button>
                 </form> 
-                    </div>}
+                    </Card></div></div>}
             </div>
         </div>
     </React.Fragment>

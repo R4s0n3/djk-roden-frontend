@@ -14,7 +14,6 @@ const Verein = () => {
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedLeads, setLoadedLeads] = React.useState();
     const [isData, setIsData] = React.useState(false);
-
     
     React.useEffect(()=>{
         const fetchData = async () => {
@@ -22,7 +21,8 @@ const Verein = () => {
             try{
     
                 const responseLeads = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/leads');
-                const sortedLeads = responseLeads.leads.sort((a, b) => a.position.localeCompare(b.position));
+                const sortedLeads = responseLeads.leads.sort((a, b) => a.index - b.index);
+                
                 setLoadedLeads(sortedLeads);
                 setIsData(true);
                 

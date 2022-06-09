@@ -6,8 +6,9 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import Checkbox from '../../shared/components/FormElements/Checkbox';
-import GalleryUpload from '../../shared/components/FormElements/GalleryUpload';
+
 import Select from '../../shared/components/FormElements/Select';
+import MultipleSelect from '../../shared/components/FormElements/MultipleSelect';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 
 import {
@@ -21,6 +22,7 @@ import Button from '../../shared/components/FormElements/Button';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import {AuthContext} from '../../shared/context/auth-context';
 import './NewPost.css';
+import FormSlider from '../../shared/components/FormElements/FormSlider';
 
 const NewPost = () => {
   const auth = useContext(AuthContext);
@@ -53,9 +55,14 @@ const NewPost = () => {
       value: false,
       isValid: true,
     },
+   
     image: { 
       value: null,
       isValid: false,
+    },
+    teams:{
+      value: [],
+      isValid: true
     }
   }, false);
 
@@ -63,9 +70,10 @@ const NewPost = () => {
     const [loadedCategories, setLoadedCategories] = useState(); 
     const [loadedTeams, setLoadedTeams] = useState(); 
     const [createMode, setCreateMode] = useState(false);
-    const [galleryMode, setGalleryMode] = useState(false);
     const [isReport, setIsReport] = useState(false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
+    const [isLink, setIsLink] = useState(false);
+    const [isTeams, setIsTeams] = useState(false);
 
    
     let navigate = useNavigate();
@@ -122,10 +130,15 @@ const NewPost = () => {
 
             });
         }
+        const teams = formState.inputs.teams.value        
         const formData = new FormData();
         formData.append('title', formState.inputs.title.value);
         formData.append('content', formState.inputs.content.value);
         formData.append('date', formState.inputs.date.value);
+        if(teams.length > 0){
+          for (let i = 0; i < teams.length; i++) {
+            formData.append('teams', teams[i]);
+          }}
         formData.append('link', formState.inputs.link.value);
         formData.append('image', formState.inputs.image.value);
         formData.append('category', formState.inputs.category.value);
@@ -217,87 +230,15 @@ const NewPost = () => {
             value:formState.inputs.image.value,
             isValid: formState.inputs.image.isValid
           },
+          teams:{
+            value:formState.inputs.teams.value,
+            isValid: formState.inputs.teams.isValid
+          }
         },false);
       }
 
     }
 
-
-
-    const handleGallery = () => {
-      setGalleryMode(true);
-      setFormData({
-        post:{
-          value: "",
-          isValid: false
-        },
-        gallery:{
-          value: null,
-          isValid: false
-        }
-      },false);
-    }
-
-    const cancelGallery = () => {
-      setGalleryMode(false);
-      setFormData({
-        title:{
-          value:formState.inputs.title.value,
-          isValid: formState.inputs.title.isValid
-        },
-        content:{
-          value:formState.inputs.content.value,
-          isValid: formState.inputs.content.isValid
-        },
-        link:{
-          value:formState.inputs.link.value,
-          isValid: formState.inputs.link.isValid
-        },
-        date:{
-          value:formState.inputs.date.value,
-          isValid: formState.inputs.date.isValid
-        },
-        category:{
-          value:formState.inputs.category.value,
-          isValid: formState.inputs.category.isValid
-        },
-        highlighted:{
-          value:formState.inputs.highlighted.value,
-          isValid: formState.inputs.highlighted.isValid
-        },
-        published:{
-          value:formState.inputs.published.value,
-          isValid: formState.inputs.published.isValid
-        },
-        image:{
-          value:formState.inputs.image.value,
-          isValid: formState.inputs.image.isValid
-        },
-      },false);
-    }
-
-    const createGalleryHandler = async event => {
-      event.preventDefault();
-      try{
-        const postToPush = formState.inputs.post.value;
-        const formData = new FormData();
-        for (const file of formState.inputs.gallery.value) {
-          formData.append('gallery', file);
-       }
-      
-
-        console.log("form: ", formData);
-        await sendRequest(process.env.REACT_APP_BACKEND_URL + `/posts/gallery/${postToPush}`,
-        'PATCH',
-        formData,{
-          Authorization: 'Bearer ' + auth.token
-        });
-        navigate('/dashboard');
-      }catch( err){
-        console.log(err)
-      }
-
-    }
     return( <React.Fragment>
         <ErrorModal error={error} onClear={clearError} />
   
@@ -311,8 +252,7 @@ const NewPost = () => {
         <div>
         <h2>Hi! New Posts!</h2>
         {!isLoading && loadedPosts && loadedCategories && <PostList items={loadedPosts} onDeletePost={deletedPostHandler} />}
-        {!createMode && <Button disabled={galleryMode} onClick={handleClick}>Neuer Post</Button>}
-        {!galleryMode && <Button disabled={createMode} onClick={handleGallery}>Neue Galerie</Button>}
+        {!createMode && <Button onClick={handleClick}>Neuer Post</Button>}
         </div>
         <div>
           {createMode && <form onChange={formChangeChecker} autoComplete="off" className="post-form" onSubmit={createPostHandler}>
@@ -338,7 +278,11 @@ const NewPost = () => {
             errorText="Please enter some valid content."
             onInput={inputHandler}  
           />
-           <Input 
+           <div className="form-buttons">
+            <Button inverse={isLink} type="button" onClick={()=>{setIsLink(prev => !prev)}} size="small">Link</Button>
+            <Button inverse={isTeams} type="button" onClick={()=>{setIsTeams(prev => !prev)}} size="small">Teams</Button>
+            </div>
+          {isLink && <Input 
           element="input"
           id="link"
           type="text"
@@ -346,7 +290,19 @@ const NewPost = () => {
           validators={[]}
           errorText="Please enter a link."
           onInput={inputHandler}
-          />
+          initialValid={true}
+          />}
+          {isTeams && <MultipleSelect 
+                id="teams"
+                label="Team"
+                options={loadedTeams}
+                optionsName="team-option"
+                validators={[]}
+                errorText="Please enter a team."
+                initialValue={[]}
+                onInput={inputHandler}
+                initialValid={true}
+            />}
           </div>
           <div className="halfwidth">
           <Input
@@ -367,7 +323,6 @@ const NewPost = () => {
           validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
           onInput={inputHandler}
           />
-          
           </div>
           {isReport && <div className="report-form">
           <h2>Spielbericht</h2>
@@ -487,25 +442,7 @@ const NewPost = () => {
           </div>
 
           </form>}
-          {galleryMode && <form className="gallery-form" onSubmit={createGalleryHandler} >
-            <h2>Neue Galerie erstellen</h2>
-            <GalleryUpload
-              id="gallery"
-              onInput={inputHandler}
-              errorText="Please enter valid gallery images"
-
-            />
-            <Select 
-                id="post"
-                label="Post für Galerie"
-                errorText="Please enter a valid post."
-                options={loadedPosts}
-                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
-                onInput={inputHandler}
-            />
-            <Button type="button" onClick={cancelGallery}>Verwerfen</Button>
-            <Button type="submit" disabled={!formState.isValid}>Galerie erstellen</Button>
-            </form>} 
+         
         </div>
 
         </div>

@@ -54,6 +54,7 @@ const Post = () => {
                     author={data.creator.name}
                     date={data.date}
                     link={data.link}
+                    teams={data.teams}
                     category={data.category.title}
                     content={data.content}
                     reportId={data.report.id}
@@ -82,6 +83,7 @@ const Post = () => {
                     category={data.category.title}
                     content={data.content}
                     gallery={data.gallery}
+                    teams={data.teams}
                 
                 />
             )

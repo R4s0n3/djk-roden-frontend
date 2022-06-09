@@ -31,7 +31,8 @@ const Team = () => {
                 setLoadedPosts(responsePosts.posts.filter(p => p.category.title === "Spielbericht").reverse());
 
                 const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
-                const teamSponsors = responseSponsors.sponsors.filter(s => s.team === teamId);
+                
+                const teamSponsors = responseSponsors.sponsors.filter(s => s.teams.includes(teamId));
                 setLoadedSponsors(teamSponsors);
                 setLoadedData(true);
                 console.log(teamSponsors)
@@ -70,8 +71,8 @@ const Team = () => {
             return thePosts;
         }
 
-        
-       
+    
+    
     return(<React.Fragment>
         <ErrorModal error={error} onClear={clearError} />
         

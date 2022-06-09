@@ -29,7 +29,8 @@ const PlayerListItem = props => {
     const confirmDeleteHandler = async () => {
         setShowConfirmModal(false);
         try {
-          sendRequest(process.env.REACT_APP_BACKEND_URL + `/players/${props.id}`, 'DELETE',null, {Authorization: 'Bearer ' + auth.token});
+          sendRequest(process.env.REACT_APP_BACKEND_URL + `/players/${props.id}`, 'DELETE', null, {Authorization: 'Bearer ' + auth.token});
+          props.onDelete(props.id);
         } catch (error) {
           
         }

@@ -12,7 +12,7 @@ const LeadSliderItem = props => {
         filter: "contrast(1.25)",
         backgroundPosition:"center center",
         borderRadius:"8px 8px 0 0",
-        flex:"4",
+        height:"170px"
         
         }
 
@@ -24,15 +24,12 @@ const LeadSliderItem = props => {
         <div style={CardBGstyle}></div>
            <div className="lead-slider__card-content-container">
                <h3 className="lead-slider__card-title">{shortPre}. {props.name}</h3>
-               <p className="lead-slider__card-info"><b>{props.category}</b></p>
-           
-
                <p className="lead-slider__card-content">{props.position}</p>
 
            </div>
            <div className="social-icons-container post-grid__card-footer">
-    <a href={`tel:${props.tel}`}><Icon className="djk-icon" icon="carbon:phone-filled" height="20px" color="#006400" /></a>
-    <a href={`mailto:${props.email}`}><Icon className="djk-icon" icon="clarity:email-solid" height="20px" color="#006400" /></a>
+   {props.tel && <a href={`tel:${props.tel}`}><Icon className="djk-icon" icon="carbon:phone-filled" height="20px" color="#006400" /></a>}
+    {props.email && <a href={`mailto:${props.email}`}><Icon className="djk-icon" icon="clarity:email-solid" height="20px" color="#006400" /></a>}
 </div>
         </Card>
         </div>

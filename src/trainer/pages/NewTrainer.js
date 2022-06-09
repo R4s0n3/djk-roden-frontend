@@ -2,6 +2,7 @@ import React,{useEffect, useState, useContext}from 'react';
 import TrainersList from '../components/TrainersList';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import Card from '../../shared/components/UIElements/Card';
 import Input from '../../shared/components/FormElements/Input';
 import Select from '../../shared/components/FormElements/Select';
 
@@ -32,7 +33,7 @@ const NewTrainer = props => {
       },
       email:{
           value:"",
-          isValid:false
+          isValid:true
       },
       team:{
           value:"",
@@ -42,6 +43,8 @@ const NewTrainer = props => {
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedTrainers, setLoadedTrainers] = useState();
     const [loadedTeams, setLoadedTeams] = useState();
+    const [isMail, setIsMail] = useState(false);
+    const [isTel, setIsTel] = useState(false);
 
     const createTrainerHandler = async event =>{
         console.log(formState);
@@ -116,9 +119,10 @@ const NewTrainer = props => {
         {createMode &&  <div>
             <h2>Trainerliste</h2>
             <p>Erstelle Trainer</p>
-            <div className="halfwidth">
+            
             <div>
-            <form autoComplete="off" className="trainer-form" onSubmit={createTrainerHandler}>
+              <Card className="form-card">
+              <form autoComplete="off" className="trainer-form" onSubmit={createTrainerHandler}>
             <Input 
                 element="input"
                 id="name"
@@ -137,16 +141,6 @@ const NewTrainer = props => {
                 errorText="Please enter a prename."
                 onInput={inputHandler}
             />
-            <Input 
-                element="input"
-                id="tel"
-                type="number"
-                label="Telefon"
-                validators={[]}
-                errorText="Please enter a valid age."
-                onInput={inputHandler}
-                initialValid={true}
-            />
             <Select 
                 id="team"
                 label="Mannschaft"
@@ -155,19 +149,35 @@ const NewTrainer = props => {
                 errorText="Please enter a team."
                 onInput={inputHandler}
             />
-            <Input 
+             <div className="form-buttons">
+            <Button inverse={isTel} type="button" onClick={()=>{setIsTel(prev => !prev)}} size="small">Telefon</Button>
+            <Button inverse={isMail} type="button" onClick={()=>{setIsMail(prev => !prev)}} size="small">Mail</Button>
+           
+            </div>
+            {isTel && <Input 
+                element="input"
+                id="tel"
+                type="number"
+                label="Telefon"
+                validators={[]}
+                errorText="Please enter a valid age."
+                onInput={inputHandler}
+                initialValid={true}
+            />}
+            {isMail && <Input 
                 element="input"
                 id="email"
                 type="text"
-                
+                initialValid={true}
                 label="E-Mail"
-                validators={[VALIDATOR_REQUIRE()]}
+                validators={[]}
                 errorText="Please enter a valid E-Mail."
                 onInput={inputHandler}
-            />
-            <Button type="submit">Trainer erstellen</Button>
+            />}
+            <Button disabled={!formState.isValid} type="submit">Trainer erstellen</Button>
             </form>
-            </div>
+              </Card>
+        
             </div>
             </div>}
      </div>
