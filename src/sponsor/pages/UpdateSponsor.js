@@ -70,6 +70,8 @@ useEffect(()=>{
 
         try{
             const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/sponsors/${sponsorId}`);
+            const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
+            setLoadedSponsors(responseSponsors.sponsors);
             setLoadedSponsor(responseData.sponsor);
             setFormData({
                 name:{
@@ -118,6 +120,7 @@ useEffect(()=>{
     fetchTeams();
 
 },[sendRequest, sponsorId, setFormData]);
+const lengthOfSponsors = (loadedSponsors ? loadedSponsors.filter(s => s.category.id === formState.inputs.category.value).length : 0 );
 
 const sponsorUpdateSubmitHandler = async event => {
     event.preventDefault();
@@ -191,7 +194,6 @@ const uploadHandler = () => {
         setIsUpload(false);
     }
 
-    const lengthOfSponsors = (loadedSponsors ? loadedSponsors.filter(s => s.category.id.includes(formState.inputs.category.value)).length : 0 );
 
 
     if(!isUpload){
