@@ -32,7 +32,6 @@ const PostSliderTopItem = (props) => {
 
   const formatDate = d => {
     let oldDate = d;
-    const year = oldDate.slice(2,4);
     const month = oldDate.slice(5,7);
     const day = oldDate.slice(8,10)
     return(
@@ -40,7 +39,6 @@ const PostSliderTopItem = (props) => {
     )
 
 }
-  const shortContent = props.content.slice(0, 85);
   const imgStyles={
     backgroundImage: "url(" + process.env.REACT_APP_AWS_URL +  `/${props.image})`,
     backgroundSize: "cover",

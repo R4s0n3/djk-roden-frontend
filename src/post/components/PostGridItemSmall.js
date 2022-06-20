@@ -22,7 +22,6 @@ const PostGridItemSmall = (props) => {
 
     }
     const DateString = props.date.slice(0, 11);
-    const shortContent = props.content.slice(0, 50);
 
 
     return(

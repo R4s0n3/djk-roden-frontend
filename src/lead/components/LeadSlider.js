@@ -8,7 +8,6 @@ import Button from '../../shared/components/FormElements/Button';
 const LeadSlider = props => {
 const [isMobile, setIsMobile] = useState();
 const size = useWindowSize(true);
-const [imgHeight, setImgHeight] = useState(300);
 const [count, setCount] = useState(3);
 
 

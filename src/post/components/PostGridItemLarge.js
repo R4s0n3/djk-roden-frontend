@@ -1,8 +1,7 @@
-import React, { useEffect, useState} from 'react';
+import React from 'react';
 import Card from '../../shared/components/UIElements/Card';
 import './PostGridItemLarge.css';
 import {Link, useNavigate}from 'react-router-dom';
-import {useWindowSize} from '../../shared/hooks/size-hook';
 
 const PostGridItemLarge = (props) => {
     const navigate = useNavigate();

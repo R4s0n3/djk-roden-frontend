@@ -10,23 +10,18 @@ import foerderImg from '../../shared/assets/PNG/Foerder.jpg';
 import abtImg from '../../shared/assets/PNG/Abt.jpg';
 import {Link} from 'react-router-dom';
 import Button from '../../shared/components/FormElements/Button';
-import SponsorSlider from '../../sponsor/components/SponsorSlider';
 
 const Verein = () => {
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedLeads, setLoadedLeads] = React.useState();
-    const [loadedSponsors, setLoadedSponsors] = React.useState();
     const [isData, setIsData] = React.useState(false);
     
     React.useEffect(()=>{
         const fetchData = async () => {
       
             try{
-                const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors')
                 const responseLeads = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/leads');
                 const sortedLeads = responseLeads.leads.sort((a, b) => a.index - b.index);
-                const sortedSponsors = responseSponsors.sponsors.filter(s => s.category.title === 'Sponsoren Verein');
-                setLoadedSponsors(sortedSponsors);
                 setLoadedLeads(sortedLeads);
                 setIsData(true);
                 
