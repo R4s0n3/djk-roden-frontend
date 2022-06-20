@@ -1,45 +1,72 @@
 .post-grid__card-item{
-    padding:0.25rem;
-    margin:0.5% 0;
+    margin:0.75rem 0;
+    min-width:20%;
     flex:1;
 }
 
 h3.post-grid__card-title{
-    color:#006400;
-    font-size: 1.5rem;
-    width:90%;
     margin:0;
+    color:#006400;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+  
+}
+.post-grid__card-date{
+    position:absolute;
+    bottom:0.5rem;
+    border-radius: 4px;
+    right:0.5rem;
+    color:#fff;
+    font-size: 0.8em;
+    background-color: #006400;
+    padding:0 1rem;
+    z-index: 10;
 }
 .post-grid__card{
-    height: 375px;
+    position: relative;
     display:flex;
     flex-direction: column;
+    width:100%;
+    height:100%;
     justify-content:space-between;
+    cursor: pointer;
 }
 .post-grid__card-info{
     font-size: 0.8rem;
+    
     width:90%;
-    margin:0;
+    margin:0.5rem 0;
 }
-
+.post-grid__card-img:hover{
+    
+    
+}
 .post-grid__card-content{
+    display:block;
     font-size: 1.1rem;
     width:90%;
+    height:50px;
     display:flex;
     margin:0;
+    white-space: wrap;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .post-grid__card-content-container{
     padding:0 1rem;
-    flex:4;
-    margin-top:0.5rem;
+    margin:1rem 0;
     display:flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .post-grid__card-footer{
     width:90%;
-    padding:0 1rem;
+    padding:0.5rem 1rem;
     flex:1;
     align-items:center;
     display:flex;
@@ -60,3 +87,11 @@ h3.post-grid__card-title{
 }
 
 
+@media (min-width: 768px) {
+    .post-grid__card{
+        display:flex;
+        margin:auto;
+        width:95%;
+        flex-direction: column;
+    }
+}

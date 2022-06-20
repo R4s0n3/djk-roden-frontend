@@ -2,66 +2,84 @@
   width:100%;
   max-width:100vw;
   display:flex;
-  height:60vh;
   flex-direction: column-reverse;
-  }
-  
-  .slider-item__img-container{
-    flex:3;
-    
-  }
-
-  .slider-item__img-container > img {
-    height:100%;
-    object-fit: cover;
   }
 
 .slider-item__content-container {
-    flex: 2;
+    flex:2;
     background-color: #fff;
     position:relative;
-  }
-  .slider-item__content-container i{
-    display:block;
-    position:absolute;
-    font-style: none;
-    bottom:1rem;
-    right:1rem;
+    display: flex;
   }
 .slider-item__inner{
+  position:relative;
+  margin:auto;
+  width:90%;
   padding:1rem;
-  display:flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.slider-item__inner > * {
-  margin:0.1rem 0;
+  border-radius: 8px;
 }
 
+.slider-item__inner h2{
+  margin-top:3rem;
+  font-size: 2rem;
+  color:#006400;
+ 
+}
 .slick-arrow{
   background-color:#006400;
   display: none !important;;
 }
+.silder-item__inner-img{
+  width:25%;
+  margin:3rem 0;
+
+}
+.slider-item__content-container i{
+  display:block;
+  margin-right:auto;
+  font-size: 2rem;
+  left:1rem;
+  top:1rem;
+display:block;
+text-align: center;
+  font-style: normal;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border:2px solid #006400;
+  color:#006400;
+  border-radius: 4px;
+}
   @media (min-width: 768px) {
+    .slider-item__img-container{
+      flex:3;
+    
+    }
     .slider-item{
       flex-direction: row;
+      margin-top: 0;
+    
+    }
+    .slider-item__inner h2{
+      font-size: 3rem;
+      color:#006400;
+      
+     
     }
    .slider-item__inner{
-     padding:6rem;
+    position:relative;
+  margin:auto;
+  width:80%;
+  padding:2rem;
+  border-radius: 8px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
    }
-   .slider-item__content-container i{
-    display:block;
-    position:absolute;
-    font-style: normal;
-    top:3rem;
-    right:6rem;
-  }
+
   .slider-item__content-container p{
     font-size: 1.2rem;
-    padding:0.5rem 0 0.75rem;
+    
     
   }
-  .slider-item__content-container h2{
-    font-size: 2rem;
-  }
+
 }

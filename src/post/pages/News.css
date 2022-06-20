@@ -13,9 +13,26 @@
     margin:4rem auto;
     position:relative;
 }
+.news-info__container{
+    display:flex;
+    flex-direction: column;
+}
+.news-info__container div{
+    flex:1;
+}
+.news-info__container div img{
+    display: block;
+    margin:4rem auto;
+    width: 50%;
+    animation: App-logo-spin infinite 20s linear;
+
+}
+
 
 @media(min-width: 768px){
-  
+    .news-info__container{
+        flex-direction: row;
+    }
     .news-page__container i.bg{
         display: none;
         position:absolute;
@@ -30,3 +47,13 @@
         background-color: #006400;
     }
 }
+
+
+@keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

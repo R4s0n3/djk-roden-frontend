@@ -7,12 +7,12 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Input from '../../shared/components/FormElements/Input';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import Select from '../../shared/components/FormElements/Select';
-
-
+import FormSlider from '../../shared/components/FormElements/FormSlider';
 import {
     VALIDATOR_MINLENGTH,
     VALIDATOR_MAXLENGTH,
-    VALIDATOR_REQUIRE
+    VALIDATOR_REQUIRE,
+    VALIDATOR_MIN
   } from "../../shared/util/validators";
 import { useForm} from "../../shared/hooks/form-hook";
 import Button from '../../shared/components/FormElements/Button';
@@ -30,6 +30,7 @@ const NewTeam = () => {
     const [isFace, setIsFace] = useState(false);
     const [isInsta, setIsInsta] = useState(false);
     const [isLeague, setIsLeague] = useState(false);
+    const [isIndex, setIsIndex] = useState(false);
 
 
     const [formState, inputHandler] = useForm({
@@ -39,6 +40,10 @@ const NewTeam = () => {
         },
         status:{
             value:"",
+            isValid:false
+        },
+        index:{
+            value:0,
             isValid:false
         },
         image:{
@@ -116,6 +121,7 @@ const NewTeam = () => {
             formData.append('image', formState.inputs.image.value);
             formData.append('desc', formState.inputs.desc.value);
             formData.append('insta', formState.inputs.insta.value);
+            formData.append('index', formState.inputs.index.value);
             formData.append('league',formState.inputs.league.value);
             formData.append('link',formState.inputs.link.value);
             formData.append('fb', formState.inputs.fb.value);
@@ -134,6 +140,7 @@ const NewTeam = () => {
         }
 
 
+        const lengthOfTeams = (loadedTeams ? loadedTeams.filter(t => t.status === formState.inputs.status.value).length : 0 );
 
   
 
@@ -202,11 +209,13 @@ const NewTeam = () => {
                         errorText="Please enter a description. (max. 1000 Zeichen)"
                         onInput={inputHandler}
                     />
+                     
                     <div className="form-buttons">
             <Button inverse={isLeague} type="button" onClick={()=>{setIsLeague(prev => !prev)}} size="small">Liga</Button>
             <Button inverse={isLink} type="button" onClick={()=>{setIsLink(prev => !prev)}} size="small">Link</Button>
             <Button inverse={isInsta} type="button" onClick={()=>{setIsInsta(prev => !prev)}} size="small">Insta</Button>
             <Button inverse={isFace} type="button" onClick={()=>{setIsFace(prev => !prev)}} size="small">FB</Button>
+            <Button inverse={isIndex} type="button" onClick={()=>{setIsIndex(prev =>!prev)}} size="small">Index</Button> 
             </div>
 
                     {isLeague && <Input 
@@ -250,6 +259,15 @@ const NewTeam = () => {
                         onInput={inputHandler}
                         initialValid={true}
                     />}
+                    {isIndex && <FormSlider
+                                    id="index"
+                                    onInput={inputHandler}
+                                    min={0}
+                                    max={lengthOfTeams}
+                                    step={1}
+                                    label="Index"
+                                    validators={[VALIDATOR_MIN(0)]}
+                                    />}
          <Button type="submit" disabled={!formState.isValid}>
           Team erstellen
         </Button>

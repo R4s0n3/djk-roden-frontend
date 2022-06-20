@@ -1,62 +1,45 @@
+import React,{useState, useEffect} from 'react';
 import './LeadSlider.css';
 import Slider from "react-slick";
 import LeadSliderItem from "./LeadSliderItem";
+import {useWindowSize} from '../../shared/hooks/size-hook';
+import Button from '../../shared/components/FormElements/Button';
 
 const LeadSlider = props => {
+const [isMobile, setIsMobile] = useState();
+const size = useWindowSize(true);
+const [imgHeight, setImgHeight] = useState(300);
+const [count, setCount] = useState(3);
 
-  const calcSlides = (i) => {
-    const items = i.length;
-    if(items < 4){
-      return items
-    }
-    return 4
+
+const settings = {
+   dots: true,
+   prevArrow: false,
+ nextArrow: false,
+   infinite: true,
+ slidesToShow:4,
+   slidesToScroll: 1,
+   autoplay: true,
+   speed: 750,
+ autoplaySpeed: props.speed,
+ cssEase: "ease-in-out",
+ 
 }
 
-const calcMobileSlides = (i) => {
-  const items = i.length;
-  if(items < 1){
-    return items
+useEffect(() => {
+
+const setMobileMode = () => {
+  if(size.width < 768){
+    console.log("wiiidth: ", size.width )
+    setIsMobile(true)
+  }else{
+    setIsMobile(false)
   }
-
-  return 1
 }
 
-        const settings = {
-            dots: true,
-            prevArrow: false,
-          nextArrow: false,
-            infinite: true,
-            slidesToShow: calcSlides(props.items),
-            slidesToScroll: 1,
-            autoplay: true,
-            speed: 750,
-          autoplaySpeed: props.speed,
-          cssEase: "ease-in-out",
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: calcSlides(props.items),
-                slidesToScroll: 1,
-              }
-            },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: calcMobileSlides(props.items),
-                slidesToScroll: 1,
-                initialSlide: 1
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: calcMobileSlides(props.items),
-                slidesToScroll: 1
-              }
-            }
-          ]
-        }
+setMobileMode();
+},[size, isMobile])
+       
 
         const createSlides = (data, index) => {
             return(
@@ -70,15 +53,23 @@ const calcMobileSlides = (i) => {
                     tel={data.tel}
                     email={data.email}
                     position={data.position}
-
+                    
                 />
             )   
         }
+
+        const handleMore = () => {
+            setCount(p => p + 3);
+        }
     return(
     <div className="lead-slider">
-    <Slider {...settings}>
+    {isMobile && props.items.slice(0,count).map(createSlides)}
+    {isMobile && <div>
+      <Button disabled={count > props.items.length} onClick={handleMore}>Mehr</Button>
+      </div>}
+    {!isMobile && <Slider {...settings}>
         {props.items.map(createSlides)}
-    </Slider>
+    </Slider>}
     </div>
     )
 }

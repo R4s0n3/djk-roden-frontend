@@ -22,7 +22,7 @@ const DateCalendar = (props) => {
         fetchDates();
     },[sendRequest])
     const gimmeChange = event => {
-       setValue(new Date(new Date(event).toLocaleDateString()))
+       console.log(event)
 
     }
     return(<>

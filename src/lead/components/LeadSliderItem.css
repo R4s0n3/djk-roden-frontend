@@ -1,29 +1,46 @@
 .lead-slider__item{
-    padding:0.5rem;
+    margin:0.75rem 0;
 }
 .lead-slider__card{
-    display:flex;
+    position: relative;
     flex-direction: column;
-    height: 300px;
+    width:100%;
+    height:100%;
+    justify-content:space-between;
+    cursor: pointer;
 }
 .lead-slider__card-title{
-    margin:0;
-    flex:1;
+    margin:0.5rem 0;
+   
     color:#006400;
 }
+.lead-slider__card-img{
+    padding-top:100%;
+}
 .lead-slider__card-info{
-    margin:0;
-  flex:1;
+
+ 
 }
 .lead-slider__card-content{
     margin:0;
-    flex:1;
+    height:30px;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
 .lead-slider__card-content-container{
     padding:0 1rem;
-    flex:1;
+    height:60px;
     margin-top:0.5rem;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
+
+}
+@media(min-width: 768px) {
+    .lead-slider__card{
+        display:flex;
+        margin:auto;
+        width:95%;
+        flex-direction: column;
+    }
 }

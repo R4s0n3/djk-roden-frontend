@@ -1,9 +1,15 @@
+.sponsor-grid__card-item{
+    width:90%;
+
+}
 .sponsor-grid__card{
-    height:300px;
+   
     display:flex;
     flex-direction: column;
     justify-content: space-between;
-    margin:0.5rem 0;
+    width: 95%;
+    margin:0.5rem auto;
+
 }
 
 .sponsor-grid__card-content-container{
@@ -19,18 +25,24 @@
 }
 .sponsor-grid__card-title{
     color:#006400;
- 
-    margin:0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin:0.5rem 0 0rem;
 }
 
 .sponsor-grid__card-link{
+    margin:0 0 0.5rem;
     color:#13120B;
     text-decoration: none;
 }
-
-.sponsor-grid__card-link::before{
-    margin:0;
-    content:"@ ";
-    font-weight:bold;
-    font-size: 1rem;
+.sponsor-grid__card-link::before {
+    content: "→ ";
+}
+@media (min-width: 768px) {
+    .sponsor-grid__card-item{
+     flex:0 0 25%;
+     max-width: 300px;
+    
+    }
 }

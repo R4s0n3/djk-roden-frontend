@@ -7,6 +7,7 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import NewsGrid from '../../post/components/NewsGrid';
 import LiveTicker from '../../shared/components/UIElements/LiveTicker';
 import Button from '../../shared/components/FormElements/Button';
+import ball from '../../shared/assets/SVG/ball-green.svg';
 
 const News = () => {
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
@@ -79,17 +80,22 @@ const News = () => {
  </div>
 
  <LiveTicker items={loadedTickers} />
-
- <div className="news-page__container">
+<div className="news-page__container news-info__container">
+    <div className="news-page__container-img">
+        <img className="ball" src={ball} alt="rotating-ball"/>
+    </div>
+<div className="news-page__container-content">
     <h2>Spiele mit deinem lokalen Handballverein!</h2>
-    <p className="home-content__paragraph">Du suchst nach guten Gründen, dem örtlichen Handballverein beizutreten? Schau dir unsere Teams an!</p>
-    <p className="home-content__paragraph">Wir sind immer da, um dir ein kaltes Getränk anzubieten oder mit dir zu plaudern, während du dein ganz eigenes Spiel spielst.</p>
-    <p className="home-content__paragraph">Das Beste ist, dass wir nie zu weit von den neuen Spielern oder Spielerinnen entfernt sind, die sich uns anschließen möchten. Mache einen Spaziergang und entspanne dich mit unseren Teams, bevor das Spiel beginnt.</p>
-    <p className="home-content__paragraph">Die HG Saarlouis bietet einen großartigen Ort zum Spielen und wir sind sicher, dass es auch dir gefallen wird. Tritt uns noch heute bei!</p>
+    <p>Du suchst nach guten Gründen, dem örtlichen Handballverein beizutreten? Schau dir unsere Teams an!</p>
+    <p>Wir sind immer da, um dir ein kaltes Getränk anzubieten oder mit dir zu plaudern, während du dein ganz eigenes Spiel spielst.</p>
+    <p>Das Beste ist, dass wir nie zu weit von den neuen Spielern oder Spielerinnen entfernt sind, die sich uns anschließen möchten. Mache einen Spaziergang und entspanne dich mit unseren Teams, bevor das Spiel beginnt.</p>
+    <p>Die HG Saarlouis bietet einen großartigen Ort zum Spielen und wir sind sicher, dass es auch dir gefallen wird. Tritt uns noch heute bei!</p>
 <div>
     <Button inverse to="/kontakt">Beitreten</Button>
     <Button to="/mannschaften">Teams</Button>
 </div>
+</div>
+
 </div>
    <SponsorSlider items={loadedSponsors} /> 
     </div>}

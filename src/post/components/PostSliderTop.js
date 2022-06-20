@@ -14,7 +14,7 @@ const PostSliderTop = (props) => {
         title={data.title}
         content={data.content}
         date={data.date}
-        createdAt={data.createdAt}
+       
       />
     );
   };

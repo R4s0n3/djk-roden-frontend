@@ -34,22 +34,12 @@ position:relative;
     width:100%;
     max-width:600px;
 }
+.posts h2{
+    font-size: 3rem;
+}
 @media(min-width: 768px){
     .home-content__paragraph{
         width:49%;
         
     }
-    .home-page i.bg{
-        display: none;
-        position:absolute;
-        width:25%;
-        height:100%;
-        right:25%;
-        left:auto;
-        top:-8rem;
-        bottom:auto;
-        z-index: -3;
-        padding:5rem 0 8rem;
-  background-color: rgba(41, 204, 101, 0.15);
-}
 }

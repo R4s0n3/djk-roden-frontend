@@ -6,23 +6,27 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import LeadSlider from '../../lead/components/LeadSlider';
 import historyImg from '../../shared/assets/PNG/placeholder.png';
 import leadsImg from '../../shared/assets/PNG/Gesamt.jpg';
+import foerderImg from '../../shared/assets/PNG/Foerder.jpg';
+import abtImg from '../../shared/assets/PNG/Abt.jpg';
 import {Link} from 'react-router-dom';
 import Button from '../../shared/components/FormElements/Button';
-
+import SponsorSlider from '../../sponsor/components/SponsorSlider';
 
 const Verein = () => {
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedLeads, setLoadedLeads] = React.useState();
+    const [loadedSponsors, setLoadedSponsors] = React.useState();
     const [isData, setIsData] = React.useState(false);
     
     React.useEffect(()=>{
         const fetchData = async () => {
       
             try{
-    
+                const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors')
                 const responseLeads = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/leads');
                 const sortedLeads = responseLeads.leads.sort((a, b) => a.index - b.index);
-                
+                const sortedSponsors = responseSponsors.sponsors.filter(s => s.category.title === 'Sponsoren Verein');
+                setLoadedSponsors(sortedSponsors);
                 setLoadedLeads(sortedLeads);
                 setIsData(true);
                 
@@ -47,7 +51,7 @@ const Verein = () => {
     </div>
   )}
 
-   { !isLoading && isData && <div className="verein">
+ {!isLoading && isData && <div className="verein">
             <div className="verein-container__header">
             <h1>Der Verein</h1>
             <hr />
@@ -70,27 +74,38 @@ const Verein = () => {
            
            <Link reloadDocument to="/verein/history">→ Mehr erfahren</Link>
             </div>
-           { isData && <React.Fragment>
+           <React.Fragment>
            <h1>Vorstände der DJK Roden</h1>
+            <div className="verein-container__lead">
+            <h2>Vorstand Gesamtverein</h2>
             <div className="leads-img__container">
             <img src={leadsImg} alt="history" />
             </div>
-            <div className="verein-container__lead">
-            <h2>Vorstand Gesamtverein</h2>
             <LeadSlider speed={7000} items={loadedLeads.filter(p => p.category.title === "Vorstand Gesamtverein")} />
             </div>
             <div className="verein-container__lead">
             <h2>Vorstand Handballabteilung</h2>
-            <LeadSlider speed={8000}items={loadedLeads.filter(p => p.category.title === "Vorstand Handballabteilung")} />
+            <div className="leads-img__container">
+            <img src={abtImg} alt="history" />
+            </div>
+            <LeadSlider speed={8000} items={loadedLeads.filter(p => p.category.title === "Vorstand Handballabteilung")} />
             </div>
             <div className="verein-container__lead">
             <h2>Förderverein</h2>
-            <LeadSlider speed={9000}items={loadedLeads.filter(p => p.category.title === "Förderverein")} />
+            <div className="leads-img__container">
+            <img src={foerderImg} alt="history" />
             </div>
-            </React.Fragment>}
+        
+             <LeadSlider speed={9000} items={loadedLeads.filter(p => p.category.title === "Förderverein")} />
+            </div>
+           
+              
+            
+            </React.Fragment>
+           
             </div>}
             
-   
+          
            
           </React.Fragment>
     )
