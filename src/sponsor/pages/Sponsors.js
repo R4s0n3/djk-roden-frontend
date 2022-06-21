@@ -20,8 +20,8 @@ const Sponsors = () => {
             try{
     
                 const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
-
-                setLoadedSponsors(responseSponsors.sponsors)
+                const filteredSponsors = responseSponsors.sponsors.sort((a,b) => a.index - b.index)
+                setLoadedSponsors(filteredSponsors)
                 setIsData(true);
                 
             }catch(err){
