@@ -50,7 +50,7 @@ const Teams = props => {
 
         <h2>Mannschaften {props.filter}</h2>
         <div>
-            <TeamGrid items={loadedTeams} filters={teamFilters} />
+            <TeamGrid items={loadedTeams.sort((a, b) => a.index - b.index)} filters={teamFilters} />
         </div>
         </div>}
    </React.Fragment> )

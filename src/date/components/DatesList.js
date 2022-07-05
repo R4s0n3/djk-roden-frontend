@@ -18,8 +18,10 @@ const DatesList = props => {
                 key={index}
                 id={data.id}
                 title={data.title}
-                startDate={data.startDate}
-                endDate={data.endDate}
+                date={data.date}
+                time={data.time}
+                home={data.home}
+                guest={data.guest}
                 category={data.category.title}
                 onDelete={props.onDeleteDate}
             />

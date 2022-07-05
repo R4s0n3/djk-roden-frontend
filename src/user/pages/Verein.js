@@ -73,17 +73,15 @@ const Verein = () => {
            <h1>Vorstände der DJK Roden</h1>
             <div className="verein-container__lead">
             <h2>Vorstand Gesamtverein</h2>
-            <div className="leads-img__container">
-            <img src={leadsImg} alt="history" />
-            </div>
-            <LeadSlider speed={7000} items={loadedLeads.filter(p => p.category.title === "Vorstand Gesamtverein")} />
+           
+            <LeadSlider speed={7000} items={loadedLeads.filter(p => p.category.title === "Vorstand Gesamtverein").sort((a, b) => a.index - b.index)} />
             </div>
             <div className="verein-container__lead">
             <h2>Vorstand Handballabteilung</h2>
             <div className="leads-img__container">
             <img src={abtImg} alt="history" />
             </div>
-            <LeadSlider speed={8000} items={loadedLeads.filter(p => p.category.title === "Vorstand Handballabteilung")} />
+            <LeadSlider speed={8000} items={loadedLeads.filter(p => p.category.title === "Vorstand Handballabteilung").sort((a, b) => a.index - b.index)} />
             </div>
             <div className="verein-container__lead">
             <h2>Förderverein</h2>
@@ -91,7 +89,7 @@ const Verein = () => {
             <img src={foerderImg} alt="history" />
             </div>
         
-             <LeadSlider speed={9000} items={loadedLeads.filter(p => p.category.title === "Förderverein")} />
+             <LeadSlider speed={9000} items={loadedLeads.filter(p => p.category.title === "Förderverein").sort((a, b) => a.index - b.index)} />
             </div>
            
               

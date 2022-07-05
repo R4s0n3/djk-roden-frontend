@@ -1,32 +1,32 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import {Icon} from '@iconify/react';
-// import DateCalendar from './DateCalendar';
+import DateCalendar from './DateCalendar';
 import { AuthContext } from '../../context/auth-context';
 import './IconNavLinks.css';
 import SideDrawer from './SideDrawer';
 import AdminNavLinks from './AdminNavLinks';
-// import {useWindowSize} from '../../hooks/size-hook';
+import {useWindowSize} from '../../hooks/size-hook';
 const IconNavLinks = () => {
-  // const [isMobile, setIsMobile] = useState()
-  // const size = useWindowSize(true);
-  // useEffect(()=>{
-  //   const checkMobile = ()=>{
-  //     if(size.width > 420){
-  //       setIsMobile(false);
-  //     }else if(size.width < 420){
-  //       setIsMobile(true);
-  //     }
-  //   }
-  //   checkMobile();
-  // },[size]);
+  const [isMobile, setIsMobile] = useState()
+  const size = useWindowSize(true);
+  useEffect(()=>{
+    const checkMobile = ()=>{
+      if(size.width > 420){
+        setIsMobile(false);
+      }else if(size.width < 420){
+        setIsMobile(true);
+      }
+    }
+    checkMobile();
+  },[size]);
  
   const auth = useContext(AuthContext);
-  // const [ isCal, setIsCal ] = useState(false)
+  const [ isCal, setIsCal ] = useState(false)
   const [ isAdminBar, setIsAdminBar ] = useState(false)
-  // const handleCal = () =>{
-  //   setIsCal(prev => !prev)
-  // }
+  const handleCal = () =>{
+    setIsCal(prev => !prev)
+  }
   const handleAdminNav = () => {
     setIsAdminBar(prev => !prev)
   }
@@ -42,10 +42,10 @@ const IconNavLinks = () => {
         <li className="hide-on-mobile">
           <NavLink reloadDocument to="/kontakt">Kontakt</NavLink>
     </li>
-    {/* <li className="nav-calendar" onClick={handleCal}>
+    <li className="nav-calendar" onClick={handleCal}>
       {!isMobile && "Termine"}
       {isMobile && <Icon className="djk-icon" icon="bx:calendar" height="20px" color="#006400" />}
-    </li> */}
+    </li>
 
       {!auth.isLoggedIn && (
         <li>
@@ -63,7 +63,7 @@ const IconNavLinks = () => {
         <button onClick={auth.logout}><Icon className="djk-icon" icon="ic:round-logout" height="20px" color="#006400" /></button>
       </li>
     )}
-    {/* <DateCalendar show={isCal} onClick={handleCal}/> */}
+    <DateCalendar show={isCal} onClick={handleCal}/>
      { <SideDrawer show={isAdminBar} onClick={closeBarHandler}>
         <nav className="admin-navigation__drawer-nav">
           <AdminNavLinks />

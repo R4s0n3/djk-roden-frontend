@@ -57,10 +57,11 @@ const PostSliderTopItem = (props) => {
       
       <div className="slider-item__inner">
       
-      <i onClick={itemClickHandler}>
+      {/* <i onClick={itemClickHandler}>
       <Icon className="djk-icon" icon="bx:calendar" height="22px" color="#006400" /> {formatDate(props.date)}
-      </i>
+      </i> */}
       <h2 onClick={itemClickHandler}>{props.title.toUpperCase()}</h2>
+      <p> {props.content}</p>
         <div>
         <Button to={`/posts/${props.id}`}>MEHR</Button>
 

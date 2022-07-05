@@ -14,10 +14,12 @@ import { useForm} from "../../shared/hooks/form-hook";
 import Button from '../../shared/components/FormElements/Button';
 import { AuthContext} from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import XlsUpload from '../../shared/components/FormElements/XlsUpload';
 
 const NewDate = props => {
     const auth = useContext(AuthContext);
     const [createMode, setCreateMode] = useState(false);
+    const [bulbMode, setBulbMode] = useState(false);
     const [formState, inputHandler] = useForm({
       title:{
           value:"",
@@ -113,6 +115,7 @@ const NewDate = props => {
               <h2>Termine Übersicht</h2>
               {!isLoading && loadedDates && <DatesList items={loadedDates} onDeleteDate={deletedDateHandler}/>}
               <Button inverse={createMode} onClick={handleClick}>{createMode ? "Abbruch" : "Neuer Termin"}</Button>
+              <Button inverse={bulbMode} onClick={() => setBulbMode(prev => !prev)} >{bulbMode ? "Abbruch" : "Importieren"}</Button>
               </div>
         {createMode && loadedCategories &&  <div>
             <h2>Termine</h2>
@@ -171,7 +174,11 @@ const NewDate = props => {
             </div>
           
             </div>}
+        {bulbMode && <div>
+            <XlsUpload />
+        </div>}
      </div>
+    
           </div>
 
             </React.Fragment>   )

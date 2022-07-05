@@ -27,8 +27,9 @@ const Team = () => {
                 setLoadedTeam(t => [...t, myTeam.team]);
                 
                 const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
-
-                setLoadedPosts(responsePosts.posts.filter(p => p.category.title === "Spielbericht").reverse());
+                let filteredPosts = responsePosts.posts.filter(p => p.teams.find(t => t.id === teamId));
+                console.log("filtered Posts: ", filteredPosts);
+                setLoadedPosts(filteredPosts);
 
                 const responseSponsors = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/sponsors');
                 
@@ -62,14 +63,7 @@ const Team = () => {
                 insta={data.insta}
             />)
         }
-        const filteredPosts = (posts) => {
-            let thePosts = posts.filter(p => p.report.team === teamId)
-            if(thePosts.length === 0){
-                thePosts = posts.filter(p => p.published === "true");
-                return thePosts;
-            }
-            return thePosts;
-        }
+        
 
     
     
@@ -85,8 +79,8 @@ const Team = () => {
 {loadedData && loadedTeam && loadedTeam.slice(0,1).map(createItem)}
 
 {loadedData && loadedPosts && loadedPosts.length > 0 && <div className="featured-posts__container">
-    <h2>Spielberichte</h2>
-   <PostGrid items={filteredPosts(loadedPosts)} />
+    <h2>Teamberichte</h2>
+   <PostGrid items={loadedPosts} />
 
 </div> }
 {loadedData && loadedSponsors.length > 0 && <div className="featured-sponsors__container">

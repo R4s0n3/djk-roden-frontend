@@ -25,6 +25,12 @@
   color:#006400;
  
 }
+.slider-item__inner p{
+  height:75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+ 
+}
 .slick-arrow{
   background-color:#006400;
   display: none !important;;

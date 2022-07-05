@@ -4,12 +4,12 @@ import PostSliderTopItem from "./PostSliderTopItem";
 import './PostSliderTop.css'
 
 const PostSliderTop = (props) => {
-  const createItems = (data, index) => {
+  const createItems = (data) => {
     
     return (
       <PostSliderTopItem
         id={data.id}
-        key={index}
+        key={data.index}
         image={data.image}
         title={data.title}
         content={data.content}

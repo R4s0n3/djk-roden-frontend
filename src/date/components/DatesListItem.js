@@ -35,8 +35,7 @@ const DatesListItem = props => {
         }
     };
 
-    const formatedStartDate = props.startDate.slice(0,10);
-    const formatedEndDate = props.endDate.slice(0,10);
+    
     return(
     <React.Fragment>
     <ErrorModal error={error} onClear={clearError} />
@@ -69,9 +68,10 @@ const DatesListItem = props => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {props.title}
+                {props.title || props.home + " - " + props.guest} 
               </TableCell>
-              <TableCell align="center">{formatedStartDate} - {formatedEndDate}</TableCell>
+              <TableCell align="center">{props.date}</TableCell>
+              <TableCell align="center">{props.time}</TableCell>
               <TableCell align="center">{props.category}</TableCell>
               <TableCell align="center"><Button to={`../dashboard/dates/${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
               <TableCell align="center"><Button danger onClick={showDeleteWarningHandler}><Icon className="djk-icon" icon="fluent:delete-16-regular" height="20px" color="#fff" /></Button></TableCell>
