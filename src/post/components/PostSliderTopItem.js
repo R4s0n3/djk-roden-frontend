@@ -3,7 +3,6 @@ import './PostSliderTopItem.css';
 import Button from '../../shared/components/FormElements/Button';
 import { useNavigate } from "react-router-dom";
 import {useWindowSize} from '../../shared/hooks/size-hook';
-import {Icon} from '@iconify/react';
 
 const PostSliderTopItem = (props) => {
   const navigate = useNavigate()
@@ -29,16 +28,6 @@ const PostSliderTopItem = (props) => {
   }
  },[size])
 
-
-  const formatDate = d => {
-    let oldDate = d;
-    const month = oldDate.slice(5,7);
-    const day = oldDate.slice(8,10)
-    return(
-        `${day}.${month}.`
-    )
-
-}
   const imgStyles={
     backgroundImage: "url(" + process.env.REACT_APP_AWS_URL +  `/${props.image})`,
     backgroundSize: "cover",
