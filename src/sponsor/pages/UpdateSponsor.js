@@ -115,12 +115,12 @@ useEffect(()=>{
             setLoadedTeams(responseTeams.teams);
         }catch(err){}
     }
+    
     fetchSponsor();
     fetchCategories();
     fetchTeams();
 
 },[sendRequest, sponsorId, setFormData]);
-const lengthOfSponsors = (loadedSponsors ? loadedSponsors.filter(s => s.category.id === formState.inputs.category.value).length : 0 );
 
 const sponsorUpdateSubmitHandler = async event => {
     event.preventDefault();
@@ -144,6 +144,7 @@ const sponsorUpdateSubmitHandler = async event => {
       
     }
   };
+  const lengthOfSponsors = (!isUpload && loadedSponsors ? loadedSponsors.filter(s => s.category.id === formState.inputs.category.value).length - 1 : 0 );
 
   const confirmImageUploadHandler = async event => {
       event.preventDefault();

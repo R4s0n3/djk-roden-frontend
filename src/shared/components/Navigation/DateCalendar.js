@@ -30,6 +30,14 @@ const DateCalendar = (props) => {
 
 
     const dateItems = (data, index) => {
+
+        const createDate = (d) => {
+            
+            const convertedDate = new Date(d).toLocaleTimeString();
+            console.log('date: ', convertedDate);
+            return convertedDate.slice(0,5);
+        }
+
         let dateColor;
         if( data.category.title === "Spiel"){
             dateColor = "blue"
@@ -43,10 +51,12 @@ const DateCalendar = (props) => {
             margin:"0.25rem 0",
             borderLeft:`2px solid ${dateColor}`
         }
+
+       
         return <>
         <li key={index} style={dateStyle}>
             <div>
-            {data.title} <Icon icon="bxs:time" width="12" /> {data.time} Uhr
+            {data.title} <Icon icon="bxs:time" width="12" /> {createDate(data.date)} Uhr
             </div>
            {data.home && <div>
             {data.home} - {data.guest} 
@@ -72,7 +82,8 @@ const DateCalendar = (props) => {
 
         fetchDates();
 
-    },[sendRequest])
+    },[sendRequest]);
+
     const gimmeChange = event => {
         console.log(event.toLocaleDateString())
        setValue(new Date(event))
@@ -88,7 +99,7 @@ const DateCalendar = (props) => {
     //    console.log("3: ", view)
     // }
     return(<>
-    {isLoading && <LoadingSpinner />}
+    {isLoading && <LoadingSpinner asOverlay />}
     <ErrorModal error={error} onClear={clearError}  />
         <CSSTransition
         in={props.show}

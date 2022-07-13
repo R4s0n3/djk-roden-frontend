@@ -23,18 +23,19 @@ const XlsUpload = () => {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const data = e.target.result;
-                const workbook = xlsx.read(data, { type: "Array" , encoding: 'utf8' });
+                const workbook = xlsx.read(data);
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[sheetName];
-                const json = xlsx.utils.sheet_to_json(worksheet, {type: 'String'});
+                const json = xlsx.utils.sheet_to_json(worksheet);
                 for (let i = 0; i < json.length; i++) {
-                    json[i].id = uuidv4();                    ;
+                    json[i].id = uuidv4();
+                    console.log(json[i].__EMPTY);              ;
                 }
                 setJSONdata(json);
-                
+                console.log(json);
             };
             reader.readAsArrayBuffer(e.target.files[0]);
-            console.log();
+            
         }
     }
     const handleMultiUpload = async event => {

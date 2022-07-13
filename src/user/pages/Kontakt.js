@@ -22,7 +22,7 @@ const Kontakt = () => {
             <h2>Jugendbereich:</h2>
             <ul>
                 <li>Frau Marie Herrmann</li>
-                <li><a className="contact-link" href="mailto:marie.herrmann@djk-roden.de">marie.herrmann@djk-roden.de</a></li>
+                <li><a className="contact-link" href="mailto:marie-louiseHerrmann@gmx.de">marie-louiseHerrmann@gmx.de</a></li>
                 <li>2. Vorsitzende / Jugendkoordination</li>
             </ul>
             <h2>Weitere Kontaktmöglichkeiten</h2>

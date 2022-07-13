@@ -165,7 +165,7 @@ useEffect(()=>{
 },[sendRequest, playerId, setFormData]);
 
 
-const lengthOfPlayers = (loadedPlayers ? loadedPlayers.filter(p => p.team.includes(formState.inputs.team.value)).length : 0 );
+const lengthOfPlayers = (loadedPlayers ? loadedPlayers.filter(p => p.team.includes(formState.inputs.team.value)).length - 1 : 0 );
 
 const playerUpdateSubmitHandler = async event => {
     event.preventDefault();

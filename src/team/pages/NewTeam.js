@@ -44,7 +44,7 @@ const NewTeam = () => {
         },
         index:{
             value:0,
-            isValid:false
+            isValid:true
         },
         image:{
             value:null,
@@ -267,6 +267,7 @@ const NewTeam = () => {
                                     step={1}
                                     label="Index"
                                     validators={[VALIDATOR_MIN(0)]}
+                                    initialValid={true}
                                     />}
          <Button type="submit" disabled={!formState.isValid}>
           Team erstellen

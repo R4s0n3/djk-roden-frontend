@@ -5,11 +5,13 @@ import {Icon} from '@iconify/react';
 import {
     VALIDATOR_REQUIRE,
     VALIDATOR_MINLENGTH,
-    VALIDATOR_MAXLENGTH
+    VALIDATOR_MAXLENGTH,
+    VALIDATOR_MIN
 } from "../../shared/util/validators";
 
 import Input from '../../shared/components/FormElements/Input';
 import Select from '../../shared/components/FormElements/Select';
+import FormSlider from '../../shared/components/FormElements/FormSlider';
 import Button from '../../shared/components/FormElements/Button';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
@@ -26,14 +28,22 @@ const UpdateTeam = () => {
 const auth = useContext(AuthContext);
 const {isLoading, error, sendRequest, clearError } = useHttpClient();
 const [loadedTeam, setLoadedTeam] = useState();
+const [loadedTeams, setLoadedTeams] = useState();
 const [isUpload, setIsUpload] = useState();
 
 const genderOptions = [{title:'Weiblich'},{title:'Männlich'},{title:'Gemischt'}];
 const statusOptions = [{title:'Jugend'},{title:'Aktive'}];
 
+const [isLink, setIsLink] = useState(false);
+const [isFace, setIsFace] = useState(false);
+const [isInsta, setIsInsta] = useState(false);
+const [isLeague, setIsLeague] = useState(false);
+const [isIndex, setIsIndex] = useState(false);
 
 const teamId = useParams().teamId;
 const navigate = useNavigate();
+
+
 
 const [formState, inputHandler, setFormData] = useForm({
     name:{
@@ -82,7 +92,9 @@ useEffect(()=>{
 
         try{
             const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/teams/${teamId}`);
+            const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/teams");
             setLoadedTeam(responseData.team);
+            setLoadedTeams(responseTeams.teams); 
             setFormData({
                 name:{
                     value:responseData.team.name,
@@ -141,7 +153,8 @@ const teamUpdateSubmitHandler = async event => {
             league: formState.inputs.league.value,
             insta: formState.inputs.insta.value,
             fb: formState.inputs.fb.value,
-            link: formState.inputs.link.value
+            link: formState.inputs.link.value,
+            index: formState.inputs.index.value
         }),
         { 'Content-Type': 'application/json', Authorization: 'Bearer ' + auth.token
       }
@@ -172,6 +185,9 @@ const teamUpdateSubmitHandler = async event => {
       }catch(err){}
     
   }
+
+  const lengthOfTeams = (loadedTeams ? loadedTeams.filter(t => t.status === formState.inputs.status.value).length - 1 : 0 );
+ 
 const uploadHandler = () => {
 
     if(isUpload){
@@ -214,6 +230,7 @@ const uploadHandler = () => {
   return(
       <React.Fragment>
     <ErrorModal error={error} onClear={clearError} />
+    
     <div className="update dash-container">
     <div className="update-image__form-container">
     <form onSubmit={confirmImageUploadHandler}>
@@ -273,8 +290,14 @@ const uploadHandler = () => {
                         initialValue={loadedTeam.desc}
                         initialValid={true}
                     />
-
-                    <Input 
+            <div className="form-buttons">
+            <Button inverse={isLeague} type="button" onClick={()=>{setIsLeague(prev => !prev)}} size="small">Liga</Button>
+            <Button inverse={isLink} type="button" onClick={()=>{setIsLink(prev => !prev)}} size="small">Link</Button>
+            <Button inverse={isInsta} type="button" onClick={()=>{setIsInsta(prev => !prev)}} size="small">Insta</Button>
+            <Button inverse={isFace} type="button" onClick={()=>{setIsFace(prev => !prev)}} size="small">FB</Button>
+            <Button inverse={isIndex} type="button" onClick={()=>{setIsIndex(prev =>!prev)}} size="small">Index</Button> 
+            </div>
+                    {isLeague && <Input 
                         element="input"
                         id="league"
                         type="text"
@@ -284,8 +307,8 @@ const uploadHandler = () => {
                         onInput={inputHandler}
                         initialValue={loadedTeam.league}
                         initialValid={true}
-                    />
-                    <Input 
+                    />}
+                    {isLink && <Input 
                         element="input"
                         id="link"
                         type="url"
@@ -295,8 +318,8 @@ const uploadHandler = () => {
                         onInput={inputHandler}
                         initialValue={loadedTeam.link}
                         initialValid={true}
-                    />
-                    <Input 
+                    />}
+                    {isInsta && <Input 
                         element="input"
                         id="insta"
                         type="url"
@@ -306,8 +329,8 @@ const uploadHandler = () => {
                         onInput={inputHandler}
                         initialValue={loadedTeam.insta}
                         initialValid={true}
-                    />
-                    <Input 
+                    />}
+                    {isFace && <Input 
                         element="input"
                         id="fb"
                         type="url"
@@ -317,8 +340,16 @@ const uploadHandler = () => {
                         onInput={inputHandler}
                         initialValue={loadedTeam.fb}
                         initialValid={true}
-                    />
-
+                    />}
+                     {isIndex && <FormSlider
+                                    id="index"
+                                    onInput={inputHandler}
+                                    min={0}
+                                    max={lengthOfTeams}
+                                    step={1}
+                                    label="Index"
+                                    validators={[VALIDATOR_MIN(0)]}
+                                    />}
         <Button type="submit" disabled={!formState.isValid}>
             Update Team
         </Button>

@@ -218,7 +218,7 @@ const uploadHandler = () => {
 
     }
 }
-const lengthOfLeads = (loadedLead ? loadedLeads.filter(l => l.category.id.includes(loadedLead.category.id)).length : 0 );
+const lengthOfLeads = (loadedLead ? loadedLeads.filter(l => l.category.id.includes(loadedLead.category.id)).length - 1 : 0 );
 
 
   if (isLoading) {

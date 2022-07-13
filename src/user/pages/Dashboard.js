@@ -228,14 +228,14 @@ const tickersHandler= () =>{
 </div>
 </div>
 
-<div>
+{loadedTrainings && <div>
 <h2>Trainings</h2>
 <TrainingsList items={loadedTrainings} onDeleteTraining={deletedTrainingHandler}/>
 <div>
 <Button to="/dashboard/trainings">Neues Training</Button>
 </div>
 
-</div>
+</div>}
 
 <div>
 <h2>Termine</h2>

@@ -13,6 +13,7 @@ import TrainingsListItem from './TrainingsListItem';
 const TrainingsList = props => {
 
     const createRows = (data, index) =>{
+      console.log(data.team);
         return(
             <TrainingsListItem 
                 key={index}
@@ -20,7 +21,7 @@ const TrainingsList = props => {
                 start={data.start}
                 end={data.end}
                 day={data.day}
-                team={data.team.name}
+                team={data.team}
                 location={data.location}
                 onDelete={props.onDeleteTraining}
             />
