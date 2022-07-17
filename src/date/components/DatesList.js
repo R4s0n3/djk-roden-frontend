@@ -22,6 +22,7 @@ const DatesList = props => {
                 time={data.time}
                 home={data.home}
                 guest={data.guest}
+                location={data.location}
                 category={data.category.title}
                 onDelete={props.onDeleteDate}
             />
@@ -35,7 +36,10 @@ const DatesList = props => {
           <TableHead>
             <TableRow>
             <TableCell component="th" scope="row">Titel</TableCell>
-            <TableCell align="center" >Start</TableCell>
+            <TableCell align="center" >Datum/Zeit</TableCell>
+            <TableCell align="center" >Heim</TableCell>
+            <TableCell align="center" >Gast</TableCell>
+            <TableCell align="center" >Standort</TableCell>
             <TableCell align="center" >Kategorie</TableCell>
             <TableCell align="center">Edit</TableCell>
             <TableCell align="center">Löschen</TableCell>

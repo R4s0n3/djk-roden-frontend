@@ -25,14 +25,11 @@ const NewDate = props => {
           value:"",
           isValid:false
       }, 
-      startDate:{
+      date:{
           value:"",
           isValid:false
       },
-      endDate:{
-          value:"",
-          isValid:false
-      },
+      
       location:{
           value:"",
           isValid:false
@@ -40,11 +37,15 @@ const NewDate = props => {
       category:{
           value:"",
           isValid:false
+      },
+      team:{
+        value:"",
+        isValid:false
       }
 }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
     const [loadedDates, setLoadedDates] = useState();
-    // const [loadedTeams, setLoadedTeams] = useState();
+    const [loadedTeams, setLoadedTeams] = useState();
     const [loadedCategories, setLoadedCategories] = useState();
 
     const createDateHandler = async event =>{
@@ -58,10 +59,12 @@ const NewDate = props => {
               'POST',
               JSON.stringify({
                title: formState.inputs.title.value,
-               startDate: formState.inputs.startDate.value,
-               endDate: formState.inputs.endDate.value,
-               category: formState.inputs.category.value,
-               location: formState.inputs.location.value
+               date: formState.inputs.date.value,
+               team: formState.inputs.team.value,
+               home: formState.inputs.home.value,
+               guest: formState.inputs.guest.value,
+               location: formState.inputs.location.value,
+               category: formState.inputs.category.value
               }),{
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + auth.token
@@ -77,10 +80,10 @@ const NewDate = props => {
           try{
   
               const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/dates');
-              // const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
+              const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/teams');
               const responseCategories = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/categories');
               setLoadedDates(responseData.dates);
-              // setLoadedTeams(responseTeams.teams);
+              setLoadedTeams(responseTeams.teams);
               setLoadedCategories(responseCategories.categories);
               
           }catch(err){
@@ -114,8 +117,8 @@ const NewDate = props => {
           <div>
               <h2>Termine Übersicht</h2>
               {!isLoading && loadedDates && <DatesList items={loadedDates} onDeleteDate={deletedDateHandler}/>}
-              <Button inverse={createMode} onClick={handleClick}>{createMode ? "Abbruch" : "Neuer Termin"}</Button>
-              <Button inverse={bulbMode} onClick={() => setBulbMode(prev => !prev)} >{bulbMode ? "Abbruch" : "Importieren"}</Button>
+              <Button disabled={bulbMode} inverse={createMode} onClick={handleClick}>{createMode ? "Abbruch" : "Neuer Termin"}</Button>
+              <Button disabled={createMode} inverse={bulbMode} onClick={() => setBulbMode(prev => !prev)} >{bulbMode ? "Abbruch" : "Importieren"}</Button>
               </div>
         {createMode && loadedCategories &&  <div>
             <h2>Termine</h2>
@@ -134,20 +137,29 @@ const NewDate = props => {
             />
             <Input 
                 element="input"
-                id="startDate"
+                id="date"
                 type="datetime-local"
-                label="Start"
+                label="Datum"
                 validators={[VALIDATOR_REQUIRE()]}
                 errorText="Please enter a date."
                 onInput={inputHandler}
             />
             <Input 
                 element="input"
-                id="endDate"
-                type="datetime-local"
-                label="Ende"
+                id="home"
+                type="text"
+                label="Heim"
                 validators={[VALIDATOR_REQUIRE()]}
-                errorText="Please enter a date."
+                errorText="Please enter a team name."
+                onInput={inputHandler}
+            />
+            <Input 
+                element="input"
+                id="guest"
+                type="text"
+                label="Gast"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter a team name."
                 onInput={inputHandler}
             />
             <Input 
@@ -166,6 +178,14 @@ const NewDate = props => {
                 options={loadedCategories}
                 validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
                 errorText="Please enter a category."
+                onInput={inputHandler}
+            />
+            <Select 
+                id="team"
+                label="Team"
+                options={loadedTeams}
+                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
+                errorText="Please enter a team."
                 onInput={inputHandler}
             />
   

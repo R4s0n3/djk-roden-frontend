@@ -7,6 +7,8 @@ const TeamGrid = props => {
   const [filterState, setFilterState] = useState();
 
     const createCardsLG =(data,index)=>{
+        
+
         return(<TeamGridItem
         key={index}
         content={data.desc}
@@ -20,7 +22,7 @@ const TeamGrid = props => {
         />
         )
     }
-
+    
 
     const handleAll = () => {
       setFilterState(false);
@@ -33,12 +35,14 @@ const TeamGrid = props => {
       }
      else if(e.target.innerHTML === 'Herren'){
         setFilterState('Männlich');
+        
       } else {
         setFilterState(e.target.innerHTML);
+      
       }
       
     }
-
+   
     const createFilter = (data, index) => {
       return(
         <Button key={index} inverse={filterState === data} type="button" onClick={handleFilters}>{data}</Button>

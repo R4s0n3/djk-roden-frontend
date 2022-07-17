@@ -28,6 +28,7 @@ const Teams = props => {
     },[sendRequest, props.filter]);
 
     let teamFilters;
+    
     if(props.filter === "Aktive"){
         teamFilters = ['Damen', 'Herren'];
     }

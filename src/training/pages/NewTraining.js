@@ -20,7 +20,7 @@ const NewTraining = props => {
     const auth = useContext(AuthContext);
     const [createMode, setCreateMode] = useState(false);
     const [formState, inputHandler] = useForm({
-      start:{
+    start:{
         value:"",
         isValid:false
     },
@@ -43,6 +43,10 @@ const NewTraining = props => {
     team:{
         value:"",
         isValid:false
+    },
+    index:{
+      value:"",
+      isValid:false
     }
     }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();

@@ -49,6 +49,10 @@ const [formState, inputHandler, setFormData] = useForm({
     link:{
         value:"",
         isValid:false
+    },
+    index:{
+        value:"",
+        isValid: false
     }
 },false);
 

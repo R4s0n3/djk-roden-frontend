@@ -73,13 +73,13 @@ const DateCalendar = (props) => {
            
             try{
                 const responseDates = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/dates');
-               
-                setLoadedDates(responseDates.dates);
                 
+                setLoadedDates(responseDates.dates);
+               
                 
             }catch(e){}
         }
-
+        
         fetchDates();
 
     },[sendRequest]);
@@ -90,14 +90,13 @@ const DateCalendar = (props) => {
         console.log(value);
     }
 
-    // const handleTiles = ({activeStartDate, date, view}) => {
+    const handleTiles = ({activeStartDate, date, view}) => {
 
-    //     if
-    //    console.log("1: ", activeStartDate)
-    //    console.log("2: ", date.getDate())
+       console.log("1: ", activeStartDate)
+       console.log("2: ", date.getDate())
     
-    //    console.log("3: ", view)
-    // }
+       console.log("3: ", view)
+    }
     return(<>
     {isLoading && <LoadingSpinner asOverlay />}
     <ErrorModal error={error} onClear={clearError}  />

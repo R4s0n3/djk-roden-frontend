@@ -27,9 +27,25 @@ const XlsUpload = () => {
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[sheetName];
                 const json = xlsx.utils.sheet_to_json(worksheet);
+                json.shift();
                 for (let i = 0; i < json.length; i++) {
                     json[i].id = uuidv4();
-                    console.log(json[i].__EMPTY);              ;
+                    json[i].team = json[i]["__EMPTY"]; 
+                    delete json[i].__EMPTY;
+                    json[i].date = json[i]["__EMPTY_1"];
+                    delete json[i].__EMPTY_1;
+                    json[i].time = (json[i]["__EMPTY_2"] || "00:00");
+                    delete json[i].__EMPTY_2;              
+                    json[i].location = `${json[i]["__EMPTY_6"]}, ${json[i]["__EMPTY_7"]} ${json[i]["__EMPTY_8"]}`;
+                    delete json[i].__EMPTY_6;              
+                    delete json[i].__EMPTY_3;              
+                    delete json[i].__EMPTY_7;              
+                    delete json[i].__EMPTY_8;
+                    delete json[i].__EMPTY_9;
+                    json[i].home = json[i]["__EMPTY_4"];
+                    delete json[i].__EMPTY_4;              
+                    json[i].guest = json[i]["__EMPTY_5"];
+                    delete json[i].__EMPTY_5;                          
                 }
                 setJSONdata(json);
                 console.log(json);
@@ -41,32 +57,33 @@ const XlsUpload = () => {
     const handleMultiUpload = async event => {
         event.preventDefault();
         const filteredDates = JSONdata.filter((date) => selectedDates.includes(date.id));
-  
-
-        const formatDate = (date, time) => {
-          var regex = /(\d{2})\.(\d{2})\.(\d{4})/;
+          const formatDate = (date, time) => {
+            console.log(date)
+            console.log(time)
+          var regex = /(\d{2})\.(\d{2})\.(\d{2})/;
           var match = regex.exec(date);
           var year = match[3];
           var month = match[2];
           var day = match[1];
-          var dateString = year + "-" + month + "-" + day + "T" + time + ":00.000Z";
+          var dateString = "20" + year + "-" + month + "-" + day + "T" + time + ":00.000Z";
           return new Date(dateString).toISOString()
         };
         try{
             for (let i = 0; i < filteredDates.length; i++){
-              const formattedDate = formatDate(filteredDates[i].Datum, filteredDates[i].Zeit)
-             
-             
+              const formattedDate = formatDate(filteredDates[i].date, filteredDates[i].time)
+             console.log(filteredDates[i]);
+             console.log(formattedDate);
                 await sendRequest(
                     process.env.REACT_APP_BACKEND_URL + '/dates',
                     'POST',
                     JSON.stringify({
                      title: "Spieltermin",
                      date: formattedDate,
-                     guest:filteredDates[i].Gast,
-                     home:  filteredDates[i].Heim,
+                     guest: filteredDates[i].guest,
+                     home:  filteredDates[i].home,
+                     team: filteredDates[i].team,
                      category: '6239156487b6da644f43d199',
-                     location: filteredDates[i].Halle
+                     location: filteredDates[i].location
                     }),{
                       'Content-Type': 'application/json',
                       Authorization: 'Bearer ' + auth.token
@@ -75,38 +92,39 @@ const XlsUpload = () => {
 
                 }
                 document.location.reload();
-            }catch(e){}
+            }catch(e){
+              console.log(e);
+            }
         
     }
     const columns = [
-        { field: 'id', headerName: 'id', width: 90 },
         {
-          field: 'Halle',
+          field: 'location',
           headerName: 'Halle',
           width: 150,
           editable: false,
         },
         {
-          field: 'Datum',
+          field: 'date',
           headerName: 'Datum',
           width: 150,
           sortable: true,
           editable: true,
         },
         {
-          field: 'Zeit',
+          field: 'time',
           headerName: 'Zeit',
           width: 110,
           editable: true,
         },
         {
-          field: 'Heim',
+          field: 'home',
           headerName: 'Heim',
           sortable: false,
           width: 160
         },
         {
-          field: 'Gast',
+          field: 'guest',
           headerName: 'Gast',
           sortable: true,
           width: 160

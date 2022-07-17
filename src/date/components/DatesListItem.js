@@ -70,8 +70,10 @@ const DatesListItem = props => {
               <TableCell component="th" scope="row">
                 {props.title || props.home + " - " + props.guest} 
               </TableCell>
-              <TableCell align="center">{props.date}</TableCell>
-              <TableCell align="center">{props.time}</TableCell>
+              <TableCell align="center">{new Date(props.date).toLocaleDateString()} <br /> {new Date(props.date).toLocaleTimeString().slice(0,5)}h</TableCell>
+              <TableCell align="center">{props.home || "--"}</TableCell>
+              <TableCell align="center">{props.guest || "--"}</TableCell>
+              <TableCell align="center">{props.location || "--"}</TableCell>
               <TableCell align="center">{props.category}</TableCell>
               <TableCell align="center"><Button to={`../dashboard/dates/${props.id}`}><Icon className="djk-icon" icon="akar-icons:edit" height="20px" color="#fff" /></Button></TableCell>
               <TableCell align="center"><Button danger onClick={showDeleteWarningHandler}><Icon className="djk-icon" icon="fluent:delete-16-regular" height="20px" color="#fff" /></Button></TableCell>
