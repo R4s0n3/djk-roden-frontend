@@ -90,13 +90,13 @@ const DateCalendar = (props) => {
         console.log(value);
     }
 
-    const handleTiles = ({activeStartDate, date, view}) => {
+    // const handleTiles = ({activeStartDate, date, view}) => {
 
-       console.log("1: ", activeStartDate)
-       console.log("2: ", date.getDate())
+    //    console.log("1: ", activeStartDate)
+    //    console.log("2: ", date.getDate())
     
-       console.log("3: ", view)
-    }
+    //    console.log("3: ", view)
+    // }
     return(<>
     {isLoading && <LoadingSpinner asOverlay />}
     <ErrorModal error={error} onClear={clearError}  />
