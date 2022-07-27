@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../../assets/SVG/djk-white.svg';
+import logo from '../../assets/SVG/djk-sls-roden.svg';
 import {Link}from 'react-router-dom';
 import {Icon} from '@iconify/react';
 import "./Footer.css";
