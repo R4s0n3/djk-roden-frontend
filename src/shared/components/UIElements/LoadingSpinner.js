@@ -5,7 +5,7 @@ import {Icon} from '@iconify/react';
 const LoadingSpinner = props => {
   return (
     <div className={`${props.asOverlay && 'loading-spinner__overlay'}`}>
-      <div className="logo-spin"><Icon icon="eos-icons:bubble-loading" color="#006400" width="85" height="85" /></div>
+     {!props.invisible && <div className="logo-spin"><Icon icon="eos-icons:bubble-loading" color="#006400" width="85" height="85" /></div>}
     </div>
   );
 };

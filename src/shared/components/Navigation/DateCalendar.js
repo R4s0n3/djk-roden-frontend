@@ -2,6 +2,7 @@ import * as React from "react";
 import './Calendar.css';
 import 'react-calendar/dist/Calendar.css';
 import { CSSTransition } from 'react-transition-group';
+import { Link } from "react-router-dom";
 import {useHttpClient} from '../../hooks/http-hook';
 import ErrorModal from '../UIElements/ErrorModal';
 import LoadingSpinner from '../UIElements/LoadingSpinner';
@@ -13,24 +14,8 @@ const DateCalendar = (props) => {
     const [value, setValue] = React.useState(new Date());
     const [loadedDates, setLoadedDates] = React.useState();
 
-
-    // const calendarTiles = document.getElementsByClassName('react-calendar__month-view__days__day');
-    // let TilesToMatch = {
-    //     all:[],
-    //     loaded:[]
-    // }
-        
-    
-    
-    // function getDate(str) {
-    //     var regex = /aria-label="(.*?)"/;
-    //     var match = regex.exec(str);
-    //     return match[1];
-    //   }
-
-
     const dateItems = (data, index) => {
-
+        console.log(data)
         const createDate = (d) => {
             
             const convertedDate = new Date(d).toLocaleTimeString();
@@ -51,7 +36,6 @@ const DateCalendar = (props) => {
             margin:"0.25rem 0",
             borderLeft:`2px solid ${dateColor}`
         }
-
        
         return <>
         <li key={index} style={dateStyle}>
@@ -59,7 +43,7 @@ const DateCalendar = (props) => {
             {data.title} <Icon icon="bxs:time" width="12" /> {createDate(data.date)} Uhr
             </div>
            {data.home && <div>
-            {data.home} - {data.guest} 
+            <Link to={`./mannschaften/info/${data.team.id}`} style={{display:"block", fontSize: "1rem", overflow: "hidden", textOverflow: "ellipsis" , whiteSpace: "nowrap"}} >{data.home} - {data.guest}</Link>
             </div>}
             {data.location && <div>
             <a style={{display:"block", fontSize: "1rem", overflow: "hidden", textOverflow: "ellipsis" , whiteSpace: "nowrap"}}target="blank" rel="noopener noreferrer" href={"https://www.google.com/maps/search/" + data.location} ><Icon icon="fa6-solid:location-dot" height="12" /> {data.location}</a>
@@ -71,11 +55,13 @@ const DateCalendar = (props) => {
 
         const fetchDates = async () => {
            
+          
+        
             try{
                 const responseDates = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/dates');
                 
                 setLoadedDates(responseDates.dates);
-               
+                
                 
             }catch(e){}
         }
@@ -90,15 +76,25 @@ const DateCalendar = (props) => {
         console.log(value);
     }
 
-    // const handleTiles = ({activeStartDate, date, view}) => {
-
-    //    console.log("1: ", activeStartDate)
-    //    console.log("2: ", date.getDate())
+    const handleTiles = ({activeStartDate, date, view}) => {
+        let disabledTiles = [];
+        console.log(view);
+        for (const date of loadedDates){
+            const formattedDate = new Date(date.date).toLocaleDateString()
+            disabledTiles.push(formattedDate);
+        }
+        if(disabledTiles.includes(date.toLocaleDateString())){
+            return false;
+        }else if(view !== "month"){
+            return false;
+        }else{
+            return true;
+        }
+       
+    }
     
-    //    console.log("3: ", view)
-    // }
     return(<>
-    {isLoading && <LoadingSpinner asOverlay />}
+    {isLoading && <LoadingSpinner invisible />}
     <ErrorModal error={error} onClear={clearError}  />
         <CSSTransition
         in={props.show}
@@ -109,10 +105,11 @@ const DateCalendar = (props) => {
         >
         
         <div className='calendar-widget'>
-            <Calendar onChange={gimmeChange} value={value} />
+            <Calendar tileDisabled={handleTiles} onChange={gimmeChange} value={value} />
             <hr/>
             <ul>
             {loadedDates && loadedDates.filter(d => new Date(d.date).toLocaleDateString() === new Date(value).toLocaleDateString()).map(dateItems)}
+            {loadedDates && loadedDates.filter(d => new Date(d.date).toLocaleDateString() === new Date(value).toLocaleDateString()).length === 0 && <li>keine Termine</li>}
             </ul>
         </div>
         </CSSTransition>

@@ -118,6 +118,7 @@ useEffect(()=>{
         <Route path="/mannschaften/jugend" element={<Teams filter="Jugend" />} />
         <Route path="/mannschaften/aktive/:teamId" element={<Team />} />
         <Route path="/mannschaften/jugend/:teamId" element={<Team />} />
+        <Route path="/mannschaften/info/:teamId" element={<Team />} />
         <Route path="/posts/:postId" element={<Post />} />
         <Route path="/kontakt" element={<Kontakt />} />
         <Route path="/impressum" element={<Impressum />} />
@@ -171,6 +172,7 @@ useEffect(()=>{
         <Route path="/teams" element={<Mannschaften />} />
         <Route path="/mannschaften/aktive" element={<Teams filter="Aktive" />} />
         <Route path="/mannschaften/jugend" element={<Teams filter="Jugend" />} />
+        <Route path="/mannschaften/info/:teamId" element={<Team />} />
         <Route path="/mannschaften/aktive/:teamId" element={<Team />} />
         <Route path="/mannschaften/jugend/:teamId" element={<Team />} />
         <Route path="/posts/:postId" element={<Post />} />
