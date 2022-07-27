@@ -86,8 +86,8 @@ const Home = () => {
     <p>Wir freuen uns, dir mitteilen zu können, dass die App unseres Vereins jetzt zum Download zur Verfügung steht. Hol' dir die neuesten Nachrichten, Veranstaltungen und Spiele direkt auf dein Handy. Lade sie jetzt herunter und werde Teil der DJK.
      </p>
     <div className="icon-buttons-container"> 
-    <Button icon><Icon icon="ant-design:apple-filled"  height="20px"/> <span>Appstore</span></Button>
-    <Button icon><Icon icon="ion:logo-google-playstore" height="20px"/><span>Playstore</span></Button></div>
+    <Button href="https://apps.apple.com/de/app/djk-saarlouis-roden/id1563909900" icon><Icon icon="ant-design:apple-filled"  height="20px"/> <span>Appstore</span></Button>
+    <Button href="https://play.google.com/store/apps/details?id=de.appack.project.djk_saarlouis_roden&hl=de&gl=US" icon><Icon icon="ion:logo-google-playstore" height="20px"/><span>Playstore</span></Button></div>
     </div>
     <div>
       <img className="home-img" alt="iphone mock up"src={appmock} />
