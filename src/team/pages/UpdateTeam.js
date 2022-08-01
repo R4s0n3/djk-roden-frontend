@@ -28,8 +28,9 @@ const UpdateTeam = () => {
 const auth = useContext(AuthContext);
 const {isLoading, error, sendRequest, clearError } = useHttpClient();
 const [loadedTeam, setLoadedTeam] = useState();
-const [loadedTeams, setLoadedTeams] = useState();
 const [isUpload, setIsUpload] = useState();
+const [teamIndex, setTeamIndex] = useState(0);
+
 
 const genderOptions = [{title:'Weiblich'},{title:'Männlich'},{title:'Gemischt'}];
 const statusOptions = [{title:'Jugend'},{title:'Aktive'}];
@@ -81,6 +82,10 @@ const [formState, inputHandler, setFormData] = useForm({
     link:{
         value:"",
         isValid:true
+    },
+    index:{
+        value:0,
+        isValid:true
     }
 },false
 );
@@ -94,7 +99,8 @@ useEffect(()=>{
             const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/teams/${teamId}`);
             const responseTeams = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/teams");
             setLoadedTeam(responseData.team);
-            setLoadedTeams(responseTeams.teams); 
+            const filteredTeams = responseTeams.teams.filter(t => t.status === responseData.team.status)
+            setTeamIndex(filteredTeams.length - 1);
             setFormData({
                 name:{
                     value:responseData.team.name,
@@ -185,8 +191,6 @@ const teamUpdateSubmitHandler = async event => {
       }catch(err){}
     
   }
-
-  const lengthOfTeams = (loadedTeams ? loadedTeams.filter(t => t.status === formState.inputs.status.value).length - 1 : 0 );
  
 const uploadHandler = () => {
 
@@ -345,10 +349,11 @@ const uploadHandler = () => {
                                     id="index"
                                     onInput={inputHandler}
                                     min={0}
-                                    max={lengthOfTeams}
+                                    max={teamIndex}
                                     step={1}
                                     label="Index"
                                     validators={[VALIDATOR_MIN(0)]}
+                                    initialValid={true}
                                     />}
         <Button type="submit" disabled={!formState.isValid}>
             Update Team

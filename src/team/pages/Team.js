@@ -24,7 +24,7 @@ const Team = () => {
         const fetchData = async () => {
             try{
                 const myTeam = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/teams/${teamId}`);
-                setLoadedTeam(t => [...t, myTeam.team]);
+                setLoadedTeam(myTeam.team);
                 
                 const responsePosts = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/posts');
                 let filteredPosts = responsePosts.posts.filter(p => p.teams.find(t => t.id === teamId));
@@ -43,27 +43,7 @@ const Team = () => {
        fetchData()
         },[sendRequest, teamId]);
         
-        const createItem = (data, index) => {
-            
-            return(
-            <TeamItem 
-                key={index}
-                id={data.id}
-                title={data.name}
-                status={data.status}
-                gender={data.gender}
-                imageUrl={data.image}
-                league={data.league}
-                content={data.desc}
-                players={data.players}
-                trainers={data.trainers}
-                trainings={data.trainings}
-                link={data.link}
-                fb={data.fb}
-                insta={data.insta}
-            />)
-        }
-        
+
 
     
     
@@ -76,7 +56,22 @@ const Team = () => {
      </div>
    )}
         <div className="team">
-{loadedData && loadedTeam && loadedTeam.slice(0,1).map(createItem)}
+{loadedData && loadedTeam && <TeamItem 
+                key={loadedTeam.index}
+                id={loadedTeam.id}
+                title={loadedTeam.name}
+                status={loadedTeam.status}
+                gender={loadedTeam.gender}
+                imageUrl={loadedTeam.image}
+                league={loadedTeam.league}
+                content={loadedTeam.desc}
+                players={loadedTeam.players}
+                trainers={loadedTeam.trainers}
+                trainings={loadedTeam.trainings}
+                link={loadedTeam.link}
+                fb={loadedTeam.fb}
+                insta={loadedTeam.insta}
+            />}
 
 {loadedData && loadedPosts && loadedPosts.length > 0 && <div className="featured-posts__container">
     <h2>Teamberichte</h2>
@@ -84,7 +79,7 @@ const Team = () => {
 
 </div> }
 {loadedData && loadedSponsors.length > 0 && <div className="featured-sponsors__container">
-    <h2>{loadedTeam[0].name} Sponsoren</h2>
+    <h2>{loadedTeam.name} Sponsoren</h2>
 {loadedSponsors && <SponsorGrid items={loadedSponsors} />}
     </div>}
         </div>

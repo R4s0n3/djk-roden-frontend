@@ -47,7 +47,8 @@ const NewDate = props => {
     const [loadedDates, setLoadedDates] = useState();
     const [loadedTeams, setLoadedTeams] = useState();
     const [loadedCategories, setLoadedCategories] = useState();
-
+    const [isGame, setIsGame] = useState(false);
+    const [isLocation, setIsLocation] = useState(false);
     const createDateHandler = async event =>{
         event.preventDefault();
       
@@ -126,6 +127,7 @@ const NewDate = props => {
            
             <div>
             <form autoComplete="off" className="date-form" onSubmit={createDateHandler}>
+           
             <Input 
                 element="input"
                 id="title"
@@ -133,6 +135,14 @@ const NewDate = props => {
                 label="Titel"
                 validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(2)]}
                 errorText="Please enter a title."
+                onInput={inputHandler}
+            />
+            <Select 
+                id="category"
+                label="Kategorie"
+                options={loadedCategories}
+                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
+                errorText="Please enter a category."
                 onInput={inputHandler}
             />
             <Input 
@@ -144,7 +154,11 @@ const NewDate = props => {
                 errorText="Please enter a date."
                 onInput={inputHandler}
             />
-            <Input 
+             <div className="form-buttons">
+            <Button inverse={isGame} type="button" onClick={()=>{setIsGame(prev => !prev)}} size="small">Spieltermin</Button>
+            <Button inverse={isLocation} type="button" onClick={()=>{setIsLocation(prev => !prev)}} size="small">Standort</Button>
+            </div>
+            {isGame && <Input 
                 element="input"
                 id="home"
                 type="text"
@@ -152,8 +166,9 @@ const NewDate = props => {
                 validators={[VALIDATOR_REQUIRE()]}
                 errorText="Please enter a team name."
                 onInput={inputHandler}
-            />
-            <Input 
+                initialValid={true}
+            />}
+            {isGame && <Input 
                 element="input"
                 id="guest"
                 type="text"
@@ -161,8 +176,18 @@ const NewDate = props => {
                 validators={[VALIDATOR_REQUIRE()]}
                 errorText="Please enter a team name."
                 onInput={inputHandler}
-            />
-            <Input 
+                initialValid={true}
+            />}
+             {isGame && <Select 
+                id="team"
+                label="Team"
+                options={loadedTeams}
+                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
+                errorText="Please enter a team."
+                onInput={inputHandler}
+                initialValid={true}
+            />}
+            {isLocation && <Input 
                 element="input"
                 id="location"
                 type="text"
@@ -170,24 +195,11 @@ const NewDate = props => {
                 validators={[]}
                 errorText="Please enter a location."
                 onInput={inputHandler}
-            />
+                initialValid={true}
+            />}
            
-            <Select 
-                id="category"
-                label="Kategorie"
-                options={loadedCategories}
-                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
-                errorText="Please enter a category."
-                onInput={inputHandler}
-            />
-            <Select 
-                id="team"
-                label="Team"
-                options={loadedTeams}
-                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MINLENGTH(3)]}
-                errorText="Please enter a team."
-                onInput={inputHandler}
-            />
+            
+           
   
             <Button type="submit">Neuer Termin</Button>
             </form>

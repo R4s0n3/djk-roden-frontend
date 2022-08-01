@@ -40,7 +40,7 @@ const DateCalendar = (props) => {
         return <>
         <li key={index} style={dateStyle}>
             <div>
-            {data.title} <Icon icon="bxs:time" width="12" /> {createDate(data.date)} Uhr
+            {data.title === "Spieltermin" ? `${data.title.slice(0,5)} | ${data.team.name} ` : data.title}<Icon icon="bxs:time" width="12" /> {createDate(data.date)} Uhr
             </div>
            {data.home && <div>
             <Link to={`./mannschaften/info/${data.team.id}`} style={{display:"block", fontSize: "1rem", overflow: "hidden", textOverflow: "ellipsis" , whiteSpace: "nowrap"}} >{data.home} - {data.guest}</Link>

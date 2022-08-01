@@ -27,8 +27,8 @@ const UpdatePlayer = () => {
 const auth = useContext(AuthContext);
 const {isLoading, error, sendRequest, clearError } = useHttpClient();
 const [loadedPlayer, setLoadedPlayer] = useState();
-const [loadedPlayers, setLoadedPlayers] = useState();
 const [loadedTeams, setLoadedTeams] = useState();
+const [teamIndex, setTeamIndex] = useState(0);
 const [isUpload, setIsUpload] = useState();
 
 const positions = [
@@ -115,10 +115,13 @@ useEffect(()=>{
     const fetchPlayer = async () => {
 
         try{
-            const responsePlayers = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/players");
-            setLoadedPlayers(responsePlayers.players);
             const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/players/${playerId}`);
+            const teamId = responseData.player.team;
+            const responseTeam = await sendRequest(process.env.REACT_APP_BACKEND_URL + `/teams/${teamId}`);
+            
             setLoadedPlayer(responseData.player);
+            console.log(responseTeam.team.players.length)
+            setTeamIndex(responseTeam.team.players.length - 1);
             setFormData({
                 name:{
                     value:responseData.player.name,
@@ -165,7 +168,6 @@ useEffect(()=>{
 },[sendRequest, playerId, setFormData]);
 
 
-const lengthOfPlayers = (loadedPlayers ? loadedPlayers.filter(p => p.team.includes(formState.inputs.team.value)).length - 1 : 0 );
 
 const playerUpdateSubmitHandler = async event => {
     event.preventDefault();
@@ -260,7 +262,7 @@ const uploadHandler = () => {
 
     }
 }
-  
+
 
   if (isLoading) {
     return (
@@ -296,7 +298,7 @@ const uploadHandler = () => {
     </form>
     </div>
     <div>
-    <form className="update-form" onSubmit={playerUpdateSubmitHandler}>
+   <form className="update-form" onSubmit={playerUpdateSubmitHandler}>
     <h2>Update Player</h2>
     <Input 
                 element="input"
@@ -374,7 +376,7 @@ const uploadHandler = () => {
             onInput={inputHandler}
             min={0}
             initialValue={loadedPlayer.index}
-            max={lengthOfPlayers}
+            max={teamIndex}
             step={1}
             label="Index"
             validators={[VALIDATOR_MIN(0)]}
