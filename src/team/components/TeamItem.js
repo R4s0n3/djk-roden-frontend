@@ -13,7 +13,15 @@ import Avatar from '../../shared/components/UIElements/Avatar';
 
 const TeamItem = props => {
     const [imgBox, setImgBox] = useState(false);
-    
+    const alldays = [
+      "Montag",
+      "Dienstag",
+      "Mittwoch",
+      "Donnerstag",
+      "Freitag",
+      "Samstag",
+      "Sonntag"
+    ];
     const noNumbers = props.players.filter(p => p.number === null);
     let withNumbers = props.players.filter(p => p.number !== null).sort((a,b) => a.number - b.number);
 withNumbers.push(...noNumbers);
@@ -159,7 +167,9 @@ withNumbers.push(...noNumbers);
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.trainings.map(createTrainingRows)} 
+            {props.trainings.sort(
+    (a, b) => alldays.indexOf(a.day) - alldays.indexOf(b.day)
+  ).map(createTrainingRows)} 
           </TableBody>
         </Table>
         {props.trainings.length === 0 && <h2 style={{textAlign: "center",padding:"0 0.5rem"}}>Diese Mannschaft hat derzeit keine Trainingszeiten.</h2>}

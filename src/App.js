@@ -69,6 +69,7 @@ import History from './user/pages/History';
 import Sponsors from './sponsor/pages/Sponsors';
 import Kontakt from './user/pages/Kontakt';
 import Impressum from './user/pages/Impressum';
+
 import actions from './shared/util/actions';
 
 function App() {
@@ -204,7 +205,7 @@ useEffect(()=>{
     <AuthContext.Provider
     value={{ isLoggedIn: !!token,  token: token, userId: userId, login: login, logout: logout, reset: reset }}  >
     <div className="App">
-   {!token && <Modal
+   {!token && !isCookies && <Modal
       show={!isCookies}
             header="Verwendung von Cookies"
             
@@ -226,7 +227,7 @@ useEffect(()=>{
         </p>
         </Modal>}
   <BrowserRouter>
-  <MainNavigation />
+  {isCookies &&  <MainNavigation />}
   <AdminBar />
   <KBarProvider className="DJK-Bar" actions={actions}>
           <KBarPortal> 
@@ -237,10 +238,10 @@ useEffect(()=>{
               </KBarAnimator>
             </KBarPositioner>
           </KBarPortal>
-          <main>{routes}</main>
+         {isCookies && <main>{routes}</main>} 
         </KBarProvider>
  
-   <Footer />
+        {isCookies && <Footer /> }
 
  
   </BrowserRouter>

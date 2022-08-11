@@ -133,7 +133,12 @@ useEffect(()=>{
                 link:{
                     value:responseData.team.link,
                     isValid:true
+                },
+                index:{
+                    value:responseData.team.index,
+                    isValid:true
                 }
+              
             },true
         );
 
@@ -195,7 +200,9 @@ const teamUpdateSubmitHandler = async event => {
 const uploadHandler = () => {
 
     if(isUpload){
-        setFormData();
+        setFormData(
+            
+        );
         setIsUpload(false);
     }
 
@@ -354,6 +361,7 @@ const uploadHandler = () => {
                                     label="Index"
                                     validators={[VALIDATOR_MIN(0)]}
                                     initialValid={true}
+                                    initialValue={loadedTeam.index}
                                     />}
         <Button type="submit" disabled={!formState.isValid}>
             Update Team

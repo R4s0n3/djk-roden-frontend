@@ -7,6 +7,7 @@ import './IconNavLinks.css';
 import SideDrawer from './SideDrawer';
 import AdminNavLinks from './AdminNavLinks';
 import {useWindowSize} from '../../hooks/size-hook';
+import Backdrop from '../UIElements/Backdrop';
 const IconNavLinks = () => {
   const [isMobile, setIsMobile] = useState()
   const size = useWindowSize(true);
@@ -24,6 +25,12 @@ const IconNavLinks = () => {
   const auth = useContext(AuthContext);
   const [ isCal, setIsCal ] = useState(false)
   const [ isAdminBar, setIsAdminBar ] = useState(false)
+  const body = document.querySelector('body');
+  if(isAdminBar){
+    body.classList.add('no-scroll');
+  }else{
+    body.classList.remove('no-scroll');
+  }
   const handleCal = () =>{
     setIsCal(prev => !prev)
   }
@@ -63,7 +70,8 @@ const IconNavLinks = () => {
         <button onClick={auth.logout}><Icon className="djk-icon" icon="ic:round-logout" height="20px" color="#006400" /></button>
       </li>
     )}
-    <DateCalendar show={isCal} onClick={handleCal}/>
+    <DateCalendar show={isCal} closeCal={() => setIsCal(false)} onClick={handleCal}/>
+    {isAdminBar && <Backdrop onClick={closeBarHandler} />}
      { <SideDrawer show={isAdminBar} onClick={closeBarHandler}>
         <nav className="admin-navigation__drawer-nav">
           <AdminNavLinks />

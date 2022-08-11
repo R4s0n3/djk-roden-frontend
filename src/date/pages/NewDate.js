@@ -41,6 +41,14 @@ const NewDate = props => {
       team:{
         value:"",
         isValid:false
+      },
+      home:{
+        value:"",
+        isValid:false
+      },
+      guest:{
+        value:"",
+        isValid:false
       }
 }, false);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
@@ -52,8 +60,6 @@ const NewDate = props => {
     const createDateHandler = async event =>{
         event.preventDefault();
       
-        
-
             try{
             const dateData = await sendRequest(
               process.env.REACT_APP_BACKEND_URL + '/dates',

@@ -74,10 +74,10 @@ const Home = () => {
     {!isLoading && loadedData && <div className="home-content">
     <i className="bg"></i>
     <section className="posts">
-    <h2>News</h2>
+      <h2>Willkommen bei der DJK Saarlouis Roden<br /> – Abteilung Handball</h2>
       <p className="home-content__paragraph">
-      Willkommen im News-Bereich der DJK! Hier findest du alle aktuellen Nachrichten und Informationen über unseren Verein und seine Aktivitäten. Bleibe auf dem Laufenden, indem du regelmäßig vorbeischaust!
-      </p>
+      Ein Traditionsverein, der in diesem Jahr sein 100-jähriges Jubiläum feiert; und sich dennoch als junger und lebendiger Verein auszeichnet. Zusammen mit unserem Partnerverein, dem SC Saargold Lisdorf, bilden wir seit mehr als 25 Jahren, eine starke Handballgemeinschaft in Saarlouis und sind einer der größten Vereine im saarländischen Handballverband.       </p>
+    <h2>News</h2>
     <PostGrid items={loadedPosts} />
     </section>
     <section className="app-cta halfwidth">

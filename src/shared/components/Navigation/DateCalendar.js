@@ -40,7 +40,7 @@ const DateCalendar = (props) => {
         return <>
         <li key={index} style={dateStyle}>
             <div>
-            {data.title === "Spieltermin" ? `${data.title.slice(0,5)} | ${data.team.name} ` : data.title}<Icon icon="bxs:time" width="12" /> {createDate(data.date)} Uhr
+            {data.title === "Spieltermin" ? `${data.title.slice(0,5)} | ${data.team.name} ` : data.title + " "}<Icon icon="bxs:time" width="12" /> {createDate(data.date)} Uhr
             </div>
            {data.home && <div>
             <Link to={`./mannschaften/info/${data.team.id}`} style={{display:"block", fontSize: "1rem", overflow: "hidden", textOverflow: "ellipsis" , whiteSpace: "nowrap"}} >{data.home} - {data.guest}</Link>
@@ -78,7 +78,8 @@ const DateCalendar = (props) => {
 
     const handleTiles = ({activeStartDate, date, view}) => {
         let disabledTiles = [];
-        console.log(view);
+        
+        console.log(date);
         for (const date of loadedDates){
             const formattedDate = new Date(date.date).toLocaleDateString()
             disabledTiles.push(formattedDate);
@@ -86,6 +87,9 @@ const DateCalendar = (props) => {
         if(disabledTiles.includes(date.toLocaleDateString())){
             return false;
         }else if(view !== "month"){
+            return false;
+        }else if(date.toLocaleDateString() === new Date().toLocaleDateString()){
+            
             return false;
         }else{
             return true;
@@ -105,11 +109,13 @@ const DateCalendar = (props) => {
         >
         
         <div className='calendar-widget'>
+            <span onClick={props.closeCal} className="close-cal">X</span>
             <Calendar tileDisabled={handleTiles} onChange={gimmeChange} value={value} />
             <hr/>
             <ul>
             {loadedDates && loadedDates.filter(d => new Date(d.date).toLocaleDateString() === new Date(value).toLocaleDateString()).map(dateItems)}
-            {loadedDates && loadedDates.filter(d => new Date(d.date).toLocaleDateString() === new Date(value).toLocaleDateString()).length === 0 && <li>keine Termine</li>}
+            {loadedDates && loadedDates.filter(d => new Date(d.date).toLocaleDateString() === new Date(value).toLocaleDateString()).length === 0 && <li>{new Date(value).toLocaleDateString() === new Date().toLocaleDateString() ? "Heute keine Termine" : "Keine Termine"}</li>}
+            
             </ul>
         </div>
         </CSSTransition>

@@ -52,7 +52,11 @@ const Sponsors = () => {
            <h1>Sponsoren der DJK Roden</h1>
            <hr />
            <p className="home-content__paragraph">
-            Wir möchten uns ganz herzlich bei unseren Sponsoren für ihre Hilfe bedanken, die unseren Verein möglich macht. Ohne ihre Unterstützung wären wir nicht in der Lage, die großartige Arbeit zu leisten, die wir tun. Vielen Dank für Ihre anhaltende Unterstützung!
+           Danke allen Sponsoren und Gönnern des Vereins.
+           <br />
+          Ohne Eure/Ihre finanzielle oder auch materielle Unterstützung wäre es uns nicht möglich, gerade die Jugendarbeit auf diesem im Saarland herausragenden Niveau immer wieder zu halten und fortzuführen.
+          <br />
+          Wir würden uns freuen, auch in den nächsten Jahren gemeinsam mit Euch/Ihnen den Jugendhandball in Saarlouis voranzubringen.
             </p>
             <div className="verein-container__lead">
             <h2>Sponsoren Verein</h2>
@@ -67,9 +71,15 @@ const Sponsors = () => {
             <div className="verein-container__header">
             <h1>Sponsoring</h1>
             <hr />
-            <p className="home-content__paragraph">Wir sind eine Gruppe von Gleichgesinnten, die sich für die von uns gewählte Tätigkeit begeistern. Um unseren Mitgliedern auch weiterhin das bestmögliche Erlebnis bieten zu können, sind wir immer auf der Suche nach neuen Sponsoren.
-            Wenn Sie daran interessiert sind, als Sponsor für unseren Club tätig zu werden, nehmen Sie bitte Kontakt mit uns auf. Wir würden uns freuen, mit Ihnen über die Vorteile eines Sponsorings für unseren Club zu sprechen. Wir glauben, dass ein Sponsoring unseres Clubs eine großartige Möglichkeit ist, Ihr Unternehmen oder Ihre Organisation zu fördern, und wir wären stolz darauf, Sie an Bord zu haben.
-            Vielen Dank für Ihre Zeit, und wir hoffen, bald von Ihnen zu hören.</p>
+            <p className="home-content__paragraph">
+            Werden Sie Teil unserer Handballfamilie und melden Sie sich heute noch als Sponsor an. Seit vielen Jahren blicken wir auf eine erfolgreiche Nachwuchsarbeit und dürfen regelmäßig Meisterschaften feiern. Im männlichen Bereich ist unser Maßstab, in jeder Altersklasse mit mind. einer Mannschaft in der höchstmöglichen Spielklasse vertreten zu sein. So können wir mit Stolz immer wieder eine Mannschaft in der Jugendbundesliga stellen und sind in den Oberligen kaum noch wegzudenken. Aber auch im weiblichen Bereich erfreuen wir uns seit einigen Jahren stetig wachsendem Zuwachs, sodass wir immer mehr reine Mädchenmannschaften stellen können. Ein Bereich, den wir in den kommenden Jahren weiter ausbauen wollen.
+            <br />
+            Dies bietet Ihnen eine großartige Möglichkeit, auch über die regionalen Grenzen hinaus, an Bekanntheit dazu zu gewinnen.
+            <br />
+            Um den Standard unserer Trainings und Spiele weiter hochzuhalten, benötigen wir dauerhaft verlässliche Partner an unserer Seite, die uns bei der Anschaffung von Trainingsgeräten, Trikots oder auch den Unkosten für den Spielbetrieb unterstützen. 
+            <br />
+            Haben wir Ihr Interesse geweckt? Dann kontaktieren Sie uns doch gleich.
+            </p>
             <div>
             <Button inverse to="/kontakt">Sponsor werden</Button>
             <Button href="">Spenden</Button>

@@ -39,7 +39,7 @@ position:relative;
 }
 @media(min-width: 768px){
     .home-content__paragraph{
-        width:49%;
+        width:74%;
         
     }
 }

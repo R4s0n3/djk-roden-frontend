@@ -50,6 +50,14 @@ const Teams = props => {
 
 
         <h2>Mannschaften {props.filter}</h2>
+        <h3>Wir stellen uns vor</h3>
+        <p className="home-content__paragraph">
+        Während wir bei unseren Breitensportmannschaften verstärkt den Fokus auf Gemeinschaftserlebnisse und den Spaß an Bewegung und unserem Sport legen, konzentrieren wir uns bei unseren Leistungsmannschaften auf die individuelle Entwicklung der Spieler, gemeinsame sportliche Erfolge und die Leistungsmaximierung der Teams. 
+        <br />
+        Entsprechend spielen wir im männl. Jugendbereich seit vielen Jahren in allen Altersgruppen mit mindestens einer Jugendmannschaft in der höchstmöglichen Spielklasse. Den größten Zuwachs erleben wir aktuell jedoch im weibl. Bereich, sodass wir zunehmend reine Mädchenmannschaften aufbauen können.
+        <br />
+        Aber auch allen Aktiven bieten wir vom Leistungssport, bis hin zum Amateurhandball, eine Plattform. Und schaffen am Ende mit Hilfe fleißiger Trainer- und Betreuerteams regelmäßig neue Erfolgserlebnisse. 
+        </p>
         <div>
             <TeamGrid items={loadedTeams.sort((a, b) => a.index - b.index)} filters={teamFilters} />
         </div>

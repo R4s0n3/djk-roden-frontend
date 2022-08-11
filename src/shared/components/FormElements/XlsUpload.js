@@ -27,6 +27,7 @@ const XlsUpload = () => {
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[sheetName];
                 const json = xlsx.utils.sheet_to_json(worksheet);
+                console.log('before: ', worksheet);
                 json.shift();
                 for (let i = 0; i < json.length; i++) {
                     json[i].id = uuidv4();
@@ -48,7 +49,7 @@ const XlsUpload = () => {
                     delete json[i].__EMPTY_5;                          
                 }
                 setJSONdata(json);
-                console.log(json);
+                console.log('after: ', json);
             };
             reader.readAsArrayBuffer(e.target.files[0]);
             
@@ -60,7 +61,7 @@ const XlsUpload = () => {
           const formatDate = (date, time) => {
             console.log(date)
             console.log(time)
-          var regex = /(\d{2})\.(\d{2})\.(\d{2})/;
+          var regex = /(\d{2})\.(\d{2})\.(\d{2})/ || /(\d{2})\/(\d{2})\/(\d{2})/;
           var match = regex.exec(date);
           var year = match[3];
           var month = match[2];

@@ -376,6 +376,7 @@ const uploadHandler = () => {
             onInput={inputHandler}
             min={0}
             initialValue={loadedPlayer.index}
+            initialValid={true}
             max={teamIndex}
             step={1}
             label="Index"

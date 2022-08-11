@@ -23,7 +23,7 @@ h3.post-grid__card-title{
     font-size: 0.8em;
     background-color: #006400;
     padding:0 1rem;
-    z-index: 10;
+    z-index: 5;
 }
 .post-grid__card{
     position: relative;

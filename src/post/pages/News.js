@@ -64,8 +64,7 @@ const News = () => {
     </h1>
     <hr />
     <p className="home-content__paragraph">
-    Willkommen im News-Bereich der DJK! Hier findest du alle aktuellen Nachrichten und Informationen über unseren Verein und seine Aktivitäten. Bleibe auf dem Laufenden, indem du regelmäßig vorbeischaust!
-    </p>
+    Willkommen im Newsbereich der DJK Saarlouis - Roden. Hier findest du alle aktuellen News und Informationen über unseren Verein und unsere Aktivitäten. Schaue regelmäßig vorbei und bleibe auf dem Laufenden.    </p>
 
 </div> 
 
@@ -85,11 +84,11 @@ const News = () => {
         <img className="ball" src={ball} alt="rotating-ball"/>
     </div>
 <div className="news-page__container-content">
-    <h2>Spiele mit deinem lokalen Handballverein!</h2>
-    <p>Du suchst nach guten Gründen, dem örtlichen Handballverein beizutreten? Schau dir unsere Teams an!</p>
-    <p>Wir sind immer da, um dir ein kaltes Getränk anzubieten oder mit dir zu plaudern, während du dein ganz eigenes Spiel spielst.</p>
-    <p>Das Beste ist, dass wir nie zu weit von den neuen Spielern oder Spielerinnen entfernt sind, die sich uns anschließen möchten. Mache einen Spaziergang und entspanne dich mit unseren Teams, bevor das Spiel beginnt.</p>
-    <p>Die HG Saarlouis bietet einen großartigen Ort zum Spielen und wir sind sicher, dass es auch dir gefallen wird. Tritt uns noch heute bei!</p>
+    <h2>Werde jetzt Teil der DJK Handballfamilie</h2>
+    <p>Du suchst nach guten Gründen, dem örtlichen Handballverein beizutreten? Schau dir unseren Verein und die Teams an.</p>
+    <p>Ein Verein der für und durch seine Mitglieder lebt. Mit einer Mitgliedschaft bei der DJK Saarlouis-Roden, unterstützt du nicht nur den Erhalt des männlichen Leistungshandball in Saarlouis, sondern ermöglichst weiterhin die umfangreiche und wichtige Nachwuchsarbeit von den Minis bis hin zur A-Jugend in den unterschiedlichen Trainingszeiten der HG Saarlouis.</p>
+    <p>Und was wäre Saarlouis ohne den Handball?</p>
+    <p>Die HG Saarlouis bietet einen großartigen Ort zum Spielen und eröffnet für alle Handball-Verrückten eine Chance dabei zu sein. Tritt uns noch heute als passives, aktives oder förderndes Mitglied bei und unterstütze unsere Arbeit. </p>
 <div>
     <Button inverse to="/kontakt">Beitreten</Button>
     <Button to="/mannschaften">Teams</Button>
