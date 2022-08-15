@@ -31,8 +31,8 @@ const XlsUpload = () => {
                 json.shift();
                 for (let i = 0; i < json.length; i++) {
                     json[i].id = uuidv4();
-                    json[i].team = json[i]["__EMPTY"]; 
-                    delete json[i].__EMPTY;
+                    json[i].team = json[i]["HG_Saarlouis.csv"]; 
+                    // delete json[i].HG_Saarlouis.csv;
                     json[i].date = json[i]["__EMPTY_1"];
                     delete json[i].__EMPTY_1;
                     json[i].time = (json[i]["__EMPTY_2"] || "00:00");
