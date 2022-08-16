@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../../assets/SVG/djk-sls-roden.svg';
+import logo from '../../assets/SVG/100_jahre_logo.svg';
 import {Link}from 'react-router-dom';
 import {Icon} from '@iconify/react';
 import "./Footer.css";

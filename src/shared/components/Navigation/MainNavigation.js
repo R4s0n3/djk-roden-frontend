@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/SVG/djk-green.svg';
+import logo from '../../assets/SVG/100_jahre_ohne.svg';
 import MainHeader from './MainHeader';
 import NavLinks from './NavLinks';
 import IconNavLinks from './IconNavLinks';
@@ -39,7 +39,7 @@ const MainNavigation = props => {
           <NavLinks />
         </nav>
         <div className="main-navigation_header-logo">
-        <Link reloadDocument to="/"><img src={logo} alt="logo" height="25px" /></Link>
+        <Link reloadDocument to="/"><img src={logo} alt="logo" height="35px" /></Link>
         </div>
         <nav className="main-navigation__header-icon-nav">
           <IconNavLinks />
